@@ -2,6 +2,19 @@
   text-align: center;
 }
 
+.quick {
+  display: flex; 
+  justify-content: flex-end;
+  margin-right: 200px;
+  margin-left: 800px;
+  color:blue;
+}
+
+.pos {
+  display: flex;
+  margin-left: 200px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
