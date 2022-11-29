@@ -1,7 +1,7 @@
-import "./styles.css";
+import "./css/styles.css";
 import React, { useState } from "react";
-import LoginForm from "./LoginForm";
-import NavBar from "./NavBar";
+import LoginForm from "./func/LoginForm";
+import NavBar from "./func/NavBar";
 
 export default function App() {
   const [isShowLogin, setIsShowLogin] = useState(true);
