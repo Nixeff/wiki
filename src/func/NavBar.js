@@ -1,35 +1,22 @@
-import { Component } from "react";
+import React, { Component } from "react";
+import App from "../App";
 
-export default class NavBar extends Component({handleLoginClick}) {
+export default class NavBar extends React.Component {
     constructor(props){
       super(props)
+      this.state = {
+        show: props.show
+      }
     }
-    handleClick = () => {
-      handleLoginClick();
-    };
     render(){
       return (
         <div className="navbar">
           <div>
-            <span onClick={handleClick} className="loginicon">
+            <span onClick={() => this.handleClick()} className="loginicon">
               Sign In
             </span>
           </div>
         </div>
       );
     }
-  }
-
-
-
-  constructor(props){
-    super(props);
-    this.state = {
-      isShowLogin: true
-    };
-  }
-  handleLoginClick = () => {
-    this.setState(prevState => ({
-      isShowLogin: !prevState.isShowLogin
-    }));
   }

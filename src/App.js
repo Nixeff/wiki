@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import "./css/styles.css";
 
 import ShowAllWikis from "./func/showAllWikis";
-import LoginForm from './func/LoginForm';
-import NavBar from './func/NavBar';
 
-export default class App extends Component() {
+export default class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      isShowLogin: true
+    };
+  }
+  handleLoginClick = () => {
+    this.setState(prevState => ({
+      isShowLogin: !prevState.isShowLogin
+    }));
+  }
   render(){
     return (
-      <BrowserRouter>
-        <div>
-          <Route path="/ShowAllWikis" component={<ShowAllWikis /> } />
-        </div>
-      </BrowserRouter>
+      <Routes>
+        <Route exact path="/ShowAllWikis" element={<ShowAllWikis /> } />
+      </Routes>
     );
   }
 }

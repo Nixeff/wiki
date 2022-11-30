@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WikiTag from "./wikiTags";
+import LoginForm from './LoginForm';
+import NavBar from './NavBar';
 
 export default class ShowAllWikis extends React.Component {
     constructor(props) {
@@ -22,7 +24,9 @@ export default class ShowAllWikis extends React.Component {
 
     render(){
         return(
-            <div>       
+            <div>     
+                <NavBar />  
+                
                 <input type="button" onClick={() => this.getWikis()} value="klcik"></input>
                 {this.state.wikis.map( (wikis,index)=>
                     (
