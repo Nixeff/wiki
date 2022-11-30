@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
+import WikiTag from "./wikiTags";
 
-export default ShowAllWikis;
-
-class ShowAllWikis extends React.Component {
+export default class ShowAllWikis extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            wikis: [{"ID":2,"Type":"wiki","Title":"asd"}],
+            wikis: [],
         }
+        
     }
 
     getWikis = async () => {
@@ -19,20 +19,29 @@ class ShowAllWikis extends React.Component {
         })
     }
 
+    useEffect(
+        () => {
+            if (times % 3 === 0) {
+                setCounter(counter + 1);
+            }
+        },
+        [times]  // <--- THIS RIGHT HERE IS THE KEY!
+    );
+
     render(){
         return(
-            <div>
+            <div>       
+                <input type="button" onClick='this.getWikis()' value="klcik"></input>
                 {this.state.wikis.map( (wikis,index)=>
                     (
                         <div key={index}>
-                            <h3>{wikis.Title}</h3>
-                            <p>{wikis.Type}</p>
+                            <WikiTag title={wikis.Title} Type={wikis.Type} wID={wikis.ID}/>
                         </div>
                     ))}
             </div>
-        )
-        
+        )  
     }
         
 
 }
+
