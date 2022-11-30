@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 
 function ShowAllWikis(){
@@ -30,4 +31,3 @@ function ShowAllWikis(){
 }
 
 export default ShowAllWikis;
-
