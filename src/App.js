@@ -1,19 +1,18 @@
-import "./css/styles.css";
-import React, { useState } from "react";
-import LoginForm from "./func/LoginForm";
-import NavBar from "./func/NavBar";
+import React, { Component } from 'react';
+import { Route, BrowserRouter } from "react-router-dom";
 
-export default function App() {
-  const [isShowLogin, setIsShowLogin] = useState(true);
+import ShowAllWikis from "./func/showAllWikis";
+import LoginForm from './func/LoginForm';
+import NavBar from './func/NavBar';
 
-  const handleLoginClick = () => {
-    setIsShowLogin((isShowLogin) => !isShowLogin);
-  };
-
-  return (
-    <div className="App">
-      <NavBar handleLoginClick={handleLoginClick} />
-      <LoginForm isShowLogin={isShowLogin} />
-    </div>
-  );
+export default class App extends Component() {
+  render(){
+    return (
+      <BrowserRouter>
+        <div>
+          <Route path="/ShowAllWikis" component={<ShowAllWikis /> } />
+        </div>
+      </BrowserRouter>
+    );
+  }
 }

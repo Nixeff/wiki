@@ -1,16 +1,35 @@
-function NavBar({ handleLoginClick }) {
-    const handleClick = () => {
+import { Component } from "react";
+
+export default class NavBar extends Component({handleLoginClick}) {
+    constructor(props){
+      super(props)
+    }
+    handleClick = () => {
       handleLoginClick();
     };
-    return (
-      <div className="navbar">
-        <div>
-          <span onClick={handleClick} className="loginicon">
-            Sign In
-          </span>
+    render(){
+      return (
+        <div className="navbar">
+          <div>
+            <span onClick={handleClick} className="loginicon">
+              Sign In
+            </span>
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
-  
-  export default NavBar;
+
+
+
+  constructor(props){
+    super(props);
+    this.state = {
+      isShowLogin: true
+    };
+  }
+  handleLoginClick = () => {
+    this.setState(prevState => ({
+      isShowLogin: !prevState.isShowLogin
+    }));
+  }
