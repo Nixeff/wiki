@@ -33,4 +33,4 @@ export default class ShowAllWikis extends React.Component {
             </div>
         )  
     }
-  
+}
