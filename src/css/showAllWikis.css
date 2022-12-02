@@ -1,0 +1,21 @@
+*{
+    
+}
+
+#showWikis{
+    margin-top:60px;
+}
+
+#wikiHandler{
+
+}
+
+#title{
+    display: flex;
+    justify-content: center;
+}
+
+#wikiList{
+    display: flex;
+    justify-content: center;
+}

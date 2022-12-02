@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import WikiTag from "./wikiTags";
 import LoginForm from './LoginForm';
 import NavBar from './NavBar';
+import "../css/showAllWikis.css";
 
 export default class ShowAllWikis extends React.Component {
     constructor(props) {
@@ -26,14 +27,17 @@ export default class ShowAllWikis extends React.Component {
         return(
             <div>     
                 <NavBar />  
-                
-                <input type="button" onClick={() => this.getWikis()} value="klcik"></input>
-                {this.state.wikis.map( (wikis,index)=>
-                    (
-                        <div key={index}>
-                            <WikiTag title={wikis.Title} Type={wikis.Type} wID={wikis.ID}/>
-                        </div>
-                    ))}
+                <input id="showWikis" type="button" onClick={() => this.getWikis()} value="klcik"></input>
+                <div id="wikiList">
+                    <div>
+                        {this.state.wikis.map( (wikis,index)=>
+                            (
+                                <div key={index}>
+                                    <WikiTag title={wikis.Title} Type={wikis.Type} wID={wikis.ID}/>
+                                </div>
+                            ))}
+                    </div>
+                </div>
             </div>
         )  
     }
