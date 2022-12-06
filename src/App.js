@@ -22,6 +22,7 @@ export default class App extends React.Component {
       <Routes>
         <Route exact path="/ShowAllWikis" element={<ShowAllWikis /> } />
         <Route exact path="/WikiPage" element={<ShowWikiPage /> } />
+        <Route exact path="/Page" element={<ShowWikiPage /> } />
       </Routes>
     );
   }
