@@ -8,13 +8,13 @@ export default class ShowWikiPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            ID: loadLS("wID"),
+            ID: loadLS("pID"),
             wikis: []
         }
     }
 
     getPages = async () => {
-        let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?wiki_id="+this.state.ID;
+        let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_get_content.php?page_id="+this.state.ID;
         console.log(API_URL);
         fetch(`${API_URL}`)
         .then((data) => data.json())
@@ -33,12 +33,7 @@ export default class ShowWikiPage extends React.Component {
                 <br></br>
                 <input id="showWikis" type="button" onClick={() => this.getPages()} value="Show"></input>
                 <div>
-                        {this.state.wikis.map( (wikis,index)=>
-                            (
-                                <div key={index}>
-                                    <WikiTag location="/Page" cookieName="pID" title={wikis.Title} ID={wikis.ID}/>
-                                </div>
-                            ))}
+                        
                     </div>
             </div>
         )
