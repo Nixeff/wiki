@@ -27,13 +27,13 @@ export default class ShowAllWikis extends React.Component {
         return(
             <div>     
                 <NavBar />  
-                <input id="showWikis" type="button" onClick={() => this.getWikis()} value="klcik"></input>
+                <input id="showWikis" type="button" onClick={() => this.getWikis()} value="Show"></input>
                 <div id="wikiList">
                     <div>
                         {this.state.wikis.map( (wikis,index)=>
                             (
                                 <div key={index}>
-                                    <WikiTag title={wikis.Title} Type={wikis.Type} wID={wikis.ID}/>
+                                    <WikiTag location="/WikiPage" title={wikis.Title} ID={wikis.ID}/>
                                 </div>
                             ))}
                     </div>

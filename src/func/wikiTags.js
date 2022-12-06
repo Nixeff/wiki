@@ -11,19 +11,19 @@ import "../css/showAllWikis.css"
 
 export default function WikiTag(props){
     const [title, setTitle] = useState(props.title);
-    const [wID, setWID] = useState(props.wID);
+    const [ID, setID] = useState(props.wID);
+    const [location, setLocation] = useState(props.location);
     const navigate = useNavigate();
 
-    const handler = () => {
-        saveLS("wID", wID, 1, "/");
-        navigate("/WikiPage");
+    const handler = (path) => {
+        saveLS("wID", ID, 1, "/");
+        navigate(path);
     }
 
 
     return(
         <div id="wikiHandler">
-            <h1>hi</h1>
-            <button id="title" onClick={() => handler()}>{title}</button>
+            <button id="title" onClick={() => handler(location)}>{title}</button>
         </div>
     )
 }
