@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import WikiTag from "./wikiTags";
 import LoginForm from './LoginForm';
 import NavBar from './NavBar';
+import "../css/styles.css";
 import "../css/showAllWikis.css";
 
 export default class ShowAllWikis extends React.Component {
@@ -10,6 +11,7 @@ export default class ShowAllWikis extends React.Component {
         this.state = {
             wikis: [],
             test: "",
+            isShowLogin: false
         }
         
     }
@@ -24,12 +26,26 @@ export default class ShowAllWikis extends React.Component {
     }
 
     render(){
+        const handleLoginClick = () => {
+            console.log("Message 3 " + this.state.isShowLogin)
+            this.setState(prevState => ({
+                isShowLogin: !prevState.isShowLogin
+              }));
+        console.log("Message 3 " + this.state.isShowLogin)
+        }
         return(
-            <div>     
-                <NavBar />  
+            <div>     {
+                this.state.isShowLogin?(
+                    <LoginForm isState={this.state.isShowLogin} />
+                ):(
+                    console.log("Nothing to see here")
+                )}
+                <NavBar handleLoginClick={handleLoginClick}/>
+                <LoginForm isShowLogin={this.state.isShowLogin}/>  
+                
                 <input id="showWikis" type="button" onClick={() => this.getWikis()} value="Show"></input>
                 <div id="wikiList">
-                    <div>
+                <div>
                         {this.state.wikis.map( (wikis,index)=>
                             (
                                 <div key={index}>
@@ -39,6 +55,6 @@ export default class ShowAllWikis extends React.Component {
                     </div>
                 </div>
             </div>
-        )  
+        )
     }
 }

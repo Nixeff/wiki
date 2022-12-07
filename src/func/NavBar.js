@@ -1,22 +1,19 @@
-import React, { Component } from "react";
-import App from "../App";
+import React from "react";
 
-export default class NavBar extends React.Component {
-    constructor(props){
-      super(props)
-      this.state = {
-        show: props.show
-      }
-    }
-    render(){
-      return (
-        <div className="navbar">
-          <div>
-            <span onClick={() => this.handleClick()} className="loginicon">
-              Sign In
-            </span>
-          </div>
-        </div>
-      );
-    }
+function NavBar({ handleLoginClick }) {
+  const handleClick = () => { // Updates the state
+    console.log("Message 2")
+    handleLoginClick()
   }
+  return (
+    <div className="navbar">
+      <div>
+        <span onClick={handleClick} className="loginicon">
+          Sign In
+        </span>
+      </div>
+    </div>
+  );
+}
+
+export default NavBar;
