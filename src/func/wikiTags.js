@@ -11,12 +11,13 @@ import "../css/showAllWikis.css"
 
 export default function WikiTag(props){
     const [title, setTitle] = useState(props.title);
-    const [ID, setID] = useState(props.wID);
+    const [value, setValue] = useState(props.value);
     const [location, setLocation] = useState(props.location);
+    const [cookieName, setCookieName] = useState(props.cookieName);
     const navigate = useNavigate();
 
     const handler = (path) => {
-        saveLS("wID", ID, 1, "/");
+        saveLS(cookieName, value, 1, "/");
         navigate(path);
     }
 
