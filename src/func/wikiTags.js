@@ -1,21 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
+import { loadLS, saveLS } from "./localStorage";
+import { Navigate, useNavigate } from "react-router-dom";
 
-export default class WikiTag extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            title: props.title,
-            type: props.Type
-        }
+import {
+    BrowserRouter as Router, Link,
+    useLocation, redirect
+} from "react-router-dom";
+import "../css/showAllWikis.css"
+
+
+export default function WikiTag(props){
+    const [title, setTitle] = useState(props.title);
+    const [ID, setID] = useState(props.wID);
+    const [location, setLocation] = useState(props.location);
+    const navigate = useNavigate();
+
+    const handler = (path) => {
+        saveLS("wID", ID, 1, "/");
+        navigate(path);
     }
 
-    render(){
-        return(
-            <div>
-                <h2>{this.state.title}</h2>
-                <p>{this.state.type}</p>
-            </div>
-        )
-    }
+
+    return(
+        <div id="wikiHandler">
+            <button id="title" onClick={() => handler(location)}>{title}</button>
+        </div>
+    )
 }
+
 

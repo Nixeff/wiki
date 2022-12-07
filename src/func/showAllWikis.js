@@ -3,6 +3,7 @@ import WikiTag from "./wikiTags";
 import LoginForm from './LoginForm';
 import NavBar from './NavBar';
 import "../css/styles.css";
+import "../css/showAllWikis.css";
 
 export default class ShowAllWikis extends React.Component {
     constructor(props) {
@@ -42,13 +43,17 @@ export default class ShowAllWikis extends React.Component {
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/>  
                 
-                <input type="button" onClick={() => this.getWikis()} value="klcik"></input>
-                {this.state.wikis.map( (wikis,index)=>
-                    (
-                        <div key={index}>
-                            <WikiTag title={wikis.Title} Type={wikis.Type} wID={wikis.ID}/>
-                        </div>
-                    ))}
+                <input id="showWikis" type="button" onClick={() => this.getWikis()} value="Show"></input>
+                <div id="wikiList">
+                <div>
+                        {this.state.wikis.map( (wikis,index)=>
+                            (
+                                <div key={index}>
+                                    <WikiTag location="/WikiPage" title={wikis.Title} ID={wikis.ID}/>
+                                </div>
+                            ))}
+                    </div>
+                </div>
             </div>
         )
     }
