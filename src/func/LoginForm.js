@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "../css/styles.css";
-
+// Message to check with
 const messages = [
   {
     adminMessage: "You logged in as an admin"

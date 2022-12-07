@@ -37,7 +37,7 @@ export default class ShowAllWikis extends React.Component {
                 this.state.isShowLogin?(
                     <LoginForm isState={this.state.isShowLogin} />
                 ):(
-                    console.log("Do nothing")
+                    console.log("Nothing to see here")
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/>  
