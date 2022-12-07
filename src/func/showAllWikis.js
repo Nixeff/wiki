@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import WikiTag from "./wikiTags";
 import LoginForm from './LoginForm';
 import NavBar from './NavBar';
+import "../css/styles.css";
 
 export default class ShowAllWikis extends React.Component {
     constructor(props) {
@@ -9,6 +10,7 @@ export default class ShowAllWikis extends React.Component {
         this.state = {
             wikis: [],
             test: "",
+            isShowLogin: false
         }
         
     }
@@ -22,10 +24,43 @@ export default class ShowAllWikis extends React.Component {
         });
     }
 
+    /*handleLoginClick = () => {
+        console.log("Message 3 " + this.state.isShowLogin)
+        this.state.isShowLogin = !this.state.isShowLogin
+        console.log("Message 3 " + this.state.isShowLogin)
+        //LoginForm({this.state.isShowLogin})
+        //LoginForm({ this.state.isShowLogin });
+        //<LoginForm isShowLogin={LoginForm(this.state.isShowLogin)} />
+        //return <LoginForm isShowLogin={LoginForm(this.state.isShowLogin)} />
+        
+    }*/
+
+
+    //const [isShowLogin, setIsShowLogin] = useState(false)
+
+    //this.setIsShowLogin = this.setIsShowLogin.bind(this);
+    
     render(){
+        const handleLoginClick = () => {
+            console.log("Message 3 " + this.state.isShowLogin)
+            this.setState(prevState => ({
+                isShowLogin: !prevState.isShowLogin
+              }));
+        console.log("Message 3 " + this.state.isShowLogin)
+           // LoginForm(this.state.isShowLogin)
+            //LoginForm({ this.state.isShowLogin });
+            //return <LoginForm isShowLogin={LoginForm(this.state.isShowLogin)}/>
+            //return LoginForm(this.state.isShowLogin)
+        }
         return(
-            <div>     
-                <NavBar />  
+            <div>     {
+                this.state.isShowLogin?(
+                    <LoginForm isState={this.state.isShowLogin} />
+                ):(
+                    console.log("Big chungus")
+                )}
+                <NavBar handleLoginClick={handleLoginClick}/>
+                <LoginForm isShowLogin={this.state.isShowLogin}/>  
                 
                 <input type="button" onClick={() => this.getWikis()} value="klcik"></input>
                 {this.state.wikis.map( (wikis,index)=>
@@ -35,6 +70,6 @@ export default class ShowAllWikis extends React.Component {
                         </div>
                     ))}
             </div>
-        )  
+        )
     }
 }
