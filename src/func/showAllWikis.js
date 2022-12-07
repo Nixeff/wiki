@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import WikiTag from "./wikiTags";
 import LoginForm from './LoginForm';
 import NavBar from './NavBar';
+import "../css/styles.css";
 import "../css/showAllWikis.css";
 
 export default class ShowAllWikis extends React.Component {
@@ -10,6 +11,7 @@ export default class ShowAllWikis extends React.Component {
         this.state = {
             wikis: [],
             title: "",
+            isShowLogin: false
         }
         
     }
@@ -38,25 +40,37 @@ export default class ShowAllWikis extends React.Component {
     }
 
     render(){
+        const handleLoginClick = () => {
+            console.log("Message 3 " + this.state.isShowLogin)
+            this.setState(prevState => ({
+                isShowLogin: !prevState.isShowLogin
+              }));
+        console.log("Message 3 " + this.state.isShowLogin)
+        }
         return(
-            <div>     
-                <NavBar />  
+            <div>     {
+                this.state.isShowLogin?(
+                    <LoginForm isState={this.state.isShowLogin} />
+                ):(
+                    console.log("Nothing to see here")
+                )}
+                <NavBar handleLoginClick={handleLoginClick}/>
+                <LoginForm isShowLogin={this.state.isShowLogin}/>  
                 <form id="showWikis" type="submit" onSubmit={this.getWikis}>
                     <input id="showWikis" type="text" onChange={this.handleChangeUser} value={this.state.title}></input>
                 </form>
-                
                 <div id="wikiList">
-                    <div>
+                <div>
                         {this.state.wikis.map( (wikis,index)=>
                             (
                                 <div key={index}>
-                                    <WikiTag location="/WikiPage" title={wikis.Title} ID={wikis.ID}/>
+                                    <WikiTag location="/WikiPage" cookieName="wID" title={wikis.Title} value={wikis.ID}/>
                                 </div>
                             ))}
                     </div>
                 </div>
                 
             </div>
-        )  
+        )
     }
 }
