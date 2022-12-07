@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import WikiTag from "./wikiTags";
 import LoginForm from './LoginForm';
 import NavBar from './NavBar';
@@ -24,22 +24,6 @@ export default class ShowAllWikis extends React.Component {
         });
     }
 
-    /*handleLoginClick = () => {
-        console.log("Message 3 " + this.state.isShowLogin)
-        this.state.isShowLogin = !this.state.isShowLogin
-        console.log("Message 3 " + this.state.isShowLogin)
-        //LoginForm({this.state.isShowLogin})
-        //LoginForm({ this.state.isShowLogin });
-        //<LoginForm isShowLogin={LoginForm(this.state.isShowLogin)} />
-        //return <LoginForm isShowLogin={LoginForm(this.state.isShowLogin)} />
-        
-    }*/
-
-
-    //const [isShowLogin, setIsShowLogin] = useState(false)
-
-    //this.setIsShowLogin = this.setIsShowLogin.bind(this);
-    
     render(){
         const handleLoginClick = () => {
             console.log("Message 3 " + this.state.isShowLogin)
@@ -47,10 +31,6 @@ export default class ShowAllWikis extends React.Component {
                 isShowLogin: !prevState.isShowLogin
               }));
         console.log("Message 3 " + this.state.isShowLogin)
-           // LoginForm(this.state.isShowLogin)
-            //LoginForm({ this.state.isShowLogin });
-            //return <LoginForm isShowLogin={LoginForm(this.state.isShowLogin)}/>
-            //return LoginForm(this.state.isShowLogin)
         }
         return(
             <div>     {

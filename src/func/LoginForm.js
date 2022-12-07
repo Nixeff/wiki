@@ -1,6 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import ShowAllWikis from './showAllWikis';
+import { useState } from "react";
 import "../css/styles.css";
 
 const messages = [
