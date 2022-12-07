@@ -9,25 +9,42 @@ export default class ShowAllWikis extends React.Component {
         super(props);
         this.state = {
             wikis: [],
-            test: "",
+            title: "",
         }
         
     }
 
-    getWikis = async () => {
-        let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?type=wiki";
+    handleChangeUser = (event) => {
+        this.setState({title: event.target.value});
+        console.log('value is:', event.target.value);
+        console.log('value is also:', this.state.title);
+    };
+
+    getWikis = async (event) => {
+        event.preventDefault();
+        let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?type=wiki&title="+this.state.title;
         fetch(`${API_URL}`)
         .then((data) => data.json())
         .then(data => {
             this.setState({wikis: data.Data});
+            console.log(this.state.wikis)
         });
+    }
+
+    check = () => {
+        if (this.state.wikis.length === 0){
+           return null; 
+        } 
     }
 
     render(){
         return(
             <div>     
                 <NavBar />  
-                <input id="showWikis" type="button" onClick={() => this.getWikis()} value="Show"></input>
+                <form id="showWikis" type="submit" onSubmit={this.getWikis}>
+                    <input id="showWikis" type="text" onChange={this.handleChangeUser} value={this.state.title}></input>
+                </form>
+                
                 <div id="wikiList">
                     <div>
                         {this.state.wikis.map( (wikis,index)=>
@@ -38,6 +55,7 @@ export default class ShowAllWikis extends React.Component {
                             ))}
                     </div>
                 </div>
+                
             </div>
         )  
     }
