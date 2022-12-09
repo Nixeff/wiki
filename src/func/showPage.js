@@ -3,11 +3,12 @@ import { json, useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
 import NavBar from "./NavBar";
 import WikiTag from "./wikiTags";
-import {Parser} from 'xml2js';
+import { convertXML } from "simple-xml-to-json";
 
 export default class ShowPage extends React.Component {
     constructor(props){
         super(props);
+        const {convertXML, createAST} = require("simple-xml-to-json")
         this.state = {
             ID: loadLS("pID"),
             wikis: []
@@ -25,10 +26,7 @@ export default class ShowPage extends React.Component {
     }
 
     render(){
-        let parser = new xml2js.Parser();
-        parser.parseStringPromise(this.state.wikis).then((result)=>{
-            console.dir(result);
-        })
+        const myJson = convertXML(this.state.wikis);
         return(
             
             <div>
@@ -42,7 +40,7 @@ export default class ShowPage extends React.Component {
                     {this.state.wikis.map( (wikis,index)=>
                         (
                             <div key={index}>
-                                <div>{wikis.summery}</div>
+                                <div>{myJson}</div>
                             </div>
                     ))}
             </div>
