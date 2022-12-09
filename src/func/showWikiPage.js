@@ -1,15 +1,18 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
+import LoginForm from "./LoginForm";
 import NavBar from "./NavBar";
 import WikiTag from "./wikiTags";
+import "../css/styles.css";
 
 export default class ShowWikiPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             ID: loadLS("wID"),
-            wikis: []
+            wikis: [],
+            isShowLogin: false
         }
     }
 
@@ -23,10 +26,20 @@ export default class ShowWikiPage extends React.Component {
         });
     }
     render(){
+        const handleLoginClick = () => {
+            this.setState(prevState => ({
+                isShowLogin: !prevState.isShowLogin
+              }));
+        }
         return(
-            
             <div>
-                <NavBar />  
+                {this.state.isShowLogin?(
+                    <LoginForm isState={this.state.isShowLogin} />
+                ):(
+                    console.log("Nothing to see here")
+                )}
+                <NavBar handleLoginClick={handleLoginClick}/>
+                <LoginForm isShowLogin={this.state.isShowLogin}/>
                 <br></br>
                 <br></br>
                 <br></br>
