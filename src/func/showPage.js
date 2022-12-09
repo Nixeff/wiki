@@ -1,8 +1,9 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { json, useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
 import NavBar from "./NavBar";
 import WikiTag from "./wikiTags";
+import {Parser} from 'xml2js';
 
 export default class ShowPage extends React.Component {
     constructor(props){
@@ -24,6 +25,10 @@ export default class ShowPage extends React.Component {
     }
 
     render(){
+        let parser = new xml2js.Parser();
+        parser.parseStringPromise(this.state.wikis).then((result)=>{
+            console.dir(result);
+        })
         return(
             
             <div>
@@ -37,7 +42,7 @@ export default class ShowPage extends React.Component {
                     {this.state.wikis.map( (wikis,index)=>
                         (
                             <div key={index}>
-                                <div>{wikis}</div>
+                                <div>{wikis.summery}</div>
                             </div>
                     ))}
             </div>
