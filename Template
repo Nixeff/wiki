@@ -1,45 +1,45 @@
-[
-"summery"=>[
-	"title":"Hi",
-	"img":"link",
-	"tags"=>[
+["{
+'summery':{
+	'title':'Hi',
+	'img':'link',
+	'tags':[
 		{
-		"name":"name",
-		"content":"content"
+		'name':'name',
+		'content':'content'
 		},
 		{
-		"name":"name",
-		"content":"content"
+		'name':'name',
+		'content':'content'
 		}
-	]],
-"contents"=>[
+	]},
+'contents':[
 	{
-	"title":"name",
-	"location":"here"
+	'title':'name',
+	'location':'here'
 	},
 	{
-	"title":"name",
-	"location":"here"
+	'title':'name',
+	'location':'here'
 	}
 ],
-"description":"text",
-"content":[
+'description':'text',
+'content':[
 	{
-		"title":"text",
-		"text":"text"
+		'title':'text',
+		'text':'text'
 	},
 	{
-		"title":"text",
-		"text":"text"
+		'title':'text',
+		'text':'text'
 	}
 ],
-"refrences"=>[
+'refrences':[
 	{
-	"title":"text",
-	"where":"here",
+	'title':'text',
+	'where':'here',
 	},
 	{
-	"title":"text",
-	"where":"here",
+	'title':'text',
+	'where':'here'
 	}
-]]
+]}"]
