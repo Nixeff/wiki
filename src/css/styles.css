@@ -115,6 +115,7 @@
   
   .show {
     display: block;
+    position: absolute;
     transition: 800ms;
     opacity: 1;
   }

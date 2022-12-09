@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
 import NavBar from "./NavBar";
+import LoginForm from "./LoginForm";
 import WikiTag from "./wikiTags";
 
 export default class ShowWikiPage extends React.Component {

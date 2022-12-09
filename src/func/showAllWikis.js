@@ -18,8 +18,6 @@ export default class ShowAllWikis extends React.Component {
 
     handleChangeUser = (event) => {
         this.setState({title: event.target.value});
-        console.log('value is:', event.target.value);
-        console.log('value is also:', this.state.title);
     };
 
     getWikis = async (event) => {
@@ -27,16 +25,10 @@ export default class ShowAllWikis extends React.Component {
         let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?type=wiki&title="+this.state.title;
         fetch(`${API_URL}`)
         .then((data) => data.json())
-        .then(data => {
+        .then((data) => {
             this.setState({wikis: data.Data});
-            console.log(this.state.wikis)
+            console.log(this.state.wikis);
         });
-    }
-
-    check = () => {
-        if (this.state.wikis.length === 0){
-           return null; 
-        } 
     }
 
     render(){
@@ -45,7 +37,7 @@ export default class ShowAllWikis extends React.Component {
             this.setState(prevState => ({
                 isShowLogin: !prevState.isShowLogin
               }));
-        console.log("Message 3 " + this.state.isShowLogin)
+        
         }
         return(
             <div>     {
@@ -66,6 +58,7 @@ export default class ShowAllWikis extends React.Component {
                                 <div key={index}>
                                     <WikiTag location="/WikiPage" cookieName="wID" title={wikis.Title} value={wikis.ID}/>
                                 </div>
+                                
                             ))}
                     </div>
                 </div>
