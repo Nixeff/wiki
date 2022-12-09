@@ -2,7 +2,6 @@ import React from "react";
 
 function NavBar({ handleLoginClick }) {
   const handleClick = () => { // Updates the state
-    console.log("Message 2")
     handleLoginClick()
   }
   return (
