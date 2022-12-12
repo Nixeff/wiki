@@ -11,7 +11,14 @@ export default class ShowPage extends React.Component {
         const {convertXML, createAST} = require("simple-xml-to-json")
         this.state = {
             ID: loadLS("pID"),
-            wikis: []
+            wikis: "",
+            summeryTitle: "",
+            summeryImg: "",
+            summeryTags: [],
+            contents: [],
+            description: "",
+            content: [],
+            refrences
         }
     }
 
@@ -20,13 +27,20 @@ export default class ShowPage extends React.Component {
         console.log(API_URL);
         fetch(`${API_URL}`)
         .then((data) => {return data.json()})
-        .then(data => {
-            this.setState({wikis: data.Data.page_data.page_content});
+        .then((data) => {
+            this.setState({
+                wikis: JSON.parse(data.Data.page_data.page_content),
+            });
+            this.setState({
+                summeryTitle: this.state.wikis.summery.title,
+                summeryImg: this.state.wikis.summery.img,
+                summeryTags: this.state.wikis.summery.tags,
+            });
+            console.dir(this.state.summeryTitle);
         });
     }
 
     render(){
-        const myJson = convertXML(this.state.wikis);
         return(
             
             <div>
@@ -37,12 +51,7 @@ export default class ShowPage extends React.Component {
                 <br></br>
                 <input id="showWikis" type="button" onClick={() => this.getPages()} value="Show"></input>
                 <div>
-                    {this.state.wikis.map( (wikis,index)=>
-                        (
-                            <div key={index}>
-                                <div>{myJson}</div>
-                            </div>
-                    ))}
+                    {this.state.summeryTitle}
             </div>
             </div>
         )
