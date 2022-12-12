@@ -40,6 +40,7 @@ const LoginForm = ({ isShowLogin }) => {
       } else{
         console.log("Wrong password or username");
         console.log(usercheck);
+        alert("Fel användarnamn eller lösenord");
       }
     }
   }
