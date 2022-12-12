@@ -117,9 +117,12 @@
     display: block;
     transition: 800ms;
     opacity: 1;
+    position: absolute;
+    left: 40vw;
+    height: 0px;
   }
   
   .show.active {
-    transform: translateY(100px) scale(0) rotateY(180deg);
+    transform: translateY(0px) scale(0) rotateY(180deg);
     opacity: 0;
   }

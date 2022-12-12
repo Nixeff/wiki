@@ -55,12 +55,12 @@ const LoginForm = ({ isShowLogin }) => {
       <div className="login-form">
         <div className="form-box solid">
           <form onSubmit={handleSubmit}>
-            <h1 className="login-text">Sign In</h1>
-            <label>Username</label>
+            <h1 className="login-text">Logga in</h1>
+            <label>Användarnamn</label>
             <br></br>
             <input type="text" onChange={changeUser} name="username" id="name" className="login-box" />
             <br></br>
-            <label>Password</label>
+            <label>Lösenord</label>
             <br></br>
             <input type="password" onChange={changePass} name="password" id="pass" className="login-box" />
             <br></br>
