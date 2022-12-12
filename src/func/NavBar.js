@@ -8,7 +8,7 @@ function NavBar({ handleLoginClick }) {
     <div className="navbar">
       <div>
         <span onClick={handleClick} className="loginicon">
-          Sign In
+          Logga in
         </span>
       </div>
     </div>
