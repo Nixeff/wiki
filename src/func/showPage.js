@@ -4,6 +4,8 @@ import { loadLS } from "./localStorage";
 import NavBar from "./NavBar";
 import WikiTag from "./wikiTags";
 import { convertXML } from "simple-xml-to-json";
+import "../css/showPage.css";
+import { toHaveFocus } from "@testing-library/jest-dom/dist/matchers";
 
 export default class ShowPage extends React.Component {
     constructor(props){
@@ -18,7 +20,7 @@ export default class ShowPage extends React.Component {
             contents: [],
             description: "",
             content: [],
-            refrences
+            refrences: [],
         }
     }
 
@@ -35,6 +37,10 @@ export default class ShowPage extends React.Component {
                 summeryTitle: this.state.wikis.summery.title,
                 summeryImg: this.state.wikis.summery.img,
                 summeryTags: this.state.wikis.summery.tags,
+                description: this.state.wikis.description,
+                contents: this.state.wikis.contents,
+                content: this.state.wikis.content,
+                refrences: this.state.wikis.refrences,
             });
             console.dir(this.state.summeryTitle);
         });
@@ -50,9 +56,55 @@ export default class ShowPage extends React.Component {
                 <br></br>
                 <br></br>
                 <input id="showWikis" type="button" onClick={() => this.getPages()} value="Show"></input>
-                <div>
-                    {this.state.summeryTitle}
-            </div>
+                <div id="data">
+                    <div id="areaOne">
+                        <div id="description">{this.state.description}</div>
+                        <div id="contents">
+                            {this.state.contents.map( (contents,index)=>
+                                    (
+                                        <div id="contentsItem" key={index}>
+                                            <p>{contents.title} | </p>
+                                            <p> {contents.location}</p>
+                                        </div>
+                                    ))}
+                        </div>
+                    </div>
+                    <div id="areaTwo">
+                        <div id="summery">
+                            <p id="summeryTitle">{this.state.summeryTitle}</p>
+                            <img id="summeryImg" src={this.state.summeryTitle} alt="Image" width="500" height="500"></img>
+                            {this.state.summeryTags.map( (tags,index)=>
+                                (
+                                    <div id="tag" key={index}>
+                                        <p>{tags.name} | </p>
+                                        <p> {tags.content}</p>
+                                    </div>
+                                ))}
+                        </div>
+                    </div>
+                </div>
+                <div id="areaThree">
+                    <div>
+                        <div id="content">
+                        {this.state.content.map( (content,index)=>
+                            (
+                                <div id="contentItem" key={index}>
+                                    <p id="contentTitle">{content.title}</p>
+                                    <p> {content.text}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <div id="refrences">
+                        {this.state.refrences.map( (refrences,index)=>
+                            (
+                                <div id="refrenceItem" key={index}>
+                                    <p>{refrences.title} | </p>
+                                    <p> {refrences.where}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
