@@ -64,7 +64,7 @@ const LoginForm = ({ isShowLogin }) => {
             <br></br>
             <input type="password" onChange={changePass} name="password" id="pass" className="login-box" />
             <br></br>
-            <input type="submit" value="LOGIN" className="login-btn" />
+            <input type="submit" value="LOGGA IN" className="login-btn" />
           </form>
         </div>
       </div>
