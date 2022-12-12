@@ -60,11 +60,10 @@ export default class ShowPage extends React.Component {
                     <div id="areaOne">
                         <div id="description">{this.state.description}</div>
                         <div id="contents">
-                            {this.state.contents.map( (contents,index)=>
+                            {this.state.content.map( (contents,index)=>
                                     (
-                                        <div id="contentsItem" key={index}>
-                                            <p>{contents.title} | </p>
-                                            <p> {contents.location}</p>
+                                        <div id="contentsItem+{index}" key={index}>
+                                            <a href="#contentTitle">{contents.title}</a>
                                         </div>
                                     ))}
                         </div>
@@ -88,7 +87,7 @@ export default class ShowPage extends React.Component {
                         <div id="content">
                         {this.state.content.map( (content,index)=>
                             (
-                                <div id="contentItem" key={index}>
+                                <div id="contentItem+{index}" key={index}>
                                     <p id="contentTitle">{content.title}</p>
                                     <p> {content.text}</p>
                                 </div>

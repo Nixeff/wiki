@@ -1,4 +1,4 @@
-['{
+'{
 "summery":{
 	"title":"Hi",
 	"img":"link",
@@ -36,11 +36,11 @@
 "refrences":[
 	{
 	"title":"text",
-	"where":"here",
+	"where":"here"
 	},
 	{
 	"title":"text",
 	"where":"here"
 	}
-]}']
+]}'
 
