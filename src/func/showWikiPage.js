@@ -17,12 +17,14 @@ export default class ShowWikiPage extends React.Component {
     }
 
     getPages = async () => {
+        console.log(this.state.ID);
         let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?wiki_id="+this.state.ID;
-        console.log(API_URL);
+        
         fetch(`${API_URL}`)
         .then((data) => data.json())
         .then(data => {
             this.setState({wikis: data.Data});
+            console.log(this.state.wikis);
         });
     }
     render(){
@@ -49,11 +51,11 @@ export default class ShowWikiPage extends React.Component {
                         {this.state.wikis.map( (wikis,index)=>
                             (
                                 <div key={index}>
-                                    <WikiTag location="/Page" title={wikis.Title} ID={wikis.ID}/>
+                                    <WikiTag location="/Page" cookieName="pID" title={wikis.Title} value={wikis.ID-10}/>
                                 </div>
                             ))}
                     </div>
             </div>
         )
     }
-}
+} 
