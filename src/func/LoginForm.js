@@ -13,26 +13,30 @@ const LoginForm = ({ isShowLogin }) => {
     fetch(`${API_URL}`)
     .then((data) => data.json())
     .then((data) => {
-        checkUser(data.Data.message, data.Data.ID, data.Data.token)
+        checkUser(data.Data.message, data.Data.ID, uname, data.Data.token)
     })
   }
 
-  function checkUser(loginMessage, uID, token) {
+  function checkUser(loginMessage, uID, uname, token) {
     const usercheck = (loginMessage === adminMessage);
     if(usercheck) {
       console.log("Login successful (Admin)");
       saveLS("userType", "Admin", 1, "/");
       saveLS("uID", uID, 1, "/");
+      saveLS("uname", uname, 1, "/");
       saveLS("token", token, 1, "/");
       console.log(usercheck);
+      window.location.reload(false);
     }else {
       const usercheck = (loginMessage === endUserMessage);
       if(usercheck){
         console.log("Login successful (End user)");
         saveLS("userType", "User", 1, "/");
         saveLS("uID", uID, 1, "/");
+        saveLS("uname", uname, 1, "/");
         saveLS("token", token, 1, "/");
         console.log(usercheck);
+        window.location.reload(false);
       } else{
         console.log("Wrong password or username");
         console.log(usercheck);

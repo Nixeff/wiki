@@ -1,8 +1,9 @@
-[
-"summery"=>[
+
+'{
+"summery":{
 	"title":"Hi",
 	"img":"link",
-	"tags"=>[
+	"tags":[
 		{
 		"name":"name",
 		"content":"content"
@@ -11,8 +12,8 @@
 		"name":"name",
 		"content":"content"
 		}
-	]],
-"contents"=>[
+	]},
+"contents":[
 	{
 	"title":"name",
 	"location":"here"
@@ -33,13 +34,15 @@
 		"text":"text"
 	}
 ],
-"refrences"=>[
+"refrences":[
 	{
 	"title":"text",
-	"where":"here",
+	"where":"here"
 	},
 	{
 	"title":"text",
-	"where":"here",
+	"where":"here"
 	}
-]]
+]}'
+
+
