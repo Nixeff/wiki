@@ -5,6 +5,9 @@
     display: flex;
     justify-content: center;
 }
+p{
+    padding:10px;
+}
 
 #areaThree{
     display: flex;

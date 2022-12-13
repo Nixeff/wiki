@@ -30,6 +30,7 @@ export default class ShowPage extends React.Component {
         fetch(`${API_URL}`)
         .then((data) => {return data.json()})
         .then((data) => {
+            console.log(data);
             this.setState({
                 wikis: JSON.parse(data.Data.page_data.page_content),
             });
@@ -58,7 +59,7 @@ export default class ShowPage extends React.Component {
                 <input id="showWikis" type="button" onClick={() => this.getPages()} value="Show"></input>
                 <div id="data">
                     <div id="areaOne">
-                        <div id="description">{this.state.description}</div>
+                        <p id="description">{this.state.description}</p>
                         <div id="contents">
                             {this.state.content.map( (contents,index)=>
                                     (
