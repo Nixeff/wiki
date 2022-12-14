@@ -1,0 +1,61 @@
+*{
+    font-size: 20px;
+}
+#data{
+    display: flex;
+    justify-content: center;
+}
+p{
+    padding:10px;
+}
+
+#areaThree{
+    display: flex;
+    justify-content: center;
+}
+
+/* Summery */
+#summery{
+    float:left;
+    background-color: gainsboro;
+    width:500px;
+}
+#summeryTitle{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+#tag{
+    display: flex;
+}
+
+/* Description */
+#description{
+    width:800px;
+    background-color: aqua;
+}
+
+/* Contents */
+#contents{
+    background-color: red;
+}
+#contentsItem{
+    display: flex;
+}
+
+/* Content */
+#content{
+    width:1300px;
+    background-color: beige;
+}
+#contentTitle{
+    font-size: 30px;;
+    font-weight: bold;
+}
+
+#refrences{
+    background-color:aquamarine;
+}
+#refrenceItem{
+    display: flex;
+}
