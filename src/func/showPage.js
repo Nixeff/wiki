@@ -72,7 +72,9 @@ export default class ShowPage extends React.Component {
                 <input id="showWikis" type="button" onClick={() => this.getPages()} value="Show"></input>
                 <div id="data">
                     <div id="areaOne">
+                        <p id="contentTitle"> Beskrivning</p>
                         <p id="description">{this.state.description}</p>
+                        <p id="contentTitle"> Innehåll</p>
                         <div id="contents">
                             {this.state.content.map( (contents,index)=>
                                     (
@@ -85,7 +87,7 @@ export default class ShowPage extends React.Component {
                     <div id="areaTwo">
                         <div id="summery">
                             <p id="summeryTitle">{this.state.summeryTitle}</p>
-                            <img id="summeryImg" src={this.state.summeryTitle} alt="Image" width="500" height="500"></img>
+                            <img id="summeryImg" url={this.state.summeryImg} alt="Bild" width="500" height="500"></img>
                             {this.state.summeryTags.map( (tags,index)=>
                                 (
                                     <div id="tag" key={index}>

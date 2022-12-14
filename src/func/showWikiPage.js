@@ -51,7 +51,8 @@ export default class ShowWikiPage extends React.Component {
                         {this.state.wikis.map( (wikis,index)=>
                             (
                                 <div key={index}>
-                                    <WikiTag location="/Page" cookieName="pID" title={wikis.Title} value={wikis.ID-10}/>
+                                    <WikiTag location="/Page" cookieName="pID" title={wikis.Title} value={wikis.ID}/>
+                                    <p>{wikis.ID}</p>
                                 </div>
                             ))}
                     </div>
