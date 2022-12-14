@@ -11,14 +11,12 @@ function NavBar({ handleLoginClick }) {
     <div className="navbar">
       <div>
         <span onClick={handleClick} className="loginicon">
-          Login
+          Logga in
         </span>
       </div>
       <div>
         <p className="user-info">
-          Namn: {uname}
-        </p>
-        <p className="user-info">
+          Namn: {uname} <br></br>
           Användartyp: {userType}
         </p>
       </div>
