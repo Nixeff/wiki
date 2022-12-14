@@ -14,7 +14,7 @@ export default class ShowPage extends React.Component {
         const {convertXML, createAST} = require("simple-xml-to-json")
         this.state = {
             ID: loadLS("pID"),
-            isShowLogin: false
+            isShowLogin: false,
             wikis: "",
             summeryTitle: "",
             summeryImg: "",
