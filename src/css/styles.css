@@ -7,7 +7,7 @@
     position: absolute;
     background-color: #24252A;
     width: 100vw;
-    height: 8vh;
+    height: 12vh;
     left: 0px;
     top: 0px;
   }
@@ -20,27 +20,28 @@
     align-items: center;
     justify-content: center;
     font-weight: bolder;
-    color: black;
+    color: white;
     height: 6vh;
     left: 75%;
-    top: 10%;
+    top: 2.5vh;
     background:#2bc6ff;
     border-radius: 100%;
     cursor: pointer;
   }
 
   .user-info {
+    height: 6vh;
     position: relative;
     width: 14%;
     justify-content: center;
     align-items: center;
     background-color: rgb(88, 88, 88);
     color: white;
-    margin-top: 5px;
+    margin-top: 2px;
     border-radius: 20px;
     border: none;
     left: 85%;
-    top: 10%;
+    top: 1.5vh;
     font-size: 15pt;
     font-weight: 700;
     transition: 1s;
@@ -50,7 +51,7 @@
   }
   
   .loginicon:hover{
-    color: white;
+    background-color: rgba(58, 150, 255, 0.9);
   }
   
   .login-form{
