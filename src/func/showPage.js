@@ -74,7 +74,7 @@ export default class ShowPage extends React.Component {
                     <div id="areaTwo">
                         <div id="summery">
                             <p id="summeryTitle">{this.state.summeryTitle}</p>
-                            <img id="summeryImg" url={this.state.summeryImg} alt="Bild" width="500" height="500"></img>
+                            <img id="summeryImg" src={this.state.summeryImg} alt="Bild" width="500" height="500"></img>
                             {this.state.summeryTags.map( (tags,index)=>
                                 (
                                     <div id="tag" key={index}>
