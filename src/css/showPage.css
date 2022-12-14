@@ -59,6 +59,10 @@ p{
     font-size: 30px;;
     font-weight: bold;
 }
+#contentUnderTitle{
+    font-size: 26px;;
+    font-weight: bold;
+}
 
 #refrences{
     background-color:beige;

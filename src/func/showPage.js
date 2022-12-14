@@ -52,7 +52,7 @@ export default class ShowPage extends React.Component {
         const handleLoginClick = () => {
             this.setState(prevState => ({
                 isShowLogin: !prevState.isShowLogin
-              }));
+            }));
         }
         return(
             
@@ -107,13 +107,36 @@ export default class ShowPage extends React.Component {
                         <div id="content">
                         {this.state.content.map( (content,index)=>
                             {
-                                let idTag = "contentsItem"+index;
-                                return(
-                                    <div id={idTag} key={index}>
-                                        <p id="contentTitle">{content.title}</p>
-                                        <p> {content.text}</p>
-                                    </div>
-                                )
+                                if(content.type == "title"){
+                                    let idTag = "contentsItem"+index;
+                                    return(
+                                        <div id={idTag} key={index}>
+                                            <p id="contentTitle">{content.text}</p>
+                                        </div>
+                                    )
+                                }
+                                else if(content.type == "underTitle"){
+                                    return(
+                                        <div key={index}>
+                                            <p id="contentUnderTitle">{content.text}</p>
+                                        </div>
+                                    )
+                                }
+                                else if(content.type == "text"){
+                                    return(
+                                        <div key={index}>
+                                            <p id="contentText">{content.text}</p>
+                                        </div>
+                                    )
+                                }
+                                else if(content.type == "list"){
+                                    content.text.map((item, index)=>(
+                                            <li key={index}>
+                                                <p id="contentListText">{item}</p>
+                                            </li>
+                                    ))
+                                    
+                                }
                                 
                             })}
                         </div>
