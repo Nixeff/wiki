@@ -10,7 +10,6 @@ import { toHaveFocus } from "@testing-library/jest-dom/dist/matchers";
 export default class ShowPage extends React.Component {
     constructor(props){
         super(props);
-        const {convertXML, createAST} = require("simple-xml-to-json")
         this.state = {
             ID: loadLS("pID"),
             wikis: "",
@@ -64,11 +63,15 @@ export default class ShowPage extends React.Component {
                         <p id="contentTitle"> Innehåll</p>
                         <div id="contents">
                             {this.state.content.map( (contents,index)=>
-                                    (
-                                        <div id="contentsItem+{index}" key={index}>
-                                            <a href="#contentTitle">{contents.title}</a>
-                                        </div>
-                                    ))}
+                                    {
+                                        let idLink = "#contentsItem"+index;
+                                        return(
+                                            <div id="tag" key={index}>
+                                                <a href={idLink}>{contents.title}</a>
+                                            </div>
+                                        )
+                                        
+                                    })}
                         </div>
                     </div>
                     <div id="areaTwo">
@@ -89,19 +92,22 @@ export default class ShowPage extends React.Component {
                     <div>
                         <div id="content">
                         {this.state.content.map( (content,index)=>
-                            (
-                                <div id="contentItem+{index}" key={index}>
-                                    <p id="contentTitle">{content.title}</p>
-                                    <p> {content.text}</p>
-                                </div>
-                            ))}
+                            {
+                                let idTag = "contentsItem"+index;
+                                return(
+                                    <div id={idTag} key={index}>
+                                        <p id="contentTitle">{content.title}</p>
+                                        <p> {content.text}</p>
+                                    </div>
+                                )
+                                
+                            })}
                         </div>
                         <div id="refrences">
                         {this.state.refrences.map( (refrences,index)=>
                             (
                                 <div id="refrenceItem" key={index}>
-                                    <p>{refrences.title} | </p>
-                                    <p> {refrences.where}</p>
+                                    <a href={refrences.where}>{refrences.title}</a>
                                 </div>
                             ))}
                         </div>
