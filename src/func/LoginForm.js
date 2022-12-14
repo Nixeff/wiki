@@ -1,6 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { saveLS } from "./localStorage";
+import { loadLS, saveLS } from "./localStorage";
+import { Redirect, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import AdminPage from './adminPage';
+import { useHistory } from "react-router-dom";
 import "../css/styles.css";
 
 const LoginForm = ({ isShowLogin }) => {
@@ -18,6 +22,7 @@ const LoginForm = ({ isShowLogin }) => {
   }
 
   function checkUser(loginMessage, uID, uname, token) {
+    //const navigate = useNavigate();
     const usercheck = (loginMessage === adminMessage);
     if(usercheck) {
       console.log("Login successful (Admin)");
@@ -26,7 +31,10 @@ const LoginForm = ({ isShowLogin }) => {
       saveLS("uname", uname, 1, "/");
       saveLS("token", token, 1, "/");
       console.log(usercheck);
+      console.log("Wooah! Admin check WOAHH!")
       window.location.reload(false);
+      //return(<Navigate to="/adminPage" />);
+      //navigate('/adminPage');
     }else {
       const usercheck = (loginMessage === endUserMessage);
       if(usercheck){
