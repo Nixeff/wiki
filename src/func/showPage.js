@@ -73,8 +73,9 @@ export default class ShowPage extends React.Component {
                     <div id="areaOne">
                         <p id="contentTitle"> Beskrivning</p>
                         <p id="description">{this.state.description}</p>
-                        <p id="contentTitle"> Innehåll</p>
+                        
                         <div id="contents">
+                            <p id="contentTitle"> Innehåll</p>
                             {this.state.content.map( (contents,index)=>
                                     {
                                         let idLink = "#contentsItem"+index;
