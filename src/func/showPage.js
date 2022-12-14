@@ -1,6 +1,7 @@
 import React from "react";
 import { json, useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
+import LoginForm from './LoginForm';
 import NavBar from "./NavBar";
 import WikiTag from "./wikiTags";
 import { convertXML } from "simple-xml-to-json";
@@ -13,6 +14,7 @@ export default class ShowPage extends React.Component {
         const {convertXML, createAST} = require("simple-xml-to-json")
         this.state = {
             ID: loadLS("pID"),
+            isShowLogin: false
             wikis: "",
             summeryTitle: "",
             summeryImg: "",
@@ -48,10 +50,21 @@ export default class ShowPage extends React.Component {
     }
 
     render(){
+        const handleLoginClick = () => {
+            this.setState(prevState => ({
+                isShowLogin: !prevState.isShowLogin
+              }));
+        }
         return(
             
             <div>
-                <NavBar />  
+                {this.state.isShowLogin?(
+                    <LoginForm isState={this.state.isShowLogin} />
+                ):(
+                    console.log("Nothing to see here")
+                )}
+                <NavBar handleLoginClick={handleLoginClick}/>
+                <LoginForm isShowLogin={this.state.isShowLogin}/> 
                 <br></br>
                 <br></br>
                 <br></br>
