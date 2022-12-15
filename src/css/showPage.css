@@ -10,12 +10,17 @@ p{
 }
 
 #areaThree{
+    background-color: beige;
     display: flex;
     justify-content: center;
+}
+#areaOne{
+    background-color: beige; 
 }
 
 /* Summery */
 #summery{
+    
     float:left;
     background-color: gainsboro;
     width:500px;
@@ -32,12 +37,14 @@ p{
 /* Description */
 #description{
     width:800px;
-    background-color: aqua;
+    background-color: beige;
 }
 
 /* Contents */
 #contents{
-    background-color: red;
+    background-color: beige;
+    border-style: solid;
+    padding:10px;
 }
 #contentsItem{
     display: flex;
@@ -52,9 +59,13 @@ p{
     font-size: 30px;;
     font-weight: bold;
 }
+#contentUnderTitle{
+    font-size: 26px;;
+    font-weight: bold;
+}
 
 #refrences{
-    background-color:aquamarine;
+    background-color:beige;
 }
 #refrenceItem{
     display: flex;

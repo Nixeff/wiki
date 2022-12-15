@@ -52,7 +52,7 @@ export default class ShowPage extends React.Component {
         const handleLoginClick = () => {
             this.setState(prevState => ({
                 isShowLogin: !prevState.isShowLogin
-              }));
+            }));
         }
         return(
             
@@ -73,18 +73,21 @@ export default class ShowPage extends React.Component {
                     <div id="areaOne">
                         <p id="contentTitle"> Beskrivning</p>
                         <p id="description">{this.state.description}</p>
-                        <p id="contentTitle"> Innehåll</p>
+                        
                         <div id="contents">
+                            <p id="contentTitle"> Innehåll</p>
                             {this.state.content.map( (contents,index)=>
-                                    {
+                                {
+                                    if(contents.type == "title"){
                                         let idLink = "#contentsItem"+index;
                                         return(
                                             <div id="tag" key={index}>
-                                                <a href={idLink}>{contents.title}</a>
+                                                <a href={idLink}>{contents.text}</a>
                                             </div>
                                         )
-                                        
-                                    })}
+                                    }
+                                    
+                                })}
                         </div>
                     </div>
                     <div id="areaTwo">
@@ -106,13 +109,37 @@ export default class ShowPage extends React.Component {
                         <div id="content">
                         {this.state.content.map( (content,index)=>
                             {
-                                let idTag = "contentsItem"+index;
-                                return(
-                                    <div id={idTag} key={index}>
-                                        <p id="contentTitle">{content.title}</p>
-                                        <p> {content.text}</p>
-                                    </div>
-                                )
+                                if(content.type == "title"){
+                                    let idTag = "contentsItem"+index;
+                                    return(
+                                        <div id={idTag} key={index}>
+                                            <p id="contentTitle">{content.text}</p>
+                                        </div>
+                                    )
+                                }
+                                else if(content.type == "underTitle"){
+                                    return(
+                                        <div key={index}>
+                                            <p id="contentUnderTitle">{content.text}</p>
+                                        </div>
+                                    )
+                                }
+                                else if(content.type == "text"){
+                                    return(
+                                        <div key={index}>
+                                            <p id="contentText">{content.text}</p>
+                                        </div>
+                                    )
+                                }
+                                else if(content.type == "list"){
+                                    return(
+                                        <div>
+                                            {content.text.map((item, index)=>(
+                                                <li id="contentListText">{item}</li>
+                                            ))}
+                                        </div>
+                                    )
+                                }
                                 
                             })}
                         </div>
