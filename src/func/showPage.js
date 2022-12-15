@@ -130,12 +130,13 @@ export default class ShowPage extends React.Component {
                                     )
                                 }
                                 else if(content.type == "list"){
-                                    content.text.map((item, index)=>(
-                                            <li key={index}>
-                                                <p id="contentListText">{item}</p>
-                                            </li>
-                                    ))
-                                    
+                                    return(
+                                        <div>
+                                            {content.text.map((item, index)=>(
+                                                <li id="contentListText">{item}</li>
+                                            ))}
+                                        </div>
+                                    )
                                 }
                                 
                             })}
