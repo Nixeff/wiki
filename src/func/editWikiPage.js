@@ -7,7 +7,7 @@ import "../css/showPage.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import { EditWikiPageButton } from "./buttons";
 
-export default class ShowPage extends React.Component {
+export default class EditWikiPage extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -75,7 +75,9 @@ export default class ShowPage extends React.Component {
                 <div id="data">
                     <div id="areaOne">
                         <p id="contentTitle"> Beskrivning</p>
-                        <p id="description">{this.state.description}</p>
+                        <textarea value={this.state.description} name='awesome' rows="5"  cols="60"></textarea>
+
+                        
                         <div id="contents">
                             <p id="contentTitle"> Innehåll</p>
                             {this.state.content.map( (contents,index)=>
