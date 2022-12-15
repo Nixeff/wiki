@@ -27,6 +27,7 @@ export default class ShowPage extends React.Component {
     componentDidMount(){
         this.getPages();
         this.getPages();
+        
     }
 
     getPages = async () => {

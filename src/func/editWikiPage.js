@@ -48,8 +48,11 @@ export default class EditWikiPage extends React.Component {
                 content: this.state.wikis.content,
                 refrences: this.state.wikis.refrences,
             });
-            console.dir(this.state.summeryTitle);
         });
+    }
+
+    handleChange(e){
+        
     }
 
     render(){
@@ -75,7 +78,7 @@ export default class EditWikiPage extends React.Component {
                 <div id="data">
                     <div id="areaOne">
                         <p id="contentTitle"> Beskrivning</p>
-                        <textarea value={this.state.description} name='awesome' rows="5"  cols="60"></textarea>
+                        <textarea onChange={(e)=>handleChange(e)} value={this.state.description} name='awesome' rows="5"  cols="60"></textarea>
 
                         
                         <div id="contents">
@@ -139,7 +142,7 @@ export default class EditWikiPage extends React.Component {
                                     return(
                                         <div>
                                             {content.text.map((item, index)=>(
-                                                <li id="contentListText">{item}</li>
+                                                <li key={index} id="contentListText">{item}</li>
                                             ))}
                                         </div>
                                     )
