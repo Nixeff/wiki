@@ -53,10 +53,30 @@ export default class EditWikiPage extends React.Component {
     };
     handleChangeList = (event, name, index) => {
         if (name == "tagsName"){
-            let temp = '{"name":"'+name+'"content"'+this.state.summery.tags+'}';
-            console.log(temp);
+            let temp = this.state.summeryTags;
+            temp[index] = '{"name":"'+event.target.value+',"content"'+this.state.summeryTags+'}';
             this.setState({summeryTags: temp})
-        }console.log("hi");
+        } else if (name == "tagsContent"){
+            let temp = this.state.summeryTags;
+            temp[index] = '{"name":"'+this.state.summeryTags+',"content"'+event.target.value+'}';
+            this.setState({summeryTags: temp})
+        }else if (name == "contentTitle"){
+            let temp = this.state.content;
+            temp[index] = '{"type":"title","text"'+event.target.value+'}';
+            this.setState({content: temp})
+        }else if (name == "contentUnderTitle"){
+            let temp = this.state.content;
+            temp[index] = '{"type":"underTitle","text"'+event.target.value+'}';
+            this.setState({content: temp})
+        }else if (name == "contentText"){
+            let temp = this.state.content;
+            temp[index] = '{"type":"text","text"'+event.target.value+'}';
+            this.setState({content: temp})
+        }else if (name == "contentList"){
+            let temp = this.state.content;
+            temp[index] = '{"type":"list","text"'+event.target.value+'}';
+            this.setState({content: temp})
+        }
     };
 
     render(){
@@ -108,8 +128,8 @@ export default class EditWikiPage extends React.Component {
                             {this.state.summeryTags.map( (tags,index)=>
                                 (
                                     <div id="tag" key={index}>
-                                        <textarea onChange={(event)=>this.handleChangeList(event,"tagsName")} value={tags.name} name='awesome' rows="1"  cols="15"></textarea>
-                                        <textarea onChange={(event)=>this.handleChange(event)} value={tags.content} name='awesome' rows="1"  cols="15"></textarea>
+                                        <textarea onChange={(event)=>this.handleChangeList(event,"tagsName",index)} value={tags.name} name='awesome' rows="1"  cols="15"></textarea>
+                                        <textarea onChange={(event)=>this.handleChangeList(event,"tagsContent",index)} value={tags.content} name='awesome' rows="1"  cols="15"></textarea>
                                         <button>Ta bort tag</button>
                                     </div>
                                 ))}
@@ -126,21 +146,21 @@ export default class EditWikiPage extends React.Component {
                                     let idTag = "contentsItem"+index;
                                     return(
                                         <div id={idTag} key={index}>
-                                            <textarea onChange={(event)=>this.handleChange(event)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
+                                            <textarea onChange={(event)=>this.handleChangeList(event,"contentTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
                                         </div>
                                     )
                                 }
                                 else if(content.type == "underTitle"){
                                     return(
                                         <div key={index}>
-                                            <textarea onChange={(event)=>this.handleChange(event)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
+                                            <textarea onChange={(event)=>this.handleChangeList(event,"contentUnderTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
                                         </div>
                                     )
                                 }
                                 else if(content.type == "text"){
                                     return(
                                         <div key={index}>
-                                            <textarea onChange={(event)=>this.handleChange(event)} value={content.text} name='awesome' rows="4"  cols="100"></textarea>
+                                            <textarea onChange={(event)=>this.handleChangeList(event,"contentText",index)} value={content.text} name='awesome' rows="4"  cols="100"></textarea>
                                         </div>
                                     )
                                 }
@@ -148,7 +168,7 @@ export default class EditWikiPage extends React.Component {
                                     return(
                                         <div>
                                             {content.text.map((item, index)=>(
-                                                <textarea onChange={(event)=>this.handleChange(event)} value={item} name='awesome' rows="1"  cols="40"></textarea>
+                                                <textarea onChange={(event)=>this.handleChangeList(event,"contentList",index)} value={item} name='awesome' rows="1"  cols="40"></textarea>
                                             ))}
                                             <button>Lägg till list object</button>
                                         </div>
