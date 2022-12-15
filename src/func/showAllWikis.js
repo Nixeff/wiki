@@ -27,7 +27,6 @@ export default class ShowAllWikis extends React.Component {
         .then((data) => data.json())
         .then((data) => {
             this.setState({wikis: data.Data});
-            console.log(this.state.wikis);
         });
     }
 
