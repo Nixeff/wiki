@@ -77,15 +77,17 @@ export default class ShowPage extends React.Component {
                         <div id="contents">
                             <p id="contentTitle"> Innehåll</p>
                             {this.state.content.map( (contents,index)=>
-                                    {
+                                {
+                                    if(contents.type == "title"){
                                         let idLink = "#contentsItem"+index;
                                         return(
                                             <div id="tag" key={index}>
-                                                <a href={idLink}>{contents.title}</a>
+                                                <a href={idLink}>{contents.text}</a>
                                             </div>
                                         )
-                                        
-                                    })}
+                                    }
+                                    
+                                })}
                         </div>
                     </div>
                     <div id="areaTwo">
