@@ -35,7 +35,7 @@ export default class ShowAllWikis extends React.Component {
         const handleLoginClick = () => {
             this.setState(prevState => ({
                 isShowLogin: !prevState.isShowLogin
-              }));
+            }));
         }
         return(
             <div>     

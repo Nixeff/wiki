@@ -13,7 +13,6 @@ export default class ShowPage extends React.Component {
         this.state = {
             ID: loadLS("pID"),
             isShowLogin: false,
-            wikis: "",
             summeryTitle: "",
             summeryImg: "",
             summeryTags: [],
@@ -26,30 +25,24 @@ export default class ShowPage extends React.Component {
 
     componentDidMount(){
         this.getPages();
-        this.getPages();
         
     }
 
     getPages = async () => {
         let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_get_content.php?page_id="+this.state.ID;
-        console.log(API_URL);
         fetch(`${API_URL}`)
         .then((data) => {return data.json()})
         .then((data) => {
-            console.log(data);
+            let wikis = JSON.parse(data.Data.page_data.page_content);
             this.setState({
-                wikis: JSON.parse(data.Data.page_data.page_content),
+                summeryTitle: wikis.summery.title,
+                summeryImg: wikis.summery.img,
+                summeryTags: wikis.summery.tags,
+                description: wikis.description,
+                contents: wikis.contents,
+                content: wikis.content,
+                refrences: wikis.refrences,
             });
-            this.setState({
-                summeryTitle: this.state.wikis.summery.title,
-                summeryImg: this.state.wikis.summery.img,
-                summeryTags: this.state.wikis.summery.tags,
-                description: this.state.wikis.description,
-                contents: this.state.wikis.contents,
-                content: this.state.wikis.content,
-                refrences: this.state.wikis.refrences,
-            });
-            console.dir(this.state.summeryTitle);
         });
     }
 
