@@ -3,10 +3,8 @@ import { json, useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
 import LoginForm from './LoginForm';
 import NavBar from "./NavBar";
-import WikiTag from "./wikiTags";
-import { convertXML } from "simple-xml-to-json";
 import "../css/showPage.css";
-import { toHaveFocus } from "@testing-library/jest-dom/dist/matchers";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default class ShowPage extends React.Component {
     constructor(props){
@@ -23,6 +21,11 @@ export default class ShowPage extends React.Component {
             content: [],
             refrences: [],
         }
+    }
+
+    componentDidMount(){
+        this.getPages();
+        this.getPages();
     }
 
     getPages = async () => {
@@ -68,7 +71,6 @@ export default class ShowPage extends React.Component {
                 <br></br>
                 <br></br>
                 <br></br>
-                <input id="showWikis" type="button" onClick={() => this.getPages()} value="Show"></input>
                 <div id="data">
                     <div id="areaOne">
                         <p id="contentTitle"> Beskrivning</p>
@@ -151,8 +153,11 @@ export default class ShowPage extends React.Component {
                                 </div>
                             ))}
                         </div>
+                        {/*<button onClick={()=> Navigate("/PageEdit")}>Hi</button>*/}
                     </div>
+                    
                 </div>
+                
             </div>
         )
     }
