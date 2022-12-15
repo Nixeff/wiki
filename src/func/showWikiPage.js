@@ -3,17 +3,22 @@ import { useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
 import LoginForm from "./LoginForm";
 import NavBar from "./NavBar";
-import WikiTag from "./wikiTags";
+import WikiTag from "./buttons";
 import "../css/styles.css";
 
 export default class ShowWikiPage extends React.Component {
     constructor(props){
+        
         super(props);
         this.state = {
             ID: loadLS("wID"),
             wikis: [],
             isShowLogin: false
         }
+    }
+
+    componentDidMount(){
+        this.getPages();
     }
 
     getPages = async () => {
@@ -46,7 +51,7 @@ export default class ShowWikiPage extends React.Component {
                 <br></br>
                 <br></br>
                 <br></br>
-                <input id="showWikis" type="button" onClick={() => this.getPages()} value="Show"></input>
+                <br></br>
                 <div>
                         {this.state.wikis.map( (wikis,index)=>
                             (

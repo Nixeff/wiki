@@ -29,4 +29,8 @@ export default function WikiTag(props){
     )
 }
 
+export function editWikiPage(props){
+
+}
+
 

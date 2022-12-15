@@ -1,5 +1,5 @@
 import React from "react";
-import WikiTag from "./wikiTags";
+import WikiTag from "./buttons";
 import LoginForm from './LoginForm';
 import NavBar from './NavBar';
 import "../css/styles.css";
