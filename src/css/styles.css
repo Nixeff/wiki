@@ -147,3 +147,9 @@
     transform: translateY(0px) scale(0) rotateY(180deg);
     opacity: 0;
   }
+
+  #back{
+    position: absolute;
+    top: 5vh;
+    left: 5vw;
+  }

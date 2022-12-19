@@ -9,6 +9,7 @@ export default class CreateWiki extends React.Component {
             visibility: "public",
             uID: loadLS("uID"),
             token: loadLS("token"),
+            
         }
     }
 
@@ -20,7 +21,7 @@ export default class CreateWiki extends React.Component {
         event.preventDefault();
         let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/Wiki/create_wiki.php?wiki_name="+this.state.wName+"&visibility="+this.state.visibility+"&user_id="+this.state.uID+"&token="+this.state.token;
         fetch(`${API_URL}`)
-        console.log(this.state.wName)
+        this.setState({reload: true})
     }
 
     render(){
@@ -28,7 +29,6 @@ export default class CreateWiki extends React.Component {
             <form id="createWiki" onSubmit={this.createWiki}>
                 <input id="handleWName" type="text" onChange={this.handleWName} value={this.state.wName}/>
                 <input id="submitWName" type="submit" value="create wiki"/>
-                {console.log(this.state.wName)}
             </form>
         )
     }

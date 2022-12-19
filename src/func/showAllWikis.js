@@ -14,6 +14,7 @@ export default class ShowAllWikis extends React.Component {
             wikis: [],
             title: "",
             isShowLogin: false,
+            reload: false,
             userType: loadLS("userType")
         }
     }
@@ -72,6 +73,7 @@ export default class ShowAllWikis extends React.Component {
                 </div>
                 <div id="cwbutton">
                     <CreateWiki/>
+                    {this.state.reload ? (this.onLoadGetWikis()):(console.log(this.state.reload))}
                 </div>
             </div>
         )
