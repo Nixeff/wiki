@@ -1,9 +1,10 @@
 import React from "react";
-import WikiTag from "./buttons";
+import WikiTag, { CreateWiki } from "./buttons";
 import LoginForm from './LoginForm';
 import NavBar from './NavBar';
 import "../css/styles.css";
 import "../css/showAllWikis.css";
+import { loadLS } from "./localStorage";
 
 export default class ShowAllWikis extends React.Component {
     constructor(props) {
@@ -11,9 +12,10 @@ export default class ShowAllWikis extends React.Component {
         this.state = {
             wikis: [],
             title: "",
-            isShowLogin: false
+            isShowLogin: false,
+            userType: loadLS("userType"),
+            isAdmin: false
         }
-        
     }
 
     handleChangeUser = (event) => {
@@ -54,6 +56,9 @@ export default class ShowAllWikis extends React.Component {
                             <WikiTag location="/WikiPage" cookieName="wID" title={wikis.Title} value={wikis.ID}/>
                         </div>
                     ))}
+                </div>
+                <div id="cwbutton">
+                    <CreateWiki location="/CreateWiki"/>
                 </div>
             </div>
         )

@@ -29,8 +29,20 @@ export default function WikiTag(props){
     )
 }
 
-export function editWikiPage(props){
+export function CreateWiki(props){
+    const [location, setLocation] = useState(props.location);
+    const navigate = useNavigate();
 
+    const cwhandler = (path) => {
+        navigate(path);
+    }
+
+
+    return(
+        <div id="createWikiHandler">
+            <button id="title" onClick={() => cwhandler(location)}>Create wiki</button>
+        </div>
+    )
 }
 
 

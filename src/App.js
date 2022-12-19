@@ -6,6 +6,7 @@ import ShowAllWikis from "./func/showAllWikis";
 import ShowWikiPage from "./func/showWikiPage";
 import ShowPage from './func/showPage';
 import AdminPage from './func/adminPage';
+import CreateWiki from './func/createWiki';
 
 export default class App extends React.Component {
   constructor(props){
@@ -26,6 +27,7 @@ export default class App extends React.Component {
         <Route exact path="/WikiPage" element={<ShowWikiPage /> } />
         <Route exact path="/Page" element={<ShowPage /> } />
         <Route exact path="/AdminPage" element={<AdminPage /> } />
+        <Route exact path="/CreateWiki" element={<CreateWiki /> } />
       </Routes>
     );
   }
