@@ -27,6 +27,30 @@ export default class EditWikiPage extends React.Component {
         this.getPages();
     }
 
+    sendData = async () => {
+        let uID = loadLS("uID");
+        let token = loadLS("token");
+        let pID = loadLS("pID");
+
+        let wikiPage = '{"summery":{"title":"'+this.state.summeryTitle+'","img":"'+this.state.summeryImg+'","tags":'+JSON.stringify(this.summeryTags)+'},"description":"'+this.state.description+'","content":'+JSON.stringify(this.state.content)+',"refrences":'+JSON.stringify(this.state.refrences)+'}';
+        console.log(wikiPage);
+        fetch("http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_update_page.php",
+        {
+            method: "POST",
+            headers: {
+                "user_id":uID,
+                "token":token,
+                "page_id":pID,
+                "content":wikiPage,
+            }
+
+        })
+        .then((response) => {return response.json()})
+        .then((data) => {
+        console.log(data);
+        });
+    }
+
     getPages = async () => {
         let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_get_content.php?page_id="+this.state.ID;
         fetch(`${API_URL}`)
@@ -38,7 +62,6 @@ export default class EditWikiPage extends React.Component {
                 summeryImg: wikis.summery.img,
                 summeryTags: wikis.summery.tags,
                 description: wikis.description,
-                contents: wikis.contents,
                 content: wikis.content,
                 refrences: wikis.refrences,
             });
@@ -49,35 +72,45 @@ export default class EditWikiPage extends React.Component {
         if(name == "description"){
             this.setState({description: event.target.value});
         } 
+        if(name == "title"){
+            this.setState({summeryTitle: event.target.value});
+        } 
         
     };
     handleChangeList = (event, name, index) => {
+        let temp;
         if (name == "tagsName"){
-            let temp = this.state.summeryTags;
-            temp[index] = '{"name":"'+event.target.value+',"content"'+this.state.summeryTags+'}';
+            temp = this.state.summeryTags;
+            temp[index] = JSON.parse('{"name":"'+event.target.value+'","content":"'+temp[index].content+'"}');
             this.setState({summeryTags: temp})
         } else if (name == "tagsContent"){
-            let temp = this.state.summeryTags;
-            temp[index] = '{"name":"'+this.state.summeryTags+',"content"'+event.target.value+'}';
+            temp = this.state.summeryTags;
+            temp[index] = JSON.parse('{"name":"'+temp[index].name+'","content":"'+event.target.value+'"}');
+            console.log(temp[index]);
             this.setState({summeryTags: temp})
         }else if (name == "contentTitle"){
-            let temp = this.state.content;
-            temp[index] = '{"type":"title","text"'+event.target.value+'}';
+            temp = this.state.content;
+            temp[index] = JSON.parse('{"type":"title","text":"'+event.target.value+'"}');
+            console.log(temp[index]);
             this.setState({content: temp})
+            
         }else if (name == "contentUnderTitle"){
-            let temp = this.state.content;
-            temp[index] = '{"type":"underTitle","text"'+event.target.value+'}';
+            temp = this.state.content;
+            temp[index] = JSON.parse('{"type":"underTitle","text":"'+event.target.value+'"}');
             this.setState({content: temp})
         }else if (name == "contentText"){
-            let temp = this.state.content;
-            temp[index] = '{"type":"text","text"'+event.target.value+'}';
-            this.setState({content: temp})
-        }else if (name == "contentList"){
-            let temp = this.state.content;
-            temp[index] = '{"type":"list","text"'+event.target.value+'}';
+            temp = this.state.content;
+            temp[index] = JSON.parse('{"type":"text","text":"'+event.target.value+'"}');
             this.setState({content: temp})
         }
+        console.log(temp);
     };
+    handleChangeListList = (event, index, mapIndex)=>{
+        let temp = this.state.content;
+        console.log(temp[mapIndex].text[index]);
+        temp[mapIndex].text[index] = event.target.value;
+        this.setState({content: temp});
+    }
 
     render(){
         const handleLoginClick = () => {
@@ -123,7 +156,7 @@ export default class EditWikiPage extends React.Component {
                     </div>
                     <div id="areaTwo">
                         <div id="summery">
-                        <textarea onChange={(event)=>this.handleChange(event)} value={this.state.summeryTitle} name='awesome' rows="1"  cols="41"></textarea>
+                        <textarea onChange={(event)=>this.handleChange(event,"title")} value={this.state.summeryTitle} name='awesome' rows="1"  cols="41"></textarea>
                             <img id="summeryImg" src={this.state.summeryImg} alt="Bild" width="500" height="500"></img>
                             {this.state.summeryTags.map( (tags,index)=>
                                 (
@@ -165,10 +198,11 @@ export default class EditWikiPage extends React.Component {
                                     )
                                 }
                                 else if(content.type == "list"){
+                                    let mapIndex = index;
                                     return(
                                         <div>
                                             {content.text.map((item, index)=>(
-                                                <textarea onChange={(event)=>this.handleChangeList(event,"contentList",index)} value={item} name='awesome' rows="1"  cols="40"></textarea>
+                                                <textarea onChange={(event)=>this.handleChangeListList(event,index,mapIndex)} value={item} name='awesome' rows="1"  cols="40"></textarea>
                                             ))}
                                             <button>Lägg till list object</button>
                                         </div>
@@ -185,7 +219,7 @@ export default class EditWikiPage extends React.Component {
                                 </div>
                             ))}
                         </div>
-                        <EditWikiPageButton title="Edit" location="/EditPage"/>
+                        <button onClick={()=>this.sendData()}>Confirm Edit</button>
                     </div>
                     
                 </div>
