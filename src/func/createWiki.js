@@ -6,7 +6,7 @@ export default class CreateWiki extends React.Component {
         super(props);
         this.state = {
             wName: "",
-            visibility: "private",
+            visibility: "public",
             uID: loadLS("uID"),
             token: loadLS("token"),
         }
@@ -25,11 +25,11 @@ export default class CreateWiki extends React.Component {
 
     render(){
         return(
-            <form id="createWiki" type="submit" onSubmit={this.createWiki}>
-                <input id="handleWName" type="text" onChange={this.handleWName} value={this.state.wName}></input>
+            <form id="createWiki" onSubmit={this.createWiki}>
+                <input id="handleWName" type="text" onChange={this.handleWName} value={this.state.wName}/>
+                <input id="submitWName" type="submit" value="create wiki"/>
                 {console.log(this.state.wName)}
             </form>
-            
         )
     }
 }

@@ -27,7 +27,6 @@ export default class App extends React.Component {
         <Route exact path="/WikiPage" element={<ShowWikiPage /> } />
         <Route exact path="/Page" element={<ShowPage /> } />
         <Route exact path="/AdminPage" element={<AdminPage /> } />
-        <Route exact path="/CreateWiki" element={<CreateWiki /> } />
       </Routes>
     );
   }
