@@ -5,6 +5,8 @@ import LoginForm from "./LoginForm";
 import NavBar from "./NavBar";
 import WikiTag, {Back} from "./buttons";
 import "../css/styles.css";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 export default class ShowWikiPage extends React.Component {
     constructor(props){
@@ -16,6 +18,22 @@ export default class ShowWikiPage extends React.Component {
             isShowLogin: false
         }
     }
+    submit(){
+        confirmAlert({
+            title: 'Confirm to submit',
+            message: 'Are you sure to do this.',
+            buttons: [
+                {
+                label: 'Yes',
+                onClick: () => alert('Click Yes')
+                },
+                {
+                label: 'No',
+                onClick: () => alert('Click No')
+                }
+            ]
+            });
+        };
 
     componentDidMount(){
         this.getPages();
@@ -58,9 +76,9 @@ export default class ShowWikiPage extends React.Component {
                             (
                                 <div key={index}>
                                     <WikiTag location="/Page" cookieName="pID" title={wikis.Title} value={wikis.ID}/>
-                                    <button > Lägg till en wiki sida</button>
                                 </div>
                             ))}
+                        <button onClick={()=>this.submit()}> Lägg till en wiki sida</button>
                     </div>
             </div>
         )
