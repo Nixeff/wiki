@@ -41,7 +41,7 @@ export default class EditWikiPage extends React.Component {
                 "user_id":uID,
                 "token":token,
                 "page_id":pID,
-                "content":wikiPage,
+                "content":wikiPage
             }
 
         })
@@ -111,6 +111,47 @@ export default class EditWikiPage extends React.Component {
         temp[mapIndex].text[index] = event.target.value;
         this.setState({content: temp});
     }
+    createArea(pos){
+        let temp;
+        if(pos == "tags"){
+            temp = this.state.summeryTags;
+            temp.push('{"name":" h","content":" h"}');
+            this.setState({
+                summeryTags: temp
+            })
+        }
+    }
+    removeArea(pos,listPos){
+        let temp;
+        if(pos == "tags"){
+            temp = this.state.summeryTags;
+            delete temp[listPos];
+            this.setState({
+                summeryTags: temp
+            })
+        }
+        if(pos == "title"){
+            temp = this.state.content;
+            delete temp[listPos];
+            this.setState({
+                content: temp
+            })
+        }
+        if(pos == "underTitle"){
+            temp = this.state.content;
+            delete temp[listPos];
+            this.setState({
+                content: temp
+            })
+        }
+        if(pos == "text"){
+            temp = this.state.content;
+            delete temp[listPos];
+            this.setState({
+                content: temp
+            })
+        }
+    }
 
     render(){
         const handleLoginClick = () => {
@@ -119,7 +160,6 @@ export default class EditWikiPage extends React.Component {
             }));
         }
         return(
-            
             <div>
                 {this.state.isShowLogin?(
                     <LoginForm isState={this.state.isShowLogin} />
@@ -163,10 +203,10 @@ export default class EditWikiPage extends React.Component {
                                     <div id="tag" key={index}>
                                         <textarea onChange={(event)=>this.handleChangeList(event,"tagsName",index)} value={tags.name} name='awesome' rows="1"  cols="15"></textarea>
                                         <textarea onChange={(event)=>this.handleChangeList(event,"tagsContent",index)} value={tags.content} name='awesome' rows="1"  cols="15"></textarea>
-                                        <button>Ta bort tag</button>
+                                        <button onClick={()=> this.removeArea("tags",index)}>Ta bort tag</button>
                                     </div>
                                 ))}
-                            <button>Lägg till tag</button>
+                            <button onClick={()=> this.createArea("tags")}>Lägg till tag</button>
                         </div>
                     </div>
                 </div>
@@ -180,6 +220,7 @@ export default class EditWikiPage extends React.Component {
                                     return(
                                         <div id={idTag} key={index}>
                                             <textarea onChange={(event)=>this.handleChangeList(event,"contentTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
+                                            <button onClick={()=> this.removeArea("title",index)}>Ta bort title</button>
                                         </div>
                                     )
                                 }
@@ -187,6 +228,7 @@ export default class EditWikiPage extends React.Component {
                                     return(
                                         <div key={index}>
                                             <textarea onChange={(event)=>this.handleChangeList(event,"contentUnderTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
+                                            <button onClick={()=> this.removeArea("underTitle",index)}>Ta bort under title</button>
                                         </div>
                                     )
                                 }
@@ -194,6 +236,7 @@ export default class EditWikiPage extends React.Component {
                                     return(
                                         <div key={index}>
                                             <textarea onChange={(event)=>this.handleChangeList(event,"contentText",index)} value={content.text} name='awesome' rows="4"  cols="100"></textarea>
+                                            <button onClick={()=> this.removeArea("text",index)}>Ta bort text</button>
                                         </div>
                                     )
                                 }
