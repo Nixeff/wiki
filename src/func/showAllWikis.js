@@ -6,6 +6,7 @@ import CreateWiki from "./createWiki";
 import "../css/styles.css";
 import "../css/showAllWikis.css";
 import { loadLS } from "./localStorage";
+import DeleteWiki from "./deleteWiki";
 
 export default class ShowAllWikis extends React.Component {
     constructor(props) {
@@ -14,7 +15,6 @@ export default class ShowAllWikis extends React.Component {
             wikis: [],
             title: "",
             isShowLogin: false,
-            reload: false,
             userType: loadLS("userType")
         }
     }
@@ -68,12 +68,12 @@ export default class ShowAllWikis extends React.Component {
                     {this.state.wikis.map( (wikis,index)=>(
                         <div key={index}>
                             <WikiTag location="/WikiPage" cookieName="wID" title={wikis.Title} value={wikis.ID}/>
+                            <DeleteWiki wID={wikis.ID}/>
                         </div>
                     ))}
                 </div>
                 <div id="cwbutton">
                     <CreateWiki/>
-                    {this.state.reload ? (this.onLoadGetWikis()):(console.log(this.state.reload))}
                 </div>
             </div>
         )

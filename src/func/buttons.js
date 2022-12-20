@@ -39,7 +39,7 @@ export function Back(props){
 
     return(
         <div id="backPage">
-            <button id="back" onClick={() => handler(location)}>back</button>
+            <button id="back" onClick={() => handler(location)}>tillbaka</button>
         </div>
     )
 }

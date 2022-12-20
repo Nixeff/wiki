@@ -28,7 +28,7 @@ export default class CreateWiki extends React.Component {
         return(
             <form id="createWiki" onSubmit={this.createWiki}>
                 <input id="handleWName" type="text" onChange={this.handleWName} value={this.state.wName}/>
-                <input id="submitWName" type="submit" value="create wiki"/>
+                <input id="submitWName" type="submit" value="skapa wiki"/>
             </form>
         )
     }
