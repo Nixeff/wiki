@@ -6,6 +6,8 @@ import NavBar from "./NavBar";
 import "../css/showPageEdit.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import { EditWikiPageButton } from "./buttons";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 export default class EditWikiPage extends React.Component {
     constructor(props){
@@ -20,8 +22,45 @@ export default class EditWikiPage extends React.Component {
             description: "",
             content: [],
             refrences: [],
+            anwser: false,
         }
     }
+    confirm = async(type,data) =>{
+        if(type=="create"){
+            confirmAlert({
+                title: 'Är du säker?',
+                message: 'Säker?',
+                buttons: [
+                    {
+                    label: 'Ja',
+                    onClick: () => {return true}
+                    },
+                    {
+                    label: 'Nej',
+                    onClick: () => {return false}
+                    }
+                ]
+            });
+        }
+        if(type=="remove"){
+            console.log("hi");
+            confirmAlert({
+                title: 'Är du säker?',
+                message: 'Säker?',
+                buttons: [
+                    {
+                    label: 'Ja',
+                    onClick: () => this.removeArea(data[0],data[1],data[2])
+                    },
+                    {
+                    label: 'Nej',
+                    onClick: () => console.log("hi")
+                    }
+                ]
+            });
+        }
+    }
+
 
     componentDidMount(){
         this.getPages();
@@ -161,51 +200,52 @@ export default class EditWikiPage extends React.Component {
         }
     }
     removeArea(pos,listPos,listListPos){
-        let temp;
-        if(pos == "tags"){
-            temp = this.state.summeryTags;
-            delete temp[listPos];
-            this.setState({
-                summeryTags: temp
-            })
-        }
-        if(pos == "title"){
-            temp = this.state.content;
-            delete temp[listPos];
-            this.setState({
-                content: temp
-            })
-        }
-        if(pos == "underTitle"){
-            temp = this.state.content;
-            delete temp[listPos];
-            this.setState({
-                content: temp
-            })
-        }
-        if(pos == "text"){
-            temp = this.state.content;
-            delete temp[listPos];
-            this.setState({
-                content: temp
-            })
-        }
-        if(pos == "list"){
-            temp = this.state.content;
-            delete temp[listPos];
-            this.setState({
-                content: temp
-            })
-        }
-        if(pos == "listItem"){
-            temp = this.state.content;
-            let items = this.state.content[listPos].text;
-            delete items[listListPos];
-            temp[listPos].text = items;
-            this.setState({
-                content: temp
-            })
-        }
+                let temp;
+                if(pos == "tags"){
+                    temp = this.state.summeryTags;
+                    delete temp[listPos];
+                    this.setState({
+                        summeryTags: temp
+                    })
+                }
+                if(pos == "title"){
+                    temp = this.state.content;
+                    delete temp[listPos];
+                    this.setState({
+                        content: temp
+                    })
+                }
+                if(pos == "underTitle"){
+                    temp = this.state.content;
+                    delete temp[listPos];
+                    this.setState({
+                        content: temp
+                    })
+                }
+                if(pos == "text"){
+                    temp = this.state.content;
+                    delete temp[listPos];
+                    this.setState({
+                        content: temp
+                    })
+                }
+                if(pos == "list"){
+                    temp = this.state.content;
+                    delete temp[listPos];
+                    this.setState({
+                        content: temp
+                    })
+                }
+                if(pos == "listItem"){
+                    temp = this.state.content;
+                    let items = this.state.content[listPos].text;
+                    delete items[listListPos];
+                    temp[listPos].text = items;
+                    this.setState({
+                        content: temp
+                    })
+                }
+                this.setState({anwser:false})
         
     }
 
@@ -259,7 +299,7 @@ export default class EditWikiPage extends React.Component {
                                     <div id="tag" key={index}>
                                         <textarea onChange={(event)=>this.handleChangeList(event,"tagsName",index)} value={tags.name} name='awesome' rows="1"  cols="15"></textarea>
                                         <textarea onChange={(event)=>this.handleChangeList(event,"tagsContent",index)} value={tags.content} name='awesome' rows="1"  cols="15"></textarea>
-                                        <button onClick={()=> this.removeArea("tags",index)}>Ta bort tag</button>
+                                        <button onClick={()=> this.confirm("remove",["tags",index,0])}>Ta bort tag</button>
                                     </div>
                                 ))}
                             <button onClick={()=> this.createArea("tags")}>Lägg till tag</button>
@@ -276,7 +316,7 @@ export default class EditWikiPage extends React.Component {
                                     return(
                                         <div id={idTag} key={index}>
                                             <textarea id="contentTitle" onChange={(event)=>this.handleChangeList(event,"contentTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
-                                            <button onClick={()=> this.removeArea("title",index)}>Ta bort title</button>
+                                            <button onClick={()=> this.confirm("remove",["title",index,0])}>Ta bort title</button>
                                         </div>
                                     )
                                 }
@@ -284,7 +324,7 @@ export default class EditWikiPage extends React.Component {
                                     return(
                                         <div key={index}>
                                             <textarea id="contentUnderTitle" onChange={(event)=>this.handleChangeList(event,"contentUnderTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
-                                            <button onClick={()=> this.removeArea("underTitle",index)}>Ta bort under title</button>
+                                            <button onClick={()=> this.confirm("remove",["underTitle",index,0])}>Ta bort under title</button>
                                         </div>
                                     )
                                 }
@@ -292,7 +332,7 @@ export default class EditWikiPage extends React.Component {
                                     return(
                                         <div key={index}>
                                             <textarea onChange={(event)=>this.handleChangeList(event,"contentText",index)} value={content.text} name='awesome' rows="4"  cols="100"></textarea>
-                                            <button onClick={()=> this.removeArea("text",index)}>Ta bort text</button>
+                                            <button onClick={()=> this.confirm("remove",["text",index,0])}>Ta bort text</button>
                                         </div>
                                     )
                                 }
@@ -303,12 +343,12 @@ export default class EditWikiPage extends React.Component {
                                             {content.text.map((item, index)=>(
                                                 <div>
                                                     <textarea onChange={(event)=>this.handleChangeListList(event,index,mapIndex)} value={item} name='awesome' rows="1"  cols="40"></textarea>
-                                                    <button onClick={()=> this.removeArea("listItem",mapIndex,index)}>Ta bort list object</button>
+                                                    <button onClick={()=> this.confirm("remove",["listItem",mapIndex,index])}>Ta bort list object</button>
                                                 </div>
                                                 
                                             ))}
-                                            <button onClick={()=>this.createArea("list","listObject",mapIndex)}>Lägg till list object</button>
-                                            <button onClick={()=> this.removeArea("list",mapIndex,index)}>Ta bort lista</button>
+                                            <button onClick={()=>this.confirm("create",["list","listObject",mapIndex])}>Lägg till list object</button>
+                                            <button onClick={()=> this.confirm("remove",["list",mapIndex,index])}>Ta bort lista</button>
                                         </div>
                                     )
                                 }
