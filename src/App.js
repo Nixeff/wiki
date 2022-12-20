@@ -7,7 +7,7 @@ import ShowWikiPage from "./func/showWikiPage";
 import ShowPage from './func/showPage';
 import AdminPage from './func/adminPage';
 import EditWikiPage from './func/editWikiPage';
-
+import CreateWiki from './func/createWiki';
 
 export default class App extends React.Component {
   constructor(props){

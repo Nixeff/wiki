@@ -2,8 +2,10 @@ import React from "react";
 import WikiTag from "./buttons";
 import LoginForm from './LoginForm';
 import NavBar from './NavBar';
+import CreateWiki from "./createWiki";
 import "../css/styles.css";
 import "../css/showAllWikis.css";
+import { loadLS } from "./localStorage";
 
 export default class ShowAllWikis extends React.Component {
     constructor(props) {
@@ -11,9 +13,22 @@ export default class ShowAllWikis extends React.Component {
         this.state = {
             wikis: [],
             title: "",
-            isShowLogin: false
+            isShowLogin: false,
+            reload: false,
+            userType: loadLS("userType")
         }
-        
+    }
+    componentDidMount(){
+        this.onLoadGetWikis();
+    }
+
+    onLoadGetWikis = async () => {
+        let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?type=wiki&title="+this.state.title;
+        fetch(`${API_URL}`)
+        .then((data) => data.json())
+        .then((data) => {
+            this.setState({wikis: data.Data});
+        });
     }
 
     handleChangeUser = (event) => {
@@ -27,7 +42,6 @@ export default class ShowAllWikis extends React.Component {
         .then((data) => data.json())
         .then((data) => {
             this.setState({wikis: data.Data});
-            console.log(this.state.wikis);
         });
     }
 
@@ -46,8 +60,9 @@ export default class ShowAllWikis extends React.Component {
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/>  
-                <form id="showWikis" type="submit" onSubmit={this.getWikis}>
-                    <input id="showWikis" type="text" onChange={this.handleChangeUser} value={this.state.title}></input>
+                <form id="showWikis" onSubmit={this.getWikis}>
+                    <input id="showWikis" type="text" onChange={this.handleChangeUser} value={this.state.title}/>
+                    <input id="submitShowWikis" type="submit" value="sök"/>
                 </form>
                 <div id="wikiList">
                     {this.state.wikis.map( (wikis,index)=>(
@@ -55,6 +70,10 @@ export default class ShowAllWikis extends React.Component {
                             <WikiTag location="/WikiPage" cookieName="wID" title={wikis.Title} value={wikis.ID}/>
                         </div>
                     ))}
+                </div>
+                <div id="cwbutton">
+                    <CreateWiki/>
+                    {this.state.reload ? (this.onLoadGetWikis()):(console.log(this.state.reload))}
                 </div>
             </div>
         )

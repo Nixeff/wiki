@@ -29,6 +29,7 @@ export default function WikiTag(props){
     )
 }
 
+
 export function EditWikiPageButton(props){
     const [title, setTitle] = useState(props.title);
     //const [value, setValue] = useState(props.value);
@@ -48,5 +49,18 @@ export function EditWikiPageButton(props){
         </div>
     )
 }
+export function Back(props){
+    const [location, setLocation] = useState(props.location);
+    const navigate = useNavigate();
 
+    const handler = (path) => {
+        navigate(path);
+    }
+
+    return(
+        <div id="backPage">
+            <button id="back" onClick={() => handler(location)}>back</button>
+        </div>
+    )
+}
 

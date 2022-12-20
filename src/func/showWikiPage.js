@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
 import LoginForm from "./LoginForm";
 import NavBar from "./NavBar";
-import WikiTag from "./buttons";
+import WikiTag, {Back} from "./buttons";
 import "../css/styles.css";
 
 export default class ShowWikiPage extends React.Component {
@@ -46,6 +46,7 @@ export default class ShowWikiPage extends React.Component {
                     console.log("Nothing to see here")
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
+                <Back location="/ShowAllWikis"/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/>
                 <br></br>
                 <br></br>

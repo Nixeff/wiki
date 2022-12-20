@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import "../css/showPage.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import { EditWikiPageButton } from "./buttons";
+import { Back } from "./buttons";
 
 export default class ShowPage extends React.Component {
     constructor(props){
@@ -61,6 +62,7 @@ export default class ShowPage extends React.Component {
                     console.log("Nothing to see here")
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
+                <Back location="/WikiPage"/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/> 
                 <br></br>
                 <br></br>
