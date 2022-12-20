@@ -34,7 +34,8 @@ export default class EditWikiPage extends React.Component {
 
         let wikiPage = '{"summery":{"title":"'+this.state.summeryTitle+'","img":"'+this.state.summeryImg+'","tags":'+JSON.stringify(this.summeryTags)+'},"description":"'+this.state.description+'","content":'+JSON.stringify(this.state.content)+',"refrences":'+JSON.stringify(this.state.refrences)+'}';
         console.log(wikiPage);
-        fetch("http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_update_page.php",
+        let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_update_page.php";
+        fetch(`${API_URL}`,
         {
             method: "POST",
             headers: {
@@ -111,17 +112,55 @@ export default class EditWikiPage extends React.Component {
         temp[mapIndex].text[index] = event.target.value;
         this.setState({content: temp});
     }
-    createArea(pos){
+    createArea(pos, type, index){
         let temp;
         if(pos == "tags"){
             temp = this.state.summeryTags;
-            temp.push('{"name":" h","content":" h"}');
+            temp.push({"name":"Namn","content":"Innehåll"});
             this.setState({
                 summeryTags: temp
             })
         }
+        if(pos == "content"){
+            if(type == "title"){
+                temp = this.state.content;
+                temp.push({"type":"title","text":"Titel"});
+                console.log(temp);
+                this.setState({
+                content: temp
+                })
+            }
+            if(type == "underTitle"){
+                temp = this.state.content;
+                temp.push({"type":"underTitle","text":"Under titel"});
+                this.setState({
+                content: temp
+                })
+            }
+            if(type == "text"){
+                temp = this.state.content;
+                temp.push({"type":"text","text":"text"});
+                this.setState({
+                content: temp
+                })
+            }
+            if(type == "list"){
+                temp = this.state.content;
+                temp.push({"type":"list","text":["text"]});
+                this.setState({
+                content: temp
+                })
+            }
+        }
+        if(pos == "list"){
+            temp = this.state.content;
+            temp[index].text.push("List objekt")
+            this.setState({
+            content: temp
+            })
+        }
     }
-    removeArea(pos,listPos){
+    removeArea(pos,listPos,listListPos){
         let temp;
         if(pos == "tags"){
             temp = this.state.summeryTags;
@@ -151,6 +190,23 @@ export default class EditWikiPage extends React.Component {
                 content: temp
             })
         }
+        if(pos == "list"){
+            temp = this.state.content;
+            delete temp[listPos];
+            this.setState({
+                content: temp
+            })
+        }
+        if(pos == "listItem"){
+            temp = this.state.content;
+            let items = this.state.content[listPos].text;
+            delete items[listListPos];
+            temp[listPos].text = items;
+            this.setState({
+                content: temp
+            })
+        }
+        
     }
 
     render(){
@@ -245,14 +301,23 @@ export default class EditWikiPage extends React.Component {
                                     return(
                                         <div>
                                             {content.text.map((item, index)=>(
-                                                <textarea onChange={(event)=>this.handleChangeListList(event,index,mapIndex)} value={item} name='awesome' rows="1"  cols="40"></textarea>
+                                                <div>
+                                                    <textarea onChange={(event)=>this.handleChangeListList(event,index,mapIndex)} value={item} name='awesome' rows="1"  cols="40"></textarea>
+                                                    <button onClick={()=> this.removeArea("listItem",mapIndex,index)}>Ta bort list object</button>
+                                                </div>
+                                                
                                             ))}
-                                            <button>Lägg till list object</button>
+                                            <button onClick={()=>this.createArea("list","listObject",mapIndex)}>Lägg till list object</button>
+                                            <button onClick={()=> this.removeArea("list",mapIndex,index)}>Ta bort lista</button>
                                         </div>
                                     )
                                 }
                                 
                             })}
+                            <button onClick={()=>this.createArea("content","title")}>Lägg till Titel</button>
+                            <button onClick={()=>this.createArea("content","underTitle")}>Lägg till Under Titel</button>
+                            <button onClick={()=>this.createArea("content","list")}>Lägg till Lista</button>
+                            <button onClick={()=>this.createArea("content","text")}>Lägg till Text</button>
                         </div>
                         <div id="refrences">
                         {this.state.refrences.map( (refrences,index)=>
