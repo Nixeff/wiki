@@ -3,7 +3,7 @@ import { json, useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
 import LoginForm from './LoginForm';
 import NavBar from "./NavBar";
-import "../css/showPage.css";
+import "../css/showPageEdit.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import { EditWikiPageButton } from "./buttons";
 
@@ -252,7 +252,7 @@ export default class EditWikiPage extends React.Component {
                     </div>
                     <div id="areaTwo">
                         <div id="summery">
-                        <textarea onChange={(event)=>this.handleChange(event,"title")} value={this.state.summeryTitle} name='awesome' rows="1"  cols="41"></textarea>
+                        <textarea id="summeryTitle" onChange={(event)=>this.handleChange(event,"title")} value={this.state.summeryTitle} name='awesome' rows="1"  cols="41"></textarea>
                             <img id="summeryImg" src={this.state.summeryImg} alt="Bild" width="500" height="500"></img>
                             {this.state.summeryTags.map( (tags,index)=>
                                 (
@@ -275,7 +275,7 @@ export default class EditWikiPage extends React.Component {
                                     let idTag = "contentsItem"+index;
                                     return(
                                         <div id={idTag} key={index}>
-                                            <textarea onChange={(event)=>this.handleChangeList(event,"contentTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
+                                            <textarea id="contentTitle" onChange={(event)=>this.handleChangeList(event,"contentTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
                                             <button onClick={()=> this.removeArea("title",index)}>Ta bort title</button>
                                         </div>
                                     )
@@ -283,7 +283,7 @@ export default class EditWikiPage extends React.Component {
                                 else if(content.type == "underTitle"){
                                     return(
                                         <div key={index}>
-                                            <textarea onChange={(event)=>this.handleChangeList(event,"contentUnderTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
+                                            <textarea id="contentUnderTitle" onChange={(event)=>this.handleChangeList(event,"contentUnderTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
                                             <button onClick={()=> this.removeArea("underTitle",index)}>Ta bort under title</button>
                                         </div>
                                     )
