@@ -34,7 +34,9 @@ export default class ShowPage extends React.Component {
         fetch(`${API_URL}`)
         .then((data) => {return data.json()})
         .then((data) => {
+            
             let wikis = JSON.parse(data.Data.page_data.page_content);
+            console.table(wikis);
             this.setState({
                 summeryTitle: wikis.summery.title,
                 summeryImg: wikis.summery.img,
@@ -74,9 +76,11 @@ export default class ShowPage extends React.Component {
                         <p id="description">{this.state.description}</p>
                         <div id="contents">
                             <p id="contentTitle"> Innehåll</p>
+                            {console.log(this.state.content)}
                             {this.state.content.map( (contents,index)=>
-                                {
-                                    if(contents.type == "title"){
+                                {  
+                                    if(contents != null){
+                                    if(contents.type == "title" && contents != null){
                                         let idLink = "#contentsItem"+index;
                                         return(
                                             <div id="tag" key={index}>
@@ -84,6 +88,7 @@ export default class ShowPage extends React.Component {
                                             </div>
                                         )
                                     }
+                                }
                                     
                                 })}
                         </div>
@@ -107,7 +112,8 @@ export default class ShowPage extends React.Component {
                         <div id="content">
                         {this.state.content.map( (content,index)=>
                             {
-                                if(content.type == "title"){
+                                if(content != null){
+                                if(content.type == "title" && content != null){
                                     let idTag = "contentsItem"+index;
                                     return(
                                         <div id={idTag} key={index}>
@@ -115,21 +121,21 @@ export default class ShowPage extends React.Component {
                                         </div>
                                     )
                                 }
-                                else if(content.type == "underTitle"){
+                                else if(content.type == "underTitle" && content != null){
                                     return(
                                         <div key={index}>
                                             <p id="contentUnderTitle">{content.text}</p>
                                         </div>
                                     )
                                 }
-                                else if(content.type == "text"){
+                                else if(content.type == "text" && content != null){
                                     return(
                                         <div key={index}>
                                             <p id="contentText">{content.text}</p>
                                         </div>
                                     )
                                 }
-                                else if(content.type == "list"){
+                                else if(content.type == "list" && content != null){
                                     return(
                                         <div>
                                             {content.text.map((item, index)=>(
@@ -138,6 +144,7 @@ export default class ShowPage extends React.Component {
                                         </div>
                                     )
                                 }
+                            }
                                 
                             })}
                         </div>

@@ -8,6 +8,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { EditWikiPageButton } from "./buttons";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { Back } from "./buttons";
 
 export default class EditWikiPage extends React.Component {
     constructor(props){
@@ -73,30 +74,19 @@ export default class EditWikiPage extends React.Component {
         let pID = loadLS("pID");
 
         let wikiPage = '{"summery":{"title":"'+this.state.summeryTitle+'","img":"'+this.state.summeryImg+'","tags":'+JSON.stringify(this.state.summeryTags)+'},"description":"'+this.state.description+'","content":'+JSON.stringify(this.state.content)+',"refrences":'+JSON.stringify(this.state.refrences)+'}';
+        console.log(wikiPage);
         let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_update_page.php";
         let postOptions = {
-            method: 'POST',
-            headers: {'Content-Type':'application/x-www-form-urlencoded'}, // this line is important, if this content-type is not set it wont work
-            body: 'foo=bar&blah=1'
-            /*
-            method: 'POST',
-            headers: {'Content-Type':'application/x-www-form-urlencoded'}, // this line is important, if this content-type is not set it wont work
-            body: 'foo=bar&blah=1'
-            
-            headers: {
-                'Content-Type': 'application/json'
-                },
-            body: JSON.stringify({
-                "user_id":uID,
-                "token":token,
-                "page_id":pID,
-                "content":wikiPage
-            })*/
+            "method": "POST",
+            "headers": {"Content-Type":"application/x-www-form-urlencoded"}, // this line is important, if this content-type is not set it wont work
+            "body": "user_id="+uID+"&token="+token+"&page_id="+pID+"&content="+wikiPage
         }
         fetch(`${API_URL}`,postOptions)
-        .then((response) => {return response.json()})
+        .then((response) => {
+            console.table(response);
+            return response.json()})
         .then((data) => {
-        console.log(data);
+            console.log(data);
         });
     }
 
@@ -106,6 +96,7 @@ export default class EditWikiPage extends React.Component {
         .then((response) => {return response.json()})
         .then((data) => {
             let wikis= JSON.parse(data.Data.page_data.page_content);
+            console.log(wikis);
             this.setState({
                 summeryTitle: wikis.summery.title,
                 summeryImg: wikis.summery.img,
@@ -272,6 +263,7 @@ export default class EditWikiPage extends React.Component {
                     console.log("Nothing to see here")
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
+                <Back location="/Page"/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/> 
                 <br></br>
                 <br></br>
@@ -287,6 +279,7 @@ export default class EditWikiPage extends React.Component {
                             <p id="contentTitle"> Innehåll</p>
                             {this.state.content.map( (contents,index)=>
                                 {
+                                    if(contents != null){
                                     if(contents.type == "title"){
                                         let idLink = "#contentsItem"+index;
                                         return(
@@ -295,6 +288,7 @@ export default class EditWikiPage extends React.Component {
                                             </div>
                                         )
                                     }
+                                }
                                     
                                 })}
                         </div>
@@ -320,6 +314,7 @@ export default class EditWikiPage extends React.Component {
                         <div id="content">
                         {this.state.content.map( (content,index)=>
                             {
+                                if(content != null){
                                 if(content.type == "title"){
                                     let idTag = "contentsItem"+index;
                                     return(
@@ -361,6 +356,7 @@ export default class EditWikiPage extends React.Component {
                                         </div>
                                     )
                                 }
+                            }
                                 
                             })}
                             <button onClick={()=>this.createArea("content","title")}>Lägg till Titel</button>
