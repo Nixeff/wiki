@@ -83,7 +83,10 @@ export default class ShowWikiPage extends React.Component {
                                 </div>
                             ))}
                         <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
-                    </div>
+                </div>
+                ):(
+                    <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
+                )}
 
             </div>
         )
