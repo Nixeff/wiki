@@ -67,24 +67,33 @@ export default class EditWikiPage extends React.Component {
     }
 
     sendData = async () => {
+        console.log(this.state.summeryTags);
         let uID = loadLS("uID");
         let token = loadLS("token");
         let pID = loadLS("pID");
 
-        let wikiPage = '{"summery":{"title":"'+this.state.summeryTitle+'","img":"'+this.state.summeryImg+'","tags":'+JSON.stringify(this.summeryTags)+'},"description":"'+this.state.description+'","content":'+JSON.stringify(this.state.content)+',"refrences":'+JSON.stringify(this.state.refrences)+'}';
-        console.log(wikiPage);
+        let wikiPage = '{"summery":{"title":"'+this.state.summeryTitle+'","img":"'+this.state.summeryImg+'","tags":'+JSON.stringify(this.state.summeryTags)+'},"description":"'+this.state.description+'","content":'+JSON.stringify(this.state.content)+',"refrences":'+JSON.stringify(this.state.refrences)+'}';
         let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_update_page.php";
-        fetch(`${API_URL}`,
-        {
-            method: "POST",
+        let postOptions = {
+            method: 'POST',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'}, // this line is important, if this content-type is not set it wont work
+            body: 'foo=bar&blah=1'
+            /*
+            method: 'POST',
+            headers: {'Content-Type':'application/x-www-form-urlencoded'}, // this line is important, if this content-type is not set it wont work
+            body: 'foo=bar&blah=1'
+            
             headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify({
                 "user_id":uID,
                 "token":token,
                 "page_id":pID,
                 "content":wikiPage
-            }
-
-        })
+            })*/
+        }
+        fetch(`${API_URL}`,postOptions)
         .then((response) => {return response.json()})
         .then((data) => {
         console.log(data);
