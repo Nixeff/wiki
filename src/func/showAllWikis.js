@@ -65,10 +65,10 @@ export default class ShowAllWikis extends React.Component {
                     <input id="submitShowWikis" type="submit" value="sök"/>
                 </form>
                 <div id="wikiList">
-                    {this.state.wikis.map( (wikis,index)=>(
+                    {this.state.wikis.map( (wiki,index)=>(
                         <div key={index}>
-                            <WikiTag location="/WikiPage" cookieName="wID" title={wikis.Title} value={wikis.ID}/>
-                            <DeleteWiki wID={wikis.ID}/>
+                            <WikiTag location="/WikiPage" cookieName="wID" title={wiki.Title} value={wiki.ID}/>
+                            <DeleteWiki wID={wiki.ID}/>
                         </div>
                     ))}
                 </div>
