@@ -74,6 +74,7 @@ export default class ShowWikiPage extends React.Component {
                 <br></br>
                 <br></br>
                 <br></br>
+                {this.state.wikis?(
                 <div>
                         {this.state.wikis.map( (wikis,index)=>
                             (
@@ -83,6 +84,7 @@ export default class ShowWikiPage extends React.Component {
                             ))}
                         <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
                     </div>
+
             </div>
         )
     }
