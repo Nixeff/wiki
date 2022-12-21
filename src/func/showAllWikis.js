@@ -64,7 +64,9 @@ export default class ShowAllWikis extends React.Component {
                     <input id="showWikis" type="text" onChange={this.handleChangeUser} value={this.state.title}/>
                     <input id="submitShowWikis" type="submit" value="sök"/>
                 </form>
-                <div id="wikiList">
+                {console.log(this.state.wikis)}
+                {this.state.wikis?(
+                    <div id="wikiList">
                     {this.state.wikis.map( (wiki,index)=>(
                         <div key={index}>
                             <WikiTag location="/WikiPage" cookieName="wID" title={wiki.Title} value={wiki.ID}/>
@@ -72,6 +74,9 @@ export default class ShowAllWikis extends React.Component {
                         </div>
                     ))}
                 </div>
+                ):(
+                    console.log("")
+                )}
                 <div id="cwbutton">
                     <CreateWiki/>
                 </div>
