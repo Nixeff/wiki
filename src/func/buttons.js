@@ -16,11 +16,26 @@ export default function WikiTag(props){
     const [cookieName, setCookieName] = useState(props.cookieName);
     const navigate = useNavigate();
 
+    if(title !== props.title){
+        setTitle(props.title);
+    }
+
+    if(value !== props.value){
+        setValue(props.value);
+    }
+
+    if(location !== props.location){
+        setLocation(props.location);
+    }
+
+    if(cookieName !== props.cookieName){
+        setCookieName(props.cookieName);
+    }
+
     const handler = (path) => {
         saveLS(cookieName, value, 1, "/");
         navigate(path);
     }
-
 
     return(
         <div id="wikiHandler">
