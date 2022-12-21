@@ -71,15 +71,19 @@ export default class ShowWikiPage extends React.Component {
                 <br></br>
                 <br></br>
                 <br></br>
+                {this.state.wikis?(
                 <div>
-                        {this.state.wikis.map( (wikis,index)=>
-                            (
-                                <div key={index}>
-                                    <WikiTag location="/Page" cookieName="pID" title={wikis.Title} value={wikis.ID}/>
-                                </div>
-                            ))}
-                        <button onClick={()=>this.submit()}> Lägg till en wiki sida</button>
-                    </div>
+                    {this.state.wikis.map( (wikis,index)=>
+                        (
+                            <div key={index}>
+                                <WikiTag location="/Page" cookieName="pID" title={wikis.Title} value={wikis.ID}/>
+                            </div>
+                        ))}
+                    <button onClick={()=>this.submit()}> Lägg till en wiki sida</button>
+                </div>
+                ):(
+                    <button onClick={()=>this.submit()}> Lägg till en wiki sida</button>
+                )}
             </div>
         )
     }
