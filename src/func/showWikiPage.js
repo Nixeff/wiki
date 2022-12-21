@@ -7,12 +7,15 @@ import WikiTag, {Back} from "./buttons";
 import "../css/styles.css";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import CreateWikiPage from "./createWikiPage";
 
 export default class ShowWikiPage extends React.Component {
     constructor(props){
         
         super(props);
         this.state = {
+            token: loadLS("token"),
+            user: loadLS("uID"),
             ID: loadLS("wID"),
             wikis: [],
             isShowLogin: false
@@ -78,7 +81,7 @@ export default class ShowWikiPage extends React.Component {
                                     <WikiTag location="/Page" cookieName="pID" title={wikis.Title} value={wikis.ID}/>
                                 </div>
                             ))}
-                        <button onClick={()=>this.submit()}> Lägg till en wiki sida</button>
+                        <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
                     </div>
             </div>
         )
