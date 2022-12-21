@@ -279,6 +279,7 @@ export default class EditWikiPage extends React.Component {
                             <p id="contentTitle"> Innehåll</p>
                             {this.state.content.map( (contents,index)=>
                                 {
+                                    if(contents != null){
                                     if(contents.type == "title"){
                                         let idLink = "#contentsItem"+index;
                                         return(
@@ -287,6 +288,7 @@ export default class EditWikiPage extends React.Component {
                                             </div>
                                         )
                                     }
+                                }
                                     
                                 })}
                         </div>
@@ -312,6 +314,7 @@ export default class EditWikiPage extends React.Component {
                         <div id="content">
                         {this.state.content.map( (content,index)=>
                             {
+                                if(content != null){
                                 if(content.type == "title"){
                                     let idTag = "contentsItem"+index;
                                     return(
@@ -353,6 +356,7 @@ export default class EditWikiPage extends React.Component {
                                         </div>
                                     )
                                 }
+                            }
                                 
                             })}
                             <button onClick={()=>this.createArea("content","title")}>Lägg till Titel</button>
