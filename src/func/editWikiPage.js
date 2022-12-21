@@ -8,6 +8,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { EditWikiPageButton } from "./buttons";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { Back } from "./buttons";
 
 export default class EditWikiPage extends React.Component {
     constructor(props){
@@ -272,6 +273,7 @@ export default class EditWikiPage extends React.Component {
                     console.log("Nothing to see here")
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
+                <Back location="/Page"/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/> 
                 <br></br>
                 <br></br>
