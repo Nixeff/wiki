@@ -9,6 +9,7 @@ import { EditWikiPageButton } from "./buttons";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { Back } from "./buttons";
+import ChangePath from "./changePathFunction";
 
 export default class EditWikiPage extends React.Component {
     constructor(props){
@@ -26,8 +27,9 @@ export default class EditWikiPage extends React.Component {
             anwser: false,
         }
     }
+    // Gör en är du säker check
     confirm = async(type,data) =>{
-        if(type=="create"){
+        if(type=="create"){ // Ska du skapa ett objekt
             confirmAlert({
                 title: 'Är du säker?',
                 message: 'Säker?',
@@ -43,7 +45,7 @@ export default class EditWikiPage extends React.Component {
                 ]
             });
         }
-        if(type=="remove"){
+        if(type=="remove"){ // Ska du ta bort ett objekt
             console.log("hi");
             confirmAlert({
                 title: 'Är du säker?',
@@ -63,12 +65,12 @@ export default class EditWikiPage extends React.Component {
     }
 
 
-    componentDidMount(){
+    componentDidMount(){ // Kör get pages när sidan laddar in en gång
         this.getPages();
     }
 
-    sendData = async () => {
-        console.log(this.state.summeryTags);
+    sendData = async () => { // Sickar in data 
+        let navigate = useNavigate();
         let uID = loadLS("uID");
         let token = loadLS("token");
         let pID = loadLS("pID");
@@ -86,7 +88,8 @@ export default class EditWikiPage extends React.Component {
             console.table(response);
             return response.json()})
         .then((data) => {
-            console.log(data);
+            navigate("/Page");
+            
         });
     }
 
@@ -273,24 +276,22 @@ export default class EditWikiPage extends React.Component {
                     <div id="areaOne">
                         <p id="contentTitle"> Beskrivning</p>
                         <textarea onChange={(event)=>this.handleChange(event,"description")} value={this.state.description} name='awesome' rows="5"  cols="60"></textarea>
-
-                        
                         <div id="contents">
                             <p id="contentTitle"> Innehåll</p>
                             {this.state.content.map( (contents,index)=>
                                 {
                                     if(contents != null){
-                                    if(contents.type == "title"){
-                                        let idLink = "#contentsItem"+index;
-                                        return(
-                                            <div id="tag" key={index}>
-                                                <a href={idLink}>{contents.text}</a>
-                                            </div>
-                                        )
+                                        if(contents.type == "title"){
+                                            let idLink = "#contentsItem"+index;
+                                            return(
+                                                <div id="tag" key={index}>
+                                                    <a href={idLink}>{contents.text}</a>
+                                                </div>
+                                            )
+                                        }
                                     }
                                 }
-                                    
-                                })}
+                            )}
                         </div>
                     </div>
                     <div id="areaTwo">
@@ -351,7 +352,7 @@ export default class EditWikiPage extends React.Component {
                                                 </div>
                                                 
                                             ))}
-                                            <button onClick={()=>this.confirm("create",["list","listObject",mapIndex])}>Lägg till list object</button>
+                                            <button onClick={()=> this.createArea("list","list",mapIndex)}>Lägg till list object</button>
                                             <button onClick={()=> this.confirm("remove",["list",mapIndex,index])}>Ta bort lista</button>
                                         </div>
                                     )
