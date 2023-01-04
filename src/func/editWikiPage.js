@@ -76,7 +76,7 @@ export default class EditWikiPage extends React.Component {
         let pID = loadLS("pID");
 
         let wikiPage = '{"summery":{"title":"'+this.state.summeryTitle+'","img":"'+this.state.summeryImg+'","tags":'+JSON.stringify(this.state.summeryTags)+'},"description":"'+this.state.description+'","content":'+JSON.stringify(this.state.content)+',"refrences":'+JSON.stringify(this.state.refrences)+'}';
-        console.log(wikiPage);
+        //console.log(wikiPage);
         let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_update_page.php";
         let postOptions = {
             "method": "POST",
@@ -85,9 +85,10 @@ export default class EditWikiPage extends React.Component {
         }
         fetch(`${API_URL}`,postOptions)
         .then((response) => {
-            console.table(response);
+            console.log(response);
             return response.json()})
         .then((data) => {
+            console.log(data);
             //navigate("/Page");
             
         });
@@ -344,9 +345,9 @@ export default class EditWikiPage extends React.Component {
                                 else if(content.type === "list"){
                                     let mapIndex = index;
                                     return(
-                                        <div>
+                                        <div key={mapIndex}>
                                             {content.text.map((item, index)=>(
-                                                <div>
+                                                <div key={mapIndex*10+index}>
                                                     <textarea onChange={(event)=>this.handleChangeListList(event,index,mapIndex)} value={item} name='awesome' rows="1"  cols="40"></textarea>
                                                     <button onClick={()=> this.confirm("remove",["listItem",mapIndex,index])}>Ta bort list object</button>
                                                 </div>
