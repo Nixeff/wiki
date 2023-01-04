@@ -70,7 +70,7 @@ export default class EditWikiPage extends React.Component {
     }
 
     sendData = async () => { // Sickar in data 
-        let navigate = useNavigate();
+        //let navigate = useNavigate();
         let uID = loadLS("uID");
         let token = loadLS("token");
         let pID = loadLS("pID");
@@ -88,7 +88,7 @@ export default class EditWikiPage extends React.Component {
             console.table(response);
             return response.json()})
         .then((data) => {
-            navigate("/Page");
+            //navigate("/Page");
             
         });
     }
@@ -206,35 +206,35 @@ export default class EditWikiPage extends React.Component {
                 let temp;
                 if(pos == "tags"){
                     temp = this.state.summeryTags;
-                    delete temp[listPos];
+                    temp.splice(listPos,1);
                     this.setState({
                         summeryTags: temp
                     })
                 }
                 if(pos == "title"){
                     temp = this.state.content;
-                    delete temp[listPos];
+                    temp.splice(listPos,1);
                     this.setState({
                         content: temp
                     })
                 }
                 if(pos == "underTitle"){
                     temp = this.state.content;
-                    delete temp[listPos];
+                    temp.splice(listPos,1);
                     this.setState({
                         content: temp
                     })
                 }
                 if(pos == "text"){
                     temp = this.state.content;
-                    delete temp[listPos];
+                    temp.splice(listPos,1);
                     this.setState({
                         content: temp
                     })
                 }
                 if(pos == "list"){
                     temp = this.state.content;
-                    delete temp[listPos];
+                    temp.splice(listPos,1);
                     this.setState({
                         content: temp
                     })
@@ -242,7 +242,7 @@ export default class EditWikiPage extends React.Component {
                 if(pos == "listItem"){
                     temp = this.state.content;
                     let items = this.state.content[listPos].text;
-                    delete items[listListPos];
+                    items.splice(listListPos,1);
                     temp[listPos].text = items;
                     this.setState({
                         content: temp
@@ -316,7 +316,7 @@ export default class EditWikiPage extends React.Component {
                         {this.state.content.map( (content,index)=>
                             {
                                 if(content != null){
-                                if(content.type == "title"){
+                                if(content.type === "title"){
                                     let idTag = "contentsItem"+index;
                                     return(
                                         <div id={idTag} key={index}>
@@ -325,7 +325,7 @@ export default class EditWikiPage extends React.Component {
                                         </div>
                                     )
                                 }
-                                else if(content.type == "underTitle"){
+                                else if(content.type === "underTitle"){
                                     return(
                                         <div key={index}>
                                             <textarea id="contentUnderTitle" onChange={(event)=>this.handleChangeList(event,"contentUnderTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
@@ -341,7 +341,7 @@ export default class EditWikiPage extends React.Component {
                                         </div>
                                     )
                                 }
-                                else if(content.type == "list"){
+                                else if(content.type === "list"){
                                     let mapIndex = index;
                                     return(
                                         <div>
