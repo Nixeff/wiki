@@ -118,7 +118,10 @@ export default class EditWikiPage extends React.Component {
         } 
         if(name == "title"){
             this.setState({summeryTitle: event.target.value});
-        } 
+        }
+        if(name == "img"){
+            this.setState({summeryImg: event.target.value});
+        }
         
     };
     handleChangeList = (event, name, index) => {
@@ -297,7 +300,8 @@ export default class EditWikiPage extends React.Component {
                     </div>
                     <div id="areaTwo">
                         <div id="summery">
-                        <textarea id="summeryTitle" onChange={(event)=>this.handleChange(event,"title")} value={this.state.summeryTitle} name='awesome' rows="1"  cols="41"></textarea>
+                        <textarea id="summeryTitle" onChange={(event)=>this.handleChange(event,"title")} value={this.state.summeryTitle} name='awesome' rows="1"  cols="27"></textarea>
+                        <textarea onChange={(event)=>this.handleChange(event,"img")} value={this.state.summeryImg} name='awesome' rows="1"  cols="40"></textarea>
                             <img id="summeryImg" src={this.state.summeryImg} alt="Bild" width="500" height="500"></img>
                             {this.state.summeryTags.map( (tags,index)=>
                                 (
