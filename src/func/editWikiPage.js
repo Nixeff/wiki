@@ -9,6 +9,7 @@ import { EditWikiPageButton } from "./buttons";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import { Back } from "./buttons";
+import ChangePath from "./changePathFunction";
 
 export default class EditWikiPage extends React.Component {
     constructor(props){
@@ -26,8 +27,9 @@ export default class EditWikiPage extends React.Component {
             anwser: false,
         }
     }
+    // Gör en är du säker check
     confirm = async(type,data) =>{
-        if(type=="create"){
+        if(type=="create"){ // Ska du skapa ett objekt
             confirmAlert({
                 title: 'Är du säker?',
                 message: 'Säker?',
@@ -43,7 +45,7 @@ export default class EditWikiPage extends React.Component {
                 ]
             });
         }
-        if(type=="remove"){
+        if(type=="remove"){ // Ska du ta bort ett objekt
             console.log("hi");
             confirmAlert({
                 title: 'Är du säker?',
@@ -63,18 +65,18 @@ export default class EditWikiPage extends React.Component {
     }
 
 
-    componentDidMount(){
+    componentDidMount(){ // Kör get pages när sidan laddar in en gång
         this.getPages();
     }
 
-    sendData = async () => {
-        console.log(this.state.summeryTags);
+    sendData = async () => { // Sickar in data 
+        //let navigate = useNavigate();
         let uID = loadLS("uID");
         let token = loadLS("token");
         let pID = loadLS("pID");
 
         let wikiPage = '{"summery":{"title":"'+this.state.summeryTitle+'","img":"'+this.state.summeryImg+'","tags":'+JSON.stringify(this.state.summeryTags)+'},"description":"'+this.state.description+'","content":'+JSON.stringify(this.state.content)+',"refrences":'+JSON.stringify(this.state.refrences)+'}';
-        console.log(wikiPage);
+        //console.log(wikiPage);
         let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_update_page.php";
         let postOptions = {
             "method": "POST",
@@ -83,10 +85,12 @@ export default class EditWikiPage extends React.Component {
         }
         fetch(`${API_URL}`,postOptions)
         .then((response) => {
-            console.table(response);
+            console.log(response);
             return response.json()})
         .then((data) => {
             console.log(data);
+            //navigate("/Page");
+            
         });
     }
 
@@ -203,35 +207,35 @@ export default class EditWikiPage extends React.Component {
                 let temp;
                 if(pos == "tags"){
                     temp = this.state.summeryTags;
-                    delete temp[listPos];
+                    temp.splice(listPos,1);
                     this.setState({
                         summeryTags: temp
                     })
                 }
                 if(pos == "title"){
                     temp = this.state.content;
-                    delete temp[listPos];
+                    temp.splice(listPos,1);
                     this.setState({
                         content: temp
                     })
                 }
                 if(pos == "underTitle"){
                     temp = this.state.content;
-                    delete temp[listPos];
+                    temp.splice(listPos,1);
                     this.setState({
                         content: temp
                     })
                 }
                 if(pos == "text"){
                     temp = this.state.content;
-                    delete temp[listPos];
+                    temp.splice(listPos,1);
                     this.setState({
                         content: temp
                     })
                 }
                 if(pos == "list"){
                     temp = this.state.content;
-                    delete temp[listPos];
+                    temp.splice(listPos,1);
                     this.setState({
                         content: temp
                     })
@@ -239,7 +243,7 @@ export default class EditWikiPage extends React.Component {
                 if(pos == "listItem"){
                     temp = this.state.content;
                     let items = this.state.content[listPos].text;
-                    delete items[listListPos];
+                    items.splice(listListPos,1);
                     temp[listPos].text = items;
                     this.setState({
                         content: temp
@@ -273,24 +277,22 @@ export default class EditWikiPage extends React.Component {
                     <div id="areaOne">
                         <p id="contentTitle"> Beskrivning</p>
                         <textarea onChange={(event)=>this.handleChange(event,"description")} value={this.state.description} name='awesome' rows="5"  cols="60"></textarea>
-
-                        
                         <div id="contents">
                             <p id="contentTitle"> Innehåll</p>
                             {this.state.content.map( (contents,index)=>
                                 {
                                     if(contents != null){
-                                    if(contents.type == "title"){
-                                        let idLink = "#contentsItem"+index;
-                                        return(
-                                            <div id="tag" key={index}>
-                                                <a href={idLink}>{contents.text}</a>
-                                            </div>
-                                        )
+                                        if(contents.type == "title"){
+                                            let idLink = "#contentsItem"+index;
+                                            return(
+                                                <div id="tag" key={index}>
+                                                    <a href={idLink}>{contents.text}</a>
+                                                </div>
+                                            )
+                                        }
                                     }
                                 }
-                                    
-                                })}
+                            )}
                         </div>
                     </div>
                     <div id="areaTwo">
@@ -315,7 +317,7 @@ export default class EditWikiPage extends React.Component {
                         {this.state.content.map( (content,index)=>
                             {
                                 if(content != null){
-                                if(content.type == "title"){
+                                if(content.type === "title"){
                                     let idTag = "contentsItem"+index;
                                     return(
                                         <div id={idTag} key={index}>
@@ -324,7 +326,7 @@ export default class EditWikiPage extends React.Component {
                                         </div>
                                     )
                                 }
-                                else if(content.type == "underTitle"){
+                                else if(content.type === "underTitle"){
                                     return(
                                         <div key={index}>
                                             <textarea id="contentUnderTitle" onChange={(event)=>this.handleChangeList(event,"contentUnderTitle",index)} value={content.text} name='awesome' rows="1"  cols="20"></textarea>
@@ -340,18 +342,18 @@ export default class EditWikiPage extends React.Component {
                                         </div>
                                     )
                                 }
-                                else if(content.type == "list"){
+                                else if(content.type === "list"){
                                     let mapIndex = index;
                                     return(
-                                        <div>
+                                        <div key={mapIndex}>
                                             {content.text.map((item, index)=>(
-                                                <div>
+                                                <div key={mapIndex*10+index}>
                                                     <textarea onChange={(event)=>this.handleChangeListList(event,index,mapIndex)} value={item} name='awesome' rows="1"  cols="40"></textarea>
                                                     <button onClick={()=> this.confirm("remove",["listItem",mapIndex,index])}>Ta bort list object</button>
                                                 </div>
                                                 
                                             ))}
-                                            <button onClick={()=>this.confirm("create",["list","listObject",mapIndex])}>Lägg till list object</button>
+                                            <button onClick={()=> this.createArea("list","list",mapIndex)}>Lägg till list object</button>
                                             <button onClick={()=> this.confirm("remove",["list",mapIndex,index])}>Ta bort lista</button>
                                         </div>
                                     )
