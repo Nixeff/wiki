@@ -17,7 +17,7 @@ export default function CreateWikiPage(props){
     const createWikiPage = async (event) => {
         event.preventDefault();
         let pID;
-        let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_create_page.php?wiki_id="+wID+"&page_title="+title+"&user_id="+uID+"&token="+token;
+        let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_create_page.php?wiki_id="+wID+"&page_title=a&user_id="+uID+"&token="+token;
         console.log(API_URL);
         fetch(`${API_URL}`)
         .then((data) => data.json())
@@ -38,7 +38,6 @@ export default function CreateWikiPage(props){
 
     return(
         <form id="createWiki" onSubmit={createWikiPage}>
-            <input id="handleWName" type="text" onChange={(e)=>handleWName(e)} value={title}/>
             <input id="submitWName" type="submit" value="skapa wiki sida"/>
         </form>
     )
