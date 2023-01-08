@@ -153,7 +153,18 @@ export default class EditWikiPage extends React.Component {
             temp = this.state.content;
             temp[index] = JSON.parse('{"type":"img","text":"'+event.target.value+'"}');
             this.setState({content: temp})
+        } else if (name == "refrenceTitle"){
+            temp = this.state.refrences;
+            temp[index] = JSON.parse('{"title":"'+event.target.value+'","where":"'+temp[index].where+'"}');
+            this.setState({refrences: temp})
+        } else if (name == "refrenceWhere"){
+            temp = this.state.refrences;
+            temp[index] = JSON.parse('{"title":"'+temp[index].title+'","where":"'+event.target.value+'"}');
+            console.log(temp[index]);
+            this.setState({refrences: temp})
         }
+
+        
         console.log(temp);
     };
     handleChangeListList = (event, index, mapIndex)=>{
@@ -169,6 +180,13 @@ export default class EditWikiPage extends React.Component {
             temp.push({"name":"Namn","content":"Innehåll"});
             this.setState({
                 summeryTags: temp
+            })
+        }
+        if(pos == "refrence"){
+            temp = this.state.refrences;
+            temp.push({"title":"Titel","where":"URL"});
+            this.setState({
+                refrences: temp
             })
         }
         if(pos == "content"){
@@ -225,6 +243,13 @@ export default class EditWikiPage extends React.Component {
                     temp.splice(listPos,1);
                     this.setState({
                         summeryTags: temp
+                    })
+                }
+                if(pos == "refrence"){
+                    temp = this.state.refrences;
+                    temp.splice(listPos,1);
+                    this.setState({
+                        refrences: temp
                     })
                 }
                 if(pos == "title"){
@@ -395,9 +420,13 @@ export default class EditWikiPage extends React.Component {
                         {this.state.refrences.map( (refrences,index)=>
                             (
                                 <div id="refrenceItem" key={index}>
-                                    <a href={refrences.where}>{refrences.title}</a>
+                                        <textarea onChange={(event)=>this.handleChangeList(event,"refrenceTitle",index)} value={refrences.title} name='awesome' rows="1"  cols="15"></textarea>
+                                        <textarea onChange={(event)=>this.handleChangeList(event,"refrenceWhere",index)} value={refrences.where} name='awesome' rows="1"  cols="15"></textarea>
+                                        <button onClick={()=> this.confirm("remove",["refrence",index,0])}>Ta bort Källa</button>
+                                        <a href={refrences.where}>{refrences.title}</a>
                                 </div>
                             ))}
+                            <button onClick={()=>this.createArea("refrence")}>Lägg till Text</button>
                         </div>
                         <button onClick={()=>this.sendData()}>Confirm Edit</button>
                     </div>
