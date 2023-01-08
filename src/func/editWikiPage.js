@@ -113,6 +113,14 @@ export default class EditWikiPage extends React.Component {
     }
 
     handleChange = (event, name) => {
+        if (event.target.value.includes("&")) {
+            event.target.value = event.target.value.replace("&", "");  
+            alert("Du får inte använda '&' tyvärr använd 'och' eller ',' istället");
+        }
+        if (event.target.value.includes('"')) {
+            event.target.value = event.target.value.replace('"', "");  
+            alert("Du får inte använda "+'"'+" tyvärr använd ' istället");  
+        }
         if(name == "description"){
             this.setState({description: event.target.value});
         } 
