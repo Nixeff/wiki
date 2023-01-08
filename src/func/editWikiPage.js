@@ -76,7 +76,7 @@ export default class EditWikiPage extends React.Component {
         let pID = loadLS("pID");
 
         let wikiPage = '{"summery":{"title":"'+this.state.summeryTitle+'","img":"'+this.state.summeryImg+'","tags":'+JSON.stringify(this.state.summeryTags)+'},"description":"'+this.state.description+'","content":'+JSON.stringify(this.state.content)+',"refrences":'+JSON.stringify(this.state.refrences)+'}';
-        //console.log(wikiPage);
+        console.log(wikiPage);
         let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_update_page.php";
         let postOptions = {
             "method": "POST",
@@ -149,6 +149,10 @@ export default class EditWikiPage extends React.Component {
             temp = this.state.content;
             temp[index] = JSON.parse('{"type":"text","text":"'+event.target.value+'"}');
             this.setState({content: temp})
+        }else if (name == "contentImg"){
+            temp = this.state.content;
+            temp[index] = JSON.parse('{"type":"img","text":"'+event.target.value+'"}');
+            this.setState({content: temp})
         }
         console.log(temp);
     };
@@ -196,6 +200,14 @@ export default class EditWikiPage extends React.Component {
                 this.setState({
                 content: temp
                 })
+            }
+            if(type == "contentImg"){
+                temp = this.state.content;
+                temp.push({"type":"img","text":"[Image url]"});
+                this.setState({
+                content: temp
+                })
+                console.log(temp);
             }
         }
         if(pos == "list"){
@@ -362,6 +374,14 @@ export default class EditWikiPage extends React.Component {
                                         </div>
                                     )
                                 }
+                                else if(content.type === "img"){
+                                    return(
+                                        <div key={index}>
+                                            <textarea onChange={(event)=>this.handleChangeList(event,"contentImg",index)} value={content.text} name='awesome' rows="1"  cols="100"></textarea>
+                                            <img id="summeryImg" src={content.text} alt="Bild" width="500" height="500"></img>
+                                        </div>
+                                    )
+                                }
                             }
                                 
                             })}
@@ -369,6 +389,7 @@ export default class EditWikiPage extends React.Component {
                             <button onClick={()=>this.createArea("content","underTitle")}>Lägg till Under Titel</button>
                             <button onClick={()=>this.createArea("content","list")}>Lägg till Lista</button>
                             <button onClick={()=>this.createArea("content","text")}>Lägg till Text</button>
+                            <button onClick={()=>this.createArea("content","contentImg")}>Lägg till Bild</button>
                         </div>
                         <div id="refrences">
                         {this.state.refrences.map( (refrences,index)=>
