@@ -1,35 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { loadLS } from "./localStorage";
 
-export default class CreateWiki extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            wName: "",
-            visibility: "public",
-            uID: loadLS("uID"),
-            token: loadLS("token"),
-            
-        }
+export default function CreateWiki ({isAdmin}) {
+    const [wName, setwName] = useState("")
+    const [visibility, setVisibility] = useState("public")
+    const uID = loadLS("uID")
+    const token = loadLS("token")
+
+    const handleWName = (event) => {
+        setwName(event.target.value);
     }
 
-    handleWName = (event) => {
-        this.setState({wName: event.target.value});
-    }
-
-    createWiki = async (event) => {
+    const createWiki = async (event) => {
         event.preventDefault();
-        let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/Wiki/create_wiki.php?wiki_name="+this.state.wName+"&visibility="+this.state.visibility+"&user_id="+this.state.uID+"&token="+this.state.token;
-        fetch(`${API_URL}`)
-        this.setState({reload: true})
+        let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/Wiki/create_wiki.php?wiki_name="+wName+"&visibility="+visibility+"&user_id="+uID+"&token="+token;
+        fetch(`${API_URL}`);
     }
 
-    render(){
-        return(
-            <form id="createWiki" onSubmit={this.createWiki}>
-                <input id="handleWName" type="text" onChange={this.handleWName} value={this.state.wName}/>
-                <input id="submitWName" type="submit" value="skapa wiki"/>
-            </form>
-        )
-    }
+    return(
+        <form id="createWiki" onSubmit={createWiki}>
+            <input id="handleWName" type="text" onChange={handleWName} value={wName}/>
+            <input id="submitWName" type="submit" value="skapa wiki"/>
+        </form>
+    );
 }
