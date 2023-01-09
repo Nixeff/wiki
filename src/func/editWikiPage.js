@@ -412,6 +412,7 @@ export default class EditWikiPage extends React.Component {
                                         <div key={index}>
                                             <textarea onChange={(event)=>this.handleChangeList(event,"contentImg",index)} value={content.text} name='awesome' rows="1"  cols="100"></textarea>
                                             <img id="summeryImg" src={content.text} alt="Bild" width="500" height="500"></img>
+                                            <button onClick={()=> this.confirm("remove",["text",index,0])}>Ta bort bild</button>
                                         </div>
                                     )
                                 }
@@ -434,7 +435,7 @@ export default class EditWikiPage extends React.Component {
                                         <a href={refrences.where}>{refrences.title}</a>
                                 </div>
                             ))}
-                            <button onClick={()=>this.createArea("refrence")}>Lägg till Text</button>
+                            <button onClick={()=>this.createArea("refrence")}>Lägg till Källa</button>
                         </div>
                         <button onClick={()=>this.sendData()}>Confirm Edit</button>
                     </div>
