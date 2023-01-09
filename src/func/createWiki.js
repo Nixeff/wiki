@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { loadLS } from "./localStorage";
+import "../css/createWiki.css";
 
 export default function CreateWiki ({isAdmin}) {
     const [wName, setwName] = useState("")
@@ -16,11 +17,11 @@ export default function CreateWiki ({isAdmin}) {
         let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/Wiki/create_wiki.php?wiki_name="+wName+"&visibility="+visibility+"&user_id="+uID+"&token="+token;
         fetch(`${API_URL}`);
     }
-
+    
     return(
         <form id="createWiki" onSubmit={createWiki}>
-            <input id="handleWName" type="text" onChange={handleWName} value={wName}/>
-            <input id="submitWName" type="submit" value="skapa wiki"/>
+            <input id="handleWName" type="text" className="create-wiki" placeholder="Wiki namn..." onChange={handleWName} value={wName}/>
+            <input id="submitWName" type="submit" className="create-wiki-btn" value="Skapa wiki"/>
         </form>
     );
 }

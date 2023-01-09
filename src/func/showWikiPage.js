@@ -54,9 +54,10 @@ export default class ShowWikiPage extends React.Component {
             let prevIndex;
             let highestCID;
             let wikisList = [];
-            
+            // Lägger till en sak i slutet så att den fixar till sig själv???
+            data.Data.push(data.Data[0]);
+            // Tar bort de andra versionerna av en wiki sida
             data.Data.map((d,index)=>{
-                console.log(d);
                 
                 if(index == 0){
                     prevID = d.ID;
@@ -67,11 +68,14 @@ export default class ShowWikiPage extends React.Component {
                     prevID = d.ID;
                     highestCID = d.contentID;
                     prevIndex = index;
+                    console.log(d.ID);
                 } else if(d.contentID>highestCID){
                     highestCID = d.contentID;
                     prevIndex = index;
+                    
                 }
             })
+            console.log(wikisList);
             this.setState({wikis: wikisList});
         });
     }
@@ -100,7 +104,6 @@ export default class ShowWikiPage extends React.Component {
                 <div>
                         {this.state.wikis.map( (wikis,index)=>{
                                 let title = JSON.parse(wikis.Content);
-                                console.log(title);
                                 return(
                                     <div key={index}>
                                         <WikiTag location="/Page" cookieName="pID" title={title.summery.title} value={wikis.ID}/>

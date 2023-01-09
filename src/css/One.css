@@ -1,0 +1,117 @@
+
+:root {
+    --bc-color: #191a1f;
+    --main-color: rgb(127, 7, 153);
+    --main-accent-color: rgb(150, 73, 203);
+    --secondary-color: rgb(175, 187, 242);
+    --secondary-accent-color: rgb(211, 255, 243);
+}
+
+*{
+    
+    font-size: 20px;
+}
+body{
+    background-color: var(--bc-color);
+}
+#data{
+    display: flex;
+    justify-content: center;
+}
+p{
+    margin:10px;
+    padding:10px;
+}
+
+#areaThree{
+    border-radius: 10px;
+    width: 78.4vw;
+    background-color: var(--main-color);
+    margin:0 auto;
+}
+#areaOne{
+    border-radius: 10px;
+    background-color: var(--main-color); 
+}
+
+/* Summery */
+#summery{
+    border-radius: 10px;
+    float:left;
+    background-color: var(--secondary-color);
+    width:500px;
+}
+#summeryImg{
+    border-radius: 10px;
+    padding:5px;
+}
+#summeryTitle{
+    border-radius: 10px;
+    background-color: var(--secondary-accent-color);
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+#tag{
+    margin: 5px;
+    border-radius: 10px;
+    background-color: var(--secondary-accent-color);
+    display: flex;
+}
+
+/* Description */
+#descriptionBG{
+    padding:10px;
+    margin:10px;
+    border-radius: 25px;
+    background-color: var(--main-accent-color);
+}
+#description{
+    
+    margin:10px;
+
+    width:800px;
+    background-color: var(--main-accent-color);
+    
+}
+
+/* Contents */
+#contents{
+    margin:10px;
+    border-radius: 25px;
+    background-color: var(--main-accent-color);
+    padding:10px;
+}
+#contentsItem{
+    margin:10px;
+    display: flex;
+}
+
+/* Content */
+#content{
+    margin:10px;
+    border-radius: 25px;
+    width:75vW;
+    background-color: var(--main-accent-color);
+}
+#contentTitle{
+    margin:10px;
+    font-size: 30px;;
+    font-weight: bold;
+}
+#contentUnderTitle{
+    margin:10px;
+    font-size: 26px;;
+    font-weight: bold;
+}
+
+#refrences{
+    border-radius: 25px;
+    margin:10px;
+    background-color:var(--main-accent-color);
+}
+#refrenceItem{
+    margin:10px;
+    padding:10px;
+    display: flex;
+}
