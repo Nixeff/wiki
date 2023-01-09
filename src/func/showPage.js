@@ -3,7 +3,7 @@ import { json, useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
 import LoginForm from './LoginForm';
 import NavBar from "./NavBar";
-import "../css/showPage.css";
+import "../css/Three.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import { EditWikiPageButton } from "./buttons";
 import { Back } from "./buttons";
@@ -72,8 +72,10 @@ export default class ShowPage extends React.Component {
                 <br></br>
                 <div id="data">
                     <div id="areaOne">
-                        <p id="contentTitle"> Beskrivning</p>
-                        <p id="description">{this.state.description}</p>
+                        <div id="descriptionBG">
+                            <p id="contentTitle"> Beskrivning</p>
+                            <p id="description">{this.state.description}</p>
+                        </div>
                         <div id="contents">
                             <p id="contentTitle"> Innehåll</p>
                             {console.log(this.state.content)}
@@ -83,7 +85,7 @@ export default class ShowPage extends React.Component {
                                     if(contents.type == "title" && contents != null){
                                         let idLink = "#contentsItem"+index;
                                         return(
-                                            <div id="tag" key={index}>
+                                            <div id="contentsItem" key={index}>
                                                 <a href={idLink}>{contents.text}</a>
                                             </div>
                                         )
@@ -96,7 +98,7 @@ export default class ShowPage extends React.Component {
                     <div id="areaTwo">
                         <div id="summery">
                             <p id="summeryTitle">{this.state.summeryTitle}</p>
-                            <img id="summeryImg" src={this.state.summeryImg} alt="Bild" width="500" height="500"></img>
+                            <img id="summeryImg" src={this.state.summeryImg} alt="Bild" width="490" height="490"></img>
                             {this.state.summeryTags.map( (tags,index)=>
                                 (
                                     <div id="tag" key={index}>
@@ -156,6 +158,7 @@ export default class ShowPage extends React.Component {
                             })}
                         </div>
                         <div id="refrences">
+                            <p id="contentUnderTitle">Källor</p>
                         {this.state.refrences.map( (refrences,index)=>
                             (
                                 <div id="refrenceItem" key={index}>
