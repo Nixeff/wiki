@@ -1,5 +1,6 @@
 import React from "react";
 import { loadLS } from "./localStorage";
+import "../css/createWiki.css";
 
 export default class CreateWiki extends React.Component {
     constructor(props) {
@@ -27,8 +28,8 @@ export default class CreateWiki extends React.Component {
     render(){
         return(
             <form id="createWiki" onSubmit={this.createWiki}>
-                <input id="handleWName" type="text" onChange={this.handleWName} value={this.state.wName}/>
-                <input id="submitWName" type="submit" value="skapa wiki"/>
+                <input id="handleWName" type="text" className="create-wiki" placeholder="Wiki namn..." onChange={this.handleWName} value={this.state.wName}/>
+                <input id="submitWName" type="submit" className="create-wiki-btn" value="Skapa wiki"/>
             </form>
         )
     }

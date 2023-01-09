@@ -1,0 +1,33 @@
+#create-wiki{
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 22em;
+    padding: 12px 20px;
+}
+
+.create-wiki{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid black;
+}
+
+.create-wiki-btn{
+    background-color: white;
+    width: 100%;
+    color: black;
+    border: 2px solid black;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px 24px;
+    border-radius: 12px;
+    transition-duration: 0.4s;
+}
+.create-wiki-btn:hover{
+    background-color: rgb(128, 245, 112);
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
