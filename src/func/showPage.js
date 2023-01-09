@@ -3,7 +3,7 @@ import { json, useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
 import LoginForm from './LoginForm';
 import NavBar from "./NavBar";
-import "../css/showPage.css";
+import "../css/Three.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import { EditWikiPageButton } from "./buttons";
 import { Back } from "./buttons";
@@ -27,6 +27,7 @@ export default class ShowPage extends React.Component {
     componentDidMount(){
         this.getPages();
         
+        
     }
 
     getPages = async () => {
@@ -46,6 +47,30 @@ export default class ShowPage extends React.Component {
                 content: wikis.content,
                 refrences: wikis.refrences,
             });
+            if(wikis.theme !== undefined){
+                if(wikis.theme == "One"){
+                    document.documentElement.style.setProperty('--bc-color', "#191a1f");
+                    document.documentElement.style.setProperty('--main-color', "rgb(127, 7, 153)");
+                    document.documentElement.style.setProperty('--main-accent-color', "rgb(150, 73, 203)");
+                    document.documentElement.style.setProperty('--secondary-color', "175, 187, 242");
+                    document.documentElement.style.setProperty('--secondary-accent-color', "rgb(211, 255, 243)");
+                }
+                if(wikis.theme == "Two"){
+                    document.documentElement.style.setProperty('--bc-color', "rgb(254, 147, 140)");
+                    document.documentElement.style.setProperty('--main-color', "rgb(216, 191, 151)");
+                    document.documentElement.style.setProperty('--main-accent-color', "rgb(234, 210, 172)");
+                    document.documentElement.style.setProperty('--secondary-color', "rgb(103, 127, 224)");
+                    document.documentElement.style.setProperty('--secondary-accent-color', "rgb(113, 195, 239)");
+                }
+                if(wikis.theme == "Three"){
+                    document.documentElement.style.setProperty('--bc-color', "rgb(233, 233, 233)");
+                    document.documentElement.style.setProperty('--main-color', "rgb(220, 220, 220)");
+                    document.documentElement.style.setProperty('--main-accent-color', "rgb(251, 251, 251)");
+                    document.documentElement.style.setProperty('--secondary-color', "rgb(118, 118, 118)");
+                    document.documentElement.style.setProperty('--secondary-accent-color', "rgb(225, 225, 225)");
+                }
+            }
+
         });
     }
 
@@ -72,8 +97,10 @@ export default class ShowPage extends React.Component {
                 <br></br>
                 <div id="data">
                     <div id="areaOne">
-                        <p id="contentTitle"> Beskrivning</p>
-                        <p id="description">{this.state.description}</p>
+                        <div id="descriptionBG">
+                            <p id="contentTitle"> Beskrivning</p>
+                            <p id="description">{this.state.description}</p>
+                        </div>
                         <div id="contents">
                             <p id="contentTitle"> Innehåll</p>
                             {console.log(this.state.content)}
@@ -83,7 +110,7 @@ export default class ShowPage extends React.Component {
                                     if(contents.type == "title" && contents != null){
                                         let idLink = "#contentsItem"+index;
                                         return(
-                                            <div id="tag" key={index}>
+                                            <div id="contentsItem" key={index}>
                                                 <a href={idLink}>{contents.text}</a>
                                             </div>
                                         )
@@ -96,7 +123,7 @@ export default class ShowPage extends React.Component {
                     <div id="areaTwo">
                         <div id="summery">
                             <p id="summeryTitle">{this.state.summeryTitle}</p>
-                            <img id="summeryImg" src={this.state.summeryImg} alt="Bild" width="500" height="500"></img>
+                            <img id="summeryImg" src={this.state.summeryImg} alt="Bild" width="490" height="490"></img>
                             {this.state.summeryTags.map( (tags,index)=>
                                 (
                                     <div id="tag" key={index}>
@@ -156,6 +183,7 @@ export default class ShowPage extends React.Component {
                             })}
                         </div>
                         <div id="refrences">
+                            <p id="contentUnderTitle">Källor</p>
                         {this.state.refrences.map( (refrences,index)=>
                             (
                                 <div id="refrenceItem" key={index}>
