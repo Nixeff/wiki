@@ -113,13 +113,18 @@ export default class EditWikiPage extends React.Component {
     }
 
     handleChange = (event, name) => {
-        if (event.target.value.includes("&")) {
-            event.target.value = event.target.value.replace("&", "");  
-            alert("Du får inte använda '&' tyvärr använd 'och' eller ',' istället");
-        }
-        if (event.target.value.includes('"')) {
-            event.target.value = event.target.value.replace('"', "");  
-            alert("Du får inte använda "+'"'+" tyvärr använd ' istället");  
+        for (let i = 0; i < 100; i++) {
+            if (event.target.value.includes("&")) {
+                event.target.value = event.target.value.replace("&", "");  
+                alert("Du får inte använda '&' tyvärr använd 'och' eller ',' istället");
+            }
+            if (event.target.value.includes('"')) {
+                event.target.value = event.target.value.replace('"', "");  
+                alert("Du får inte använda "+'"'+" tyvärr använd ' istället");  
+            }
+            if (event.target.value.includes('\n')) {
+                event.target.value = event.target.value.replace('\n', "");  
+            }
         }
         if(name == "description"){
             this.setState({description: event.target.value});
@@ -133,6 +138,19 @@ export default class EditWikiPage extends React.Component {
         
     };
     handleChangeList = (event, name, index) => {
+        for (let i = 0; i < 100; i++) {
+            if (event.target.value.includes("&")) {
+                event.target.value = event.target.value.replace("&", "");  
+                alert("Du får inte använda '&' tyvärr använd 'och' eller ',' istället");
+            }
+            if (event.target.value.includes('"')) {
+                event.target.value = event.target.value.replace('"', "");  
+                alert("Du får inte använda "+'"'+" tyvärr använd ' istället");  
+            }
+            if (event.target.value.includes('\n')) {
+                event.target.value = event.target.value.replace('\n', "");  
+            }
+        }
         let temp;
         if (name == "tagsName"){
             temp = this.state.summeryTags;
@@ -176,6 +194,19 @@ export default class EditWikiPage extends React.Component {
         console.log(temp);
     };
     handleChangeListList = (event, index, mapIndex)=>{
+        for (let i = 0; i < 100; i++) {
+            if (event.target.value.includes("&")) {
+                event.target.value = event.target.value.replace("&", "");  
+                alert("Du får inte använda '&' tyvärr använd 'och' eller ',' istället");
+            }
+            if (event.target.value.includes('"')) {
+                event.target.value = event.target.value.replace('"', "");  
+                alert("Du får inte använda "+'"'+" tyvärr använd ' istället");  
+            }
+            if (event.target.value.includes('\n')) {
+                event.target.value = event.target.value.replace('\n', "");   
+            }
+        }
         let temp = this.state.content;
         console.log(temp[mapIndex].text[index]);
         temp[mapIndex].text[index] = event.target.value;
