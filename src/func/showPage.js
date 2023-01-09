@@ -27,7 +27,7 @@ export default class ShowPage extends React.Component {
     componentDidMount(){
         this.getPages();
         
-
+        
     }
 
     getPages = async () => {
@@ -47,6 +47,30 @@ export default class ShowPage extends React.Component {
                 content: wikis.content,
                 refrences: wikis.refrences,
             });
+            if(wikis.theme !== undefined){
+                if(wikis.theme == "One"){
+                    document.documentElement.style.setProperty('--bc-color', "#191a1f");
+                    document.documentElement.style.setProperty('--main-color', "rgb(127, 7, 153)");
+                    document.documentElement.style.setProperty('--main-accent-color', "rgb(150, 73, 203)");
+                    document.documentElement.style.setProperty('--secondary-color', "175, 187, 242");
+                    document.documentElement.style.setProperty('--secondary-accent-color', "rgb(211, 255, 243)");
+                }
+                if(wikis.theme == "Two"){
+                    document.documentElement.style.setProperty('--bc-color', "rgb(254, 147, 140)");
+                    document.documentElement.style.setProperty('--main-color', "rgb(216, 191, 151)");
+                    document.documentElement.style.setProperty('--main-accent-color', "rgb(234, 210, 172)");
+                    document.documentElement.style.setProperty('--secondary-color', "rgb(103, 127, 224)");
+                    document.documentElement.style.setProperty('--secondary-accent-color', "rgb(113, 195, 239)");
+                }
+                if(wikis.theme == "Three"){
+                    document.documentElement.style.setProperty('--bc-color', "rgb(233, 233, 233)");
+                    document.documentElement.style.setProperty('--main-color', "rgb(220, 220, 220)");
+                    document.documentElement.style.setProperty('--main-accent-color', "rgb(251, 251, 251)");
+                    document.documentElement.style.setProperty('--secondary-color', "rgb(118, 118, 118)");
+                    document.documentElement.style.setProperty('--secondary-accent-color', "rgb(225, 225, 225)");
+                }
+            }
+
         });
     }
 

@@ -74,7 +74,7 @@ export default class EditWikiPage extends React.Component {
         let token = loadLS("token");
         let pID = loadLS("pID");
 
-        let wikiPage = '{"summery":{"title":"'+this.state.summeryTitle+'","img":"'+this.state.summeryImg+'","tags":'+JSON.stringify(this.state.summeryTags)+'},"description":"'+this.state.description+'","content":'+JSON.stringify(this.state.content)+',"refrences":'+JSON.stringify(this.state.refrences)+'}';
+        let wikiPage = '{"theme":"'+this.state.theme+'","summery":{"title":"'+this.state.summeryTitle+'","img":"'+this.state.summeryImg+'","tags":'+JSON.stringify(this.state.summeryTags)+'},"description":"'+this.state.description+'","content":'+JSON.stringify(this.state.content)+',"refrences":'+JSON.stringify(this.state.refrences)+'}';
         console.log(wikiPage);
         let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_update_page.php";
         let postOptions = {
@@ -107,8 +107,30 @@ export default class EditWikiPage extends React.Component {
                 description: wikis.description,
                 content: wikis.content,
                 refrences: wikis.refrences,
-                theme: "../css/One.css"
+                theme: wikis.theme
             });
+        }).then((data)=>{
+            if(this.state.theme == "One"){
+                document.documentElement.style.setProperty('--bc-color', "#191a1f");
+                document.documentElement.style.setProperty('--main-color', "rgb(127, 7, 153)");
+                document.documentElement.style.setProperty('--main-accent-color', "rgb(150, 73, 203)");
+                document.documentElement.style.setProperty('--secondary-color', "175, 187, 242");
+                document.documentElement.style.setProperty('--secondary-accent-color', "rgb(211, 255, 243)");
+            }
+            if(this.state.theme == "Two"){
+                document.documentElement.style.setProperty('--bc-color', "rgb(254, 147, 140)");
+                document.documentElement.style.setProperty('--main-color', "rgb(216, 191, 151)");
+                document.documentElement.style.setProperty('--main-accent-color', "rgb(234, 210, 172)");
+                document.documentElement.style.setProperty('--secondary-color', "rgb(103, 127, 224)");
+                document.documentElement.style.setProperty('--secondary-accent-color', "rgb(113, 195, 239)");
+            }
+            if(this.state.theme == "Three"){
+                document.documentElement.style.setProperty('--bc-color', "rgb(233, 233, 233)");
+                document.documentElement.style.setProperty('--main-color', "rgb(220, 220, 220)");
+                document.documentElement.style.setProperty('--main-accent-color', "rgb(251, 251, 251)");
+                document.documentElement.style.setProperty('--secondary-color', "rgb(118, 118, 118)");
+                document.documentElement.style.setProperty('--secondary-accent-color', "rgb(225, 225, 225)");
+            }
         });
     }
 
@@ -134,6 +156,20 @@ export default class EditWikiPage extends React.Component {
                 document.documentElement.style.setProperty('--main-accent-color', "rgb(150, 73, 203)");
                 document.documentElement.style.setProperty('--secondary-color', "175, 187, 242");
                 document.documentElement.style.setProperty('--secondary-accent-color', "rgb(211, 255, 243)");
+            }
+            if(event.target.value == "Two"){
+                document.documentElement.style.setProperty('--bc-color', "rgb(254, 147, 140)");
+                document.documentElement.style.setProperty('--main-color', "rgb(216, 191, 151)");
+                document.documentElement.style.setProperty('--main-accent-color', "rgb(234, 210, 172)");
+                document.documentElement.style.setProperty('--secondary-color', "rgb(103, 127, 224)");
+                document.documentElement.style.setProperty('--secondary-accent-color', "rgb(113, 195, 239)");
+            }
+            if(event.target.value == "Three"){
+                document.documentElement.style.setProperty('--bc-color', "rgb(233, 233, 233)");
+                document.documentElement.style.setProperty('--main-color', "rgb(220, 220, 220)");
+                document.documentElement.style.setProperty('--main-accent-color', "rgb(251, 251, 251)");
+                document.documentElement.style.setProperty('--secondary-color', "rgb(118, 118, 118)");
+                document.documentElement.style.setProperty('--secondary-accent-color', "rgb(225, 225, 225)");
             }
         }
         if(name == "description"){
@@ -368,9 +404,10 @@ export default class EditWikiPage extends React.Component {
                     
                     <div id="areaOne">
                         <select onChange={(event)=>this.handleChange(event,"theme")} id="cars" name="cars">
-                            <option value="One">One</option>
-                            <option value="Two">Two</option>
-                            <option value="Three">Three</option>
+                            <option value="" selected disabled hidden>Välj Tema Här</option>
+                            <option value="One">Ett</option>
+                            <option value="Two">Två</option>
+                            <option value="Three">Tre</option>
                         </select>
                         <p id="contentTitle"> Beskrivning</p>
                         <textarea onChange={(event)=>this.handleChange(event,"description")} value={this.state.description} name='awesome' rows="5"  cols="60"></textarea>
