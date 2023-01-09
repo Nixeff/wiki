@@ -3,7 +3,6 @@ import { json, useParams } from "react-router-dom";
 import { loadLS } from "./localStorage";
 import LoginForm from './LoginForm';
 import NavBar from "./NavBar";
-import "../css/showPageEdit.css";
 import { Navigate, useNavigate } from "react-router-dom";
 import { EditWikiPageButton } from "./buttons";
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -108,6 +107,7 @@ export default class EditWikiPage extends React.Component {
                 description: wikis.description,
                 content: wikis.content,
                 refrences: wikis.refrences,
+                theme: "../css/One.css"
             });
         });
     }
@@ -124,6 +124,16 @@ export default class EditWikiPage extends React.Component {
             }
             if (event.target.value.includes('\n')) {
                 event.target.value = event.target.value.replace('\n', "");  
+            }
+        }
+        if(name == "theme"){
+            this.setState({theme:event.target.value});
+            if(event.target.value == "One"){
+                document.documentElement.style.setProperty('--bc-color', "#191a1f");
+                document.documentElement.style.setProperty('--main-color', "rgb(127, 7, 153)");
+                document.documentElement.style.setProperty('--main-accent-color', "rgb(150, 73, 203)");
+                document.documentElement.style.setProperty('--secondary-color', "175, 187, 242");
+                document.documentElement.style.setProperty('--secondary-accent-color', "rgb(211, 255, 243)");
             }
         }
         if(name == "description"){
@@ -340,6 +350,8 @@ export default class EditWikiPage extends React.Component {
         }
         return(
             <div>
+                {console.log(this.state.theme)}
+                <link rel="stylesheet" type="text/css" href="../css/One.css" />
                 {this.state.isShowLogin?(
                     <LoginForm isState={this.state.isShowLogin} />
                 ):(
@@ -353,7 +365,13 @@ export default class EditWikiPage extends React.Component {
                 <br></br>
                 <br></br>
                 <div id="data">
+                    
                     <div id="areaOne">
+                        <select onChange={(event)=>this.handleChange(event,"theme")} id="cars" name="cars">
+                            <option value="One">One</option>
+                            <option value="Two">Two</option>
+                            <option value="Three">Three</option>
+                        </select>
                         <p id="contentTitle"> Beskrivning</p>
                         <textarea onChange={(event)=>this.handleChange(event,"description")} value={this.state.description} name='awesome' rows="5"  cols="60"></textarea>
                         <div id="contents">
