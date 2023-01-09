@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { loadLS } from "./localStorage";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import "../css/deleteWiki.css";
 
 export default function DeleteWiki(props) {
     const [wID, setwID] = useState(props.wID);
@@ -32,7 +33,7 @@ export default function DeleteWiki(props) {
 
     return(
         <div>
-            <input type="button" value="ta bort wiki" onClick={() => submit()}></input>
+            <input type="button" value="Ta bort wiki" className="remove-wiki-btn" onClick={() => submit()}></input>
         </div>
     );
 }

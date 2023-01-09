@@ -39,7 +39,7 @@ export default function WikiTag(props){
 
     return(
         <div id="wikiHandler">
-            <button id="title" onClick={() => handler(location)}>{title}</button>
+            <button id="title" className="title-wiki-btn" onClick={() => handler(location)}>{title}</button>
         </div>
     )
 }
