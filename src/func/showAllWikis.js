@@ -77,7 +77,11 @@ export default class ShowAllWikis extends React.Component {
                     {this.state.wikis.map( (wiki,index)=>(
                         <div key={index}>
                             <WikiTag location="/WikiPage" cookieName="wID" title={wiki.Title} value={wiki.ID}/>
-                            <DeleteWiki wID={wiki.ID}/>
+                            {this.state.isAdmin?(
+                                <DeleteWiki wID={wiki.ID}/>
+                            ):(
+                                console.log("inte admin1")
+                            )}
                         </div>
                     ))}
                 </div>
@@ -89,7 +93,7 @@ export default class ShowAllWikis extends React.Component {
                         <CreateWiki isState={this.state.isAdmin}/>
                     </div>
                 ):(
-                    console.log("inte admin")
+                    console.log("inte admin2")
                 )}
                 
             </div>
