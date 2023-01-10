@@ -1,4 +1,4 @@
-.remove-wiki-btn {
+.create-wiki-page-btn {
     background-color: white;
     color: black;
     border: 2px solid black;
@@ -10,8 +10,8 @@
     margin-bottom: 25px;
     transition-duration: 0.4s;
   }
-.remove-wiki-btn:hover{
-    background-color: rgb(255, 36, 36);
+.create-wiki-page-btn:hover{
+    background-color: rgb(47, 255, 36);
     color: white;
     cursor: pointer;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);

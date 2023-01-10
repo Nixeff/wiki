@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import EditWikiPage from "./editWikiPage";
 import { loadLS, saveLS } from "./localStorage";
 import { Navigate, useNavigate } from "react-router-dom";
+import "../css/createWikiPage.css";
 
 export default function CreateWikiPage(props){
     const [wID, setWID] = useState(props.wID);
@@ -38,7 +39,7 @@ export default function CreateWikiPage(props){
 
     return(
         <form id="createWiki" onSubmit={createWikiPage}>
-            <input id="submitWName" type="submit" value="skapa wiki sida"/>
+            <input id="submitWName" type="submit" className="create-wiki-page-btn" value="Skapa wiki sida"/>
         </form>
     )
 }
