@@ -71,6 +71,13 @@ export default class ShowAllWikis extends React.Component {
                 <form id="showWikis" onSubmit={this.getWikis}>
                     <input id="showWikis" type="text" placeholder="Sök Wiki..." className="search-wiki" onChange={this.handleChangeUser} value={this.state.title}/>
                     <input id="submitShowWikis" className="search-wiki-btn" type="submit" value="Sök"/>
+                    {this.state.isAdmin?(
+                        <div id="cwbutton">
+                            <CreateWiki isState={this.state.isAdmin}/>
+                        </div>
+                    ):(
+                        console.log("inte admin2")
+                    )}
                 </form>
                 {console.log(this.state.wikis)}
                 {this.state.wikis?(
@@ -89,13 +96,7 @@ export default class ShowAllWikis extends React.Component {
                 ):(
                     console.log("")
                 )}
-                {this.state.isAdmin?(
-                    <div id="cwbutton">
-                        <CreateWiki isState={this.state.isAdmin}/>
-                    </div>
-                ):(
-                    console.log("inte admin2")
-                )}
+
                 
             </div>
         )
