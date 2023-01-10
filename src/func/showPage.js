@@ -52,7 +52,7 @@ export default class ShowPage extends React.Component {
                     document.documentElement.style.setProperty('--bc-color', "#191a1f");
                     document.documentElement.style.setProperty('--main-color', "rgb(127, 7, 153)");
                     document.documentElement.style.setProperty('--main-accent-color', "rgb(150, 73, 203)");
-                    document.documentElement.style.setProperty('--secondary-color', "175, 187, 242");
+                    document.documentElement.style.setProperty('--secondary-color', "rgb(175, 187, 242)");
                     document.documentElement.style.setProperty('--secondary-accent-color', "rgb(211, 255, 243)");
                 }
                 if(wikis.theme == "Two"){
