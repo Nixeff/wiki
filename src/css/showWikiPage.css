@@ -1,0 +1,15 @@
+#pages{
+    display:flex;
+    overflow-wrap: normal;
+}
+
+#page{
+    width:500px;
+    padding:10px;
+}
+
+#desc{
+    overflow: auto;
+    height:100px;
+    width: 500px;
+}

@@ -5,6 +5,7 @@ import LoginForm from "./LoginForm";
 import NavBar from "./NavBar";
 import WikiTag, {Back} from "./buttons";
 import "../css/styles.css";
+import "../css/showWikiPage.css";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import CreateWikiPage from "./createWikiPage";
@@ -54,9 +55,10 @@ export default class ShowWikiPage extends React.Component {
             let prevIndex;
             let highestCID;
             let wikisList = [];
-            
+            // Lägger till en sak i slutet så att den fixar till sig själv???
+            data.Data.push(data.Data[0]);
+            // Tar bort de andra versionerna av en wiki sida
             data.Data.map((d,index)=>{
-                console.log(d);
                 
                 if(index == 0){
                     prevID = d.ID;
@@ -67,14 +69,71 @@ export default class ShowWikiPage extends React.Component {
                     prevID = d.ID;
                     highestCID = d.contentID;
                     prevIndex = index;
+                    console.log(d.ID);
                 } else if(d.contentID>highestCID){
                     highestCID = d.contentID;
                     prevIndex = index;
+                    
                 }
             })
+            console.log(wikisList);
             this.setState({wikis: wikisList});
         });
     }
+
+    printThing(list){
+        let maxLength = 3;
+        let runs = 0;
+        if(list.length >= maxLength){
+            return(
+                <div id="pages">
+                    {list.splice(0,3).map( (wikis,index)=>{
+                        let title = JSON.parse(wikis.Content);
+                        
+                        return(
+                            <div id="page" key={index} >
+                                <WikiTag location="/Page" cookieName="pID" title={title.summery.title} value={wikis.ID}/>
+                                <p id="desc">{title.description}</p>
+                                <DeleteWikiPage pID={wikis.ID}/>
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        } else {
+            let len = list.length;
+            return(
+                <div id="pages">
+                    {list.splice(0,len).map( (wikis,index)=>{
+                        let title = JSON.parse(wikis.Content);
+                        
+                        return(
+                            <div id="page" key={index} >
+                                <WikiTag location="/Page" cookieName="pID" title={title.summery.title} value={wikis.ID}/>
+                                <p id="desc">{title.description}</p>
+                                <DeleteWikiPage pID={wikis.ID}/>
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        }
+        
+    }
+
+    lineBreak(){
+        let temp = Math.ceil(this.state.wikis.length/3); //ceil() rundar upp till närmsta int
+        let wikiss = this.state.wikis;
+        let test = [];
+        for (let i = 0; i < 5; i++) {
+            console.log(temp)
+            console.log(i)
+            test.push(this.printThing(wikiss));
+        }
+        console.log(test);
+        return test;
+        }
+    
     render(){
         const handleLoginClick = () => {
             this.setState(prevState => ({

@@ -15,6 +15,7 @@ export default class ShowAllWikis extends React.Component {
             wikis: [],
             title: "",
             isShowLogin: false,
+            isAdmin: false,
             userType: loadLS("userType")
         }
     }
@@ -29,6 +30,11 @@ export default class ShowAllWikis extends React.Component {
         .then((data) => {
             this.setState({wikis: data.Data});
         });
+        if (this.state.userType == "Admin"){
+            this.setState({
+                isAdmin: true
+            })
+        };
     }
 
     handleChangeUser = (event) => {
@@ -51,6 +57,7 @@ export default class ShowAllWikis extends React.Component {
                 isShowLogin: !prevState.isShowLogin
             }));
         }
+
         return(
             <div>     
                 {this.state.isShowLogin?(
@@ -70,16 +77,25 @@ export default class ShowAllWikis extends React.Component {
                     {this.state.wikis.map( (wiki,index)=>(
                         <div key={index}>
                             <WikiTag location="/WikiPage" cookieName="wID" title={wiki.Title} value={wiki.ID}/>
-                            <DeleteWiki wID={wiki.ID}/>
+                            {this.state.isAdmin?(
+                                <DeleteWiki wID={wiki.ID}/>
+                            ):(
+                                console.log("inte admin1")
+                            )}
                         </div>
                     ))}
                 </div>
                 ):(
                     console.log("")
                 )}
-                <div id="cwbutton">
-                    <CreateWiki/>
-                </div>
+                {this.state.isAdmin?(
+                    <div id="cwbutton">
+                        <CreateWiki isState={this.state.isAdmin}/>
+                    </div>
+                ):(
+                    console.log("inte admin2")
+                )}
+                
             </div>
         )
     }
