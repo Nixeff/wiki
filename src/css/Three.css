@@ -103,6 +103,10 @@ p{
     font-size: 26px;;
     font-weight: bold;
 }
+#contentListText{
+    margin:10px;
+    margin-left: 40px;
+}
 
 #refrences{
     border-radius: 25px;
