@@ -1,4 +1,5 @@
 #pages{
+    margin-left: 75px;
     display:flex;
     overflow-wrap: normal;
 }

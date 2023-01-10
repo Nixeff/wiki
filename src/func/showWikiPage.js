@@ -41,6 +41,7 @@ export default class ShowWikiPage extends React.Component {
         };
 
     componentDidMount(){
+        document.documentElement.style.setProperty('--bc-color', "White");
         this.getPages();
     }
 

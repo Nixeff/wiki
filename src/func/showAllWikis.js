@@ -20,6 +20,7 @@ export default class ShowAllWikis extends React.Component {
         }
     }
     componentDidMount(){
+        document.documentElement.style.setProperty('--bc-color', "White");
         this.onLoadGetWikis();
     }
 
