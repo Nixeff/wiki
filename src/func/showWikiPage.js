@@ -158,16 +158,7 @@ export default class ShowWikiPage extends React.Component {
                 {this.state.wikis?(
                 <div>
                     <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
-                        {this.state.wikis.map( (wikis,index)=>{
-                                let title = JSON.parse(wikis.Content);
-                                console.log(title);
-                                return(
-                                    <div key={index}>
-                                        <WikiTag location="/Page" cookieName="pID" title={title.summery.title} value={wikis.ID}/>
-                                        <DeleteWikiPage pID={wikis.ID}/>
-                                    </div>
-                                )
-                            })}
+                    {this.lineBreak()}
                 </div>
                 ):(
                     <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
