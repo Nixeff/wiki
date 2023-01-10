@@ -11,15 +11,15 @@ export default function DeleteWiki(props) {
 
     const submit = () =>{
         confirmAlert({
-            title: 'Confirm to submit',
-            message: 'Are you sure to do this.',
+            title: 'Bekräfta för att skicka in',
+            message: 'Är du säker på att du vill ta bort wikin?',
             buttons: [
                 {
-                label: 'Yes',
+                label: 'Ja',
                 onClick: () => deleteWiki()
                 },
                 {
-                label: 'No'
+                label: 'Nej'
                 }
             ]
             });
