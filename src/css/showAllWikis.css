@@ -39,6 +39,7 @@
     padding: 10px 24px;
     border-radius: 12px;
     margin-left: 50px;
+    margin-bottom: 5px;
     transition-duration: 0.4s;
 }
 .title-wiki-btn:hover{
@@ -72,4 +73,23 @@
     cursor: pointer;
     color: white;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.returnClick{
+    position: absolute;
+    width: 5vw;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    color: white;
+    height: 6vh;
+    left: 75%;
+    top: 2.5vh;
+    background:#2bc6ff;
+    margin-top: -20px;
+    border-radius: 100%;
+    cursor: pointer;
+    border: 0px solid black;
 }

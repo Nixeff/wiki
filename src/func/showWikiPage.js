@@ -98,6 +98,7 @@ export default class ShowWikiPage extends React.Component {
                 <br></br>
                 {this.state.wikis?(
                 <div>
+                    <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
                         {this.state.wikis.map( (wikis,index)=>{
                                 let title = JSON.parse(wikis.Content);
                                 console.log(title);
@@ -108,7 +109,6 @@ export default class ShowWikiPage extends React.Component {
                                     </div>
                                 )
                             })}
-                        <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
                 </div>
                 ):(
                     <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
