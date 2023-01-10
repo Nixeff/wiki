@@ -5,6 +5,7 @@ import LoginForm from "./LoginForm";
 import NavBar from "./NavBar";
 import WikiTag, {Back} from "./buttons";
 import "../css/styles.css";
+import "../css/showWikiPage.css";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import CreateWikiPage from "./createWikiPage";
@@ -79,6 +80,60 @@ export default class ShowWikiPage extends React.Component {
             this.setState({wikis: wikisList});
         });
     }
+
+    printThing(list){
+        let maxLength = 3;
+        let runs = 0;
+        if(list.length >= maxLength){
+            return(
+                <div id="pages">
+                    {list.splice(0,3).map( (wikis,index)=>{
+                        let title = JSON.parse(wikis.Content);
+                        
+                        return(
+                            <div id="page" key={index} >
+                                <WikiTag location="/Page" cookieName="pID" title={title.summery.title} value={wikis.ID}/>
+                                <p id="desc">{title.description}</p>
+                                <DeleteWikiPage pID={wikis.ID}/>
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        } else {
+            let len = list.length;
+            return(
+                <div id="pages">
+                    {list.splice(0,len).map( (wikis,index)=>{
+                        let title = JSON.parse(wikis.Content);
+                        
+                        return(
+                            <div id="page" key={index} >
+                                <WikiTag location="/Page" cookieName="pID" title={title.summery.title} value={wikis.ID}/>
+                                <p id="desc">{title.description}</p>
+                                <DeleteWikiPage pID={wikis.ID}/>
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        }
+        
+    }
+
+    lineBreak(){
+        let temp = Math.ceil(this.state.wikis.length/3); //ceil() rundar upp till närmsta int
+        let wikiss = this.state.wikis;
+        let test = [];
+        for (let i = 0; i < 5; i++) {
+            console.log(temp)
+            console.log(i)
+            test.push(this.printThing(wikiss));
+        }
+        console.log(test);
+        return test;
+        }
+    
     render(){
         const handleLoginClick = () => {
             this.setState(prevState => ({
@@ -102,15 +157,7 @@ export default class ShowWikiPage extends React.Component {
                 <br></br>
                 {this.state.wikis?(
                 <div>
-                        {this.state.wikis.map( (wikis,index)=>{
-                                let title = JSON.parse(wikis.Content);
-                                return(
-                                    <div key={index}>
-                                        <WikiTag location="/Page" cookieName="pID" title={title.summery.title} value={wikis.ID}/>
-                                        <DeleteWikiPage pID={wikis.ID}/>
-                                    </div>
-                                )
-                            })}
+                        {this.lineBreak()}
                         <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
                 </div>
                 ):(
