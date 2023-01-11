@@ -193,7 +193,7 @@ export default class ShowPage extends React.Component {
                         {this.state.userType?(
                             <EditWikiPageButton title="Edit" location="/EditPage"/>
                         ):(
-                            console.log("")
+                            null
                         )}
                         
                     </div>
