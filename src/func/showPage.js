@@ -174,7 +174,7 @@ export default class ShowPage extends React.Component {
                                 else if(content.type == "img" && content != null){
                                     return(
                                         <div key={index}>
-                                            <img id="summeryImg" src={content.text} alt="Bild" width="500" height="500"></img>
+                                            <img id="summeryImg" src={content.text} alt="Bild"></img>
                                         </div>
                                     )
                                 }

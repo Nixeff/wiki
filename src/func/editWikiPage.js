@@ -497,7 +497,7 @@ export default class EditWikiPage extends React.Component {
                                     return(
                                         <div key={index}>
                                             <textarea onChange={(event)=>this.handleChangeList(event,"contentImg",index)} value={content.text} name='awesome' rows="1"  cols="100"></textarea>
-                                            <img id="summeryImg" src={content.text} alt="Bild" width="500" height="500"></img>
+                                            <img id="summeryImg" src={content.text} alt="Bild"></img>
                                             <button onClick={()=> this.confirm("remove",["text",index,0])}>Ta bort bild</button>
                                         </div>
                                     )
