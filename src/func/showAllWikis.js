@@ -68,17 +68,18 @@ export default class ShowAllWikis extends React.Component {
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/>  
-                <form id="showWikis" onSubmit={this.getWikis}>
-                    <input id="showWikis" type="text" placeholder="Sök Wiki..." className="search-wiki" onChange={this.handleChangeUser} value={this.state.title}/>
-                    <input id="submitShowWikis" className="search-wiki-btn" type="submit" value="Sök"/>
+                <div>
+                    <form id="showWikis" onSubmit={this.getWikis}>
+                        <input id="showWikis" type="text" placeholder="Sök Wiki..." className="search-wiki" onChange={this.handleChangeUser} value={this.state.title}/>
+                        <input id="submitShowWikis" className="search-wiki-btn" type="submit" value="Sök"/>
+                    </form>
                     {this.state.isAdmin?(
-                        <div id="cwbutton">
-                            <CreateWiki isState={this.state.isAdmin}/>
-                        </div>
-                    ):(
+                        <CreateWiki isState={this.state.isAdmin}/>
+                        ):(
                         console.log("inte admin2")
                     )}
-                </form>
+                </div>
+                
                 {console.log(this.state.wikis)}
                 {this.state.wikis?(
                     <div id="wikiList">
