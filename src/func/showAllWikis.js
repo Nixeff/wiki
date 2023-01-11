@@ -40,6 +40,7 @@ export default class ShowAllWikis extends React.Component {
 
     handleChangeUser = (event) => {
         this.setState({title: event.target.value});
+        this.getWikis(event);
     };
 
     getWikis = async (event) => {
