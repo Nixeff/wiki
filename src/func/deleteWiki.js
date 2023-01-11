@@ -4,11 +4,13 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import "../css/deleteWiki.css";
 import checkToken from "./checkToken.js";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function DeleteWiki(props) {
     const [wID, setwID] = useState(props.wID);
     const uID = loadLS("uID");
     const token = loadLS("token");
+    const navigate = useNavigate();
 
     const submit = () =>{
         confirmAlert({
@@ -34,6 +36,7 @@ export default function DeleteWiki(props) {
         .then((data) => {
             checkToken(data.Data)
         })
+        .then(()=>navigate(0))
     }
 
     return(

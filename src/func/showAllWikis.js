@@ -44,14 +44,24 @@ export default class ShowAllWikis extends React.Component {
     };
 
     getWikis = async (event) => {
-        event.preventDefault();
-        let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?type=wiki&title="+event.target.value;
-        fetch(`${API_URL}`)
-        .then((data) => data.json())
-        .then((data) => {
+        if(event != undefined){
+            event.preventDefault();
+            let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?type=wiki&title="+event.target.value;
+            fetch(`${API_URL}`)
+            .then((data) => data.json())
+            .then((data) => {
             this.setState({wikis: data.Data});
-        });
+            });
+        } else{
+            let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?type=wiki&title=";
+            fetch(`${API_URL}`)
+            .then((data) => data.json())
+            .then((data) => {
+            this.setState({wikis: data.Data});
+            })
+        }
     }
+    
 
     render(){
         const handleLoginClick = () => {
@@ -72,7 +82,7 @@ export default class ShowAllWikis extends React.Component {
                 <div>
                     <div id="showWikis">
                         <input id="showWikis" type="text" placeholder="Sök Wiki..." className="search-wiki" onChange={this.handleChangeUser} value={this.state.title}/>
-                        <input id="submitShowWikis" className="search-wiki-btn" type="submit" value="Sök"/>
+                        <input id="submitShowWikis" className="search-wiki-btn" onClick={()=>this.getWikis()} type="button" value="Sök"/>
                     </div>
                     {this.state.isAdmin?(
                         <CreateWiki isState={this.state.isAdmin}/>
