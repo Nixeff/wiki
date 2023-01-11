@@ -154,7 +154,7 @@ export default class ShowWikiPage extends React.Component {
                         {this.state.userType?(
                             <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
                         ):(
-                            console.log("")
+                            null
                         )}
                         {this.lineBreak()}
                         
@@ -165,7 +165,7 @@ export default class ShowWikiPage extends React.Component {
                         {this.state.userType?(
                             <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
                         ):(
-                            console.log("")
+                            null
                         )}
                     </div>
                 )}
