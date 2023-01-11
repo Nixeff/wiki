@@ -45,7 +45,6 @@ export default class EditWikiPage extends React.Component {
             });
         }
         if(type=="remove"){ // Ska du ta bort ett objekt
-            console.log("hi");
             confirmAlert({
                 title: 'Är du säker?',
                 message: 'Säker?',
@@ -56,7 +55,7 @@ export default class EditWikiPage extends React.Component {
                     },
                     {
                     label: 'Nej',
-                    onClick: () => console.log("hi")
+                    onClick: () => null
                     }
                 ]
             });
@@ -75,7 +74,6 @@ export default class EditWikiPage extends React.Component {
         let pID = loadLS("pID");
 
         let wikiPage = '{"theme":"'+this.state.theme+'","summery":{"title":"'+this.state.summeryTitle+'","img":"'+this.state.summeryImg+'","tags":'+JSON.stringify(this.state.summeryTags)+'},"description":"'+this.state.description+'","content":'+JSON.stringify(this.state.content)+',"refrences":'+JSON.stringify(this.state.refrences)+'}';
-        console.log(wikiPage);
         let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_update_page.php";
         let postOptions = {
             "method": "POST",
@@ -84,13 +82,7 @@ export default class EditWikiPage extends React.Component {
         }
         fetch(`${API_URL}`,postOptions)
         .then((response) => {
-            console.log(response);
-            return response.json()})
-        .then((data) => {
-            console.log(data);
-            //navigate("/Page");
-            
-        });
+            return response.json()});
     }
 
     getPages = async () => {
@@ -99,7 +91,6 @@ export default class EditWikiPage extends React.Component {
         .then((response) => {return response.json()})
         .then((data) => {
             let wikis= JSON.parse(data.Data.page_data.page_content);
-            console.log(wikis);
             this.setState({
                 summeryTitle: wikis.summery.title,
                 summeryImg: wikis.summery.img,
@@ -205,12 +196,10 @@ export default class EditWikiPage extends React.Component {
         } else if (name == "tagsContent"){
             temp = this.state.summeryTags;
             temp[index] = JSON.parse('{"name":"'+temp[index].name+'","content":"'+event.target.value+'"}');
-            console.log(temp[index]);
             this.setState({summeryTags: temp})
         }else if (name == "contentTitle"){
             temp = this.state.content;
             temp[index] = JSON.parse('{"type":"title","text":"'+event.target.value+'"}');
-            console.log(temp[index]);
             this.setState({content: temp})
             
         }else if (name == "contentUnderTitle"){
@@ -232,12 +221,8 @@ export default class EditWikiPage extends React.Component {
         } else if (name == "refrenceWhere"){
             temp = this.state.refrences;
             temp[index] = JSON.parse('{"title":"'+temp[index].title+'","where":"'+event.target.value+'"}');
-            console.log(temp[index]);
             this.setState({refrences: temp})
         }
-
-        
-        console.log(temp);
     };
     handleChangeListList = (event, index, mapIndex)=>{
         for (let i = 0; i < 100; i++) {
@@ -254,7 +239,6 @@ export default class EditWikiPage extends React.Component {
             }
         }
         let temp = this.state.content;
-        console.log(temp[mapIndex].text[index]);
         temp[mapIndex].text[index] = event.target.value;
         this.setState({content: temp});
     }
@@ -278,7 +262,6 @@ export default class EditWikiPage extends React.Component {
             if(type == "title"){
                 temp = this.state.content;
                 temp.push({"type":"title","text":"Titel"});
-                console.log(temp);
                 this.setState({
                 content: temp
                 })
@@ -310,7 +293,6 @@ export default class EditWikiPage extends React.Component {
                 this.setState({
                 content: temp
                 })
-                console.log(temp);
             }
         }
         if(pos == "list"){
@@ -386,12 +368,11 @@ export default class EditWikiPage extends React.Component {
         }
         return(
             <div>
-                {console.log(this.state.theme)}
                 <link rel="stylesheet" type="text/css" href="../css/One.css" />
                 {this.state.isShowLogin?(
                     <LoginForm isState={this.state.isShowLogin} />
                 ):(
-                    console.log("Nothing to see here")
+                    null
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <Back location="/Page"/>

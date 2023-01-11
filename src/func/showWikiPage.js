@@ -46,7 +46,6 @@ export default class ShowWikiPage extends React.Component {
     }
 
     getPages = async () => {
-        console.log(this.state.ID);
         let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?wiki_id="+this.state.ID;
         
         fetch(`${API_URL}`)
@@ -70,14 +69,12 @@ export default class ShowWikiPage extends React.Component {
                     prevID = d.ID;
                     highestCID = d.contentID;
                     prevIndex = index;
-                    console.log(d.ID);
                 } else if(d.contentID>highestCID){
                     highestCID = d.contentID;
                     prevIndex = index;
                     
                 }
             })
-            console.log(wikisList);
             this.setState({wikis: wikisList});
         });
     }
@@ -127,11 +124,8 @@ export default class ShowWikiPage extends React.Component {
         let wikiss = this.state.wikis;
         let test = [];
         for (let i = 0; i < 5; i++) {
-            console.log(temp)
-            console.log(i)
             test.push(this.printThing(wikiss));
         }
-        console.log(test);
         return test;
         }
     
@@ -146,7 +140,7 @@ export default class ShowWikiPage extends React.Component {
                 {this.state.isShowLogin?(
                     <LoginForm isState={this.state.isShowLogin} />
                 ):(
-                    console.log("Nothing to see here")
+                    null
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <Back location="/ShowAllWikis"/>
