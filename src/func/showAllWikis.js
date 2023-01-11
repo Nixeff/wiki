@@ -45,7 +45,7 @@ export default class ShowAllWikis extends React.Component {
 
     getWikis = async (event) => {
         event.preventDefault();
-        let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?type=wiki&title="+this.state.title;
+        let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?type=wiki&title="+event.target.value;
         fetch(`${API_URL}`)
         .then((data) => data.json())
         .then((data) => {
@@ -70,10 +70,10 @@ export default class ShowAllWikis extends React.Component {
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/>  
                 <div>
-                    <form id="showWikis" onSubmit={this.getWikis}>
+                    <div id="showWikis">
                         <input id="showWikis" type="text" placeholder="Sök Wiki..." className="search-wiki" onChange={this.handleChangeUser} value={this.state.title}/>
                         <input id="submitShowWikis" className="search-wiki-btn" type="submit" value="Sök"/>
-                    </form>
+                    </div>
                     {this.state.isAdmin?(
                         <CreateWiki isState={this.state.isAdmin}/>
                         ):(
