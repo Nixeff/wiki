@@ -25,29 +25,22 @@ const LoginForm = ({ isShowLogin }) => {
     //const navigate = useNavigate();
     const usercheck = (loginMessage === adminMessage);
     if(usercheck) {
-      console.log("Login successful (Admin)");
       saveLS("userType", "Admin", 1, "/");
       saveLS("uID", uID, 1, "/");
       saveLS("uname", uname, 1, "/");
       saveLS("token", token, 1, "/");
-      console.log(usercheck);
-      console.log("Wooah! Admin check WOAHH!")
       window.location.reload(false);
       //return(<Navigate to="/adminPage" />);
       //navigate('/adminPage');
     }else {
       const usercheck = (loginMessage === endUserMessage);
       if(usercheck){
-        console.log("Login successful (End user)");
         saveLS("userType", "User", 1, "/");
         saveLS("uID", uID, 1, "/");
         saveLS("uname", uname, 1, "/");
         saveLS("token", token, 1, "/");
-        console.log(usercheck);
         window.location.reload(false);
       } else{
-        console.log("Wrong password or username");
-        console.log(usercheck);
         alert("Fel användarnamn eller lösenord");
       }
     }

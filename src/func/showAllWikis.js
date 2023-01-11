@@ -64,7 +64,7 @@ export default class ShowAllWikis extends React.Component {
                 {this.state.isShowLogin?(
                     <LoginForm isState={this.state.isShowLogin} />
                 ):(
-                    console.log("Nothing to see here")
+                    null
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/>  
@@ -76,11 +76,9 @@ export default class ShowAllWikis extends React.Component {
                     {this.state.isAdmin?(
                         <CreateWiki isState={this.state.isAdmin}/>
                         ):(
-                        console.log("inte admin2")
+                        null
                     )}
                 </div>
-                
-                {console.log(this.state.wikis)}
                 {this.state.wikis?(
                     <div id="wikiList">
                     {this.state.wikis.map( (wiki,index)=>(
@@ -89,13 +87,13 @@ export default class ShowAllWikis extends React.Component {
                             {this.state.isAdmin?(
                                 <DeleteWiki wID={wiki.ID}/>
                             ):(
-                                console.log("inte admin1")
+                                null
                             )}
                         </div>
                     ))}
                 </div>
                 ):(
-                    console.log("")
+                    null
                 )}
 
                 

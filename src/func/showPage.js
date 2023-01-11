@@ -37,7 +37,6 @@ export default class ShowPage extends React.Component {
         .then((data) => {
             
             let wikis = JSON.parse(data.Data.page_data.page_content);
-            console.table(wikis);
             this.setState({
                 summeryTitle: wikis.summery.title,
                 summeryImg: wikis.summery.img,
@@ -86,7 +85,7 @@ export default class ShowPage extends React.Component {
                 {this.state.isShowLogin?(
                     <LoginForm isState={this.state.isShowLogin} />
                 ):(
-                    console.log("Nothing to see here")
+                    null
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <Back location="/WikiPage"/>
@@ -103,7 +102,6 @@ export default class ShowPage extends React.Component {
                         </div>
                         <div id="contents">
                             <p id="contentTitle"> Innehåll</p>
-                            {console.log(this.state.content)}
                             {this.state.content.map( (contents,index)=>
                                 {  
                                     if(contents != null){
