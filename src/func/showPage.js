@@ -38,7 +38,6 @@ export default class ShowPage extends React.Component {
         .then((data) => {
             
             let wikis = JSON.parse(data.Data.page_data.page_content);
-            console.table(wikis);
             this.setState({
                 summeryTitle: wikis.summery.title,
                 summeryImg: wikis.summery.img,
@@ -53,7 +52,7 @@ export default class ShowPage extends React.Component {
                     document.documentElement.style.setProperty('--bc-color', "#191a1f");
                     document.documentElement.style.setProperty('--main-color', "rgb(127, 7, 153)");
                     document.documentElement.style.setProperty('--main-accent-color', "rgb(150, 73, 203)");
-                    document.documentElement.style.setProperty('--secondary-color', "175, 187, 242");
+                    document.documentElement.style.setProperty('--secondary-color', "rgb(175, 187, 242)");
                     document.documentElement.style.setProperty('--secondary-accent-color', "rgb(211, 255, 243)");
                 }
                 if(wikis.theme == "Two"){
@@ -87,7 +86,7 @@ export default class ShowPage extends React.Component {
                 {this.state.isShowLogin?(
                     <LoginForm isState={this.state.isShowLogin} />
                 ):(
-                    console.log("Nothing to see here")
+                    null
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <Back location="/WikiPage"/>
@@ -104,7 +103,6 @@ export default class ShowPage extends React.Component {
                         </div>
                         <div id="contents">
                             <p id="contentTitle"> Innehåll</p>
-                            {console.log(this.state.content)}
                             {this.state.content.map( (contents,index)=>
                                 {  
                                     if(contents != null){
@@ -175,7 +173,7 @@ export default class ShowPage extends React.Component {
                                 else if(content.type == "img" && content != null){
                                     return(
                                         <div key={index}>
-                                            <img id="summeryImg" src={content.text} alt="Bild" width="500" height="500"></img>
+                                            <img id="summeryImg" src={content.text} alt="Bild"></img>
                                         </div>
                                     )
                                 }

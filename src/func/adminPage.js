@@ -25,7 +25,7 @@ export default class AdminPage extends React.Component{
                 {this.state.isShowLogin?(
                     <LoginForm isState={this.state.isShowLogin} />
                 ):(
-                    console.log("Nothing to see here")
+                    null
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/> 

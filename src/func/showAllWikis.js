@@ -20,6 +20,7 @@ export default class ShowAllWikis extends React.Component {
         }
     }
     componentDidMount(){
+        document.documentElement.style.setProperty('--bc-color', "rgb(233, 233, 233)");
         this.onLoadGetWikis();
     }
 
@@ -39,11 +40,12 @@ export default class ShowAllWikis extends React.Component {
 
     handleChangeUser = (event) => {
         this.setState({title: event.target.value});
+        this.getWikis(event);
     };
 
     getWikis = async (event) => {
         event.preventDefault();
-        let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?type=wiki&title="+this.state.title;
+        let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/search.php?type=wiki&title="+event.target.value;
         fetch(`${API_URL}`)
         .then((data) => data.json())
         .then((data) => {
@@ -63,15 +65,21 @@ export default class ShowAllWikis extends React.Component {
                 {this.state.isShowLogin?(
                     <LoginForm isState={this.state.isShowLogin} />
                 ):(
-                    console.log("Nothing to see here")
+                    null
                 )}
                 <NavBar handleLoginClick={handleLoginClick}/>
                 <LoginForm isShowLogin={this.state.isShowLogin}/>  
-                <form id="showWikis" onSubmit={this.getWikis}>
-                    <input id="showWikis" type="text" placeholder="Sök Wiki..." className="search-wiki" onChange={this.handleChangeUser} value={this.state.title}/>
-                    <input id="submitShowWikis" className="search-wiki-btn" type="submit" value="Sök"/>
-                </form>
-                {console.log(this.state.wikis)}
+                <div>
+                    <div id="showWikis">
+                        <input id="showWikis" type="text" placeholder="Sök Wiki..." className="search-wiki" onChange={this.handleChangeUser} value={this.state.title}/>
+                        <input id="submitShowWikis" className="search-wiki-btn" type="submit" value="Sök"/>
+                    </div>
+                    {this.state.isAdmin?(
+                        <CreateWiki isState={this.state.isAdmin}/>
+                        ):(
+                        null
+                    )}
+                </div>
                 {this.state.wikis?(
                     <div id="wikiList">
                     {this.state.wikis.map( (wiki,index)=>(
@@ -80,21 +88,15 @@ export default class ShowAllWikis extends React.Component {
                             {this.state.isAdmin?(
                                 <DeleteWiki wID={wiki.ID}/>
                             ):(
-                                console.log("inte admin1")
+                                null
                             )}
                         </div>
                     ))}
                 </div>
                 ):(
-                    console.log("")
+                    null
                 )}
-                {this.state.isAdmin?(
-                    <div id="cwbutton">
-                        <CreateWiki isState={this.state.isAdmin}/>
-                    </div>
-                ):(
-                    console.log("inte admin2")
-                )}
+
                 
             </div>
         )

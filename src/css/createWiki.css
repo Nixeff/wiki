@@ -7,22 +7,24 @@
 }
 
 .create-wiki{
-    width: 100%;
+    width: 11.2%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
     border: 2px solid black;
+    margin-left: 38.5%;
 }
 
 .create-wiki-btn{
     background-color: white;
-    width: 100%;
+    width: 11.2%;
     color: black;
     border: 2px solid black;
     cursor: pointer;
     font-size: 20px;
     padding: 10px 24px;
     border-radius: 12px;
+    margin-left: 0.5%;
     transition-duration: 0.4s;
 }
 .create-wiki-btn:hover{

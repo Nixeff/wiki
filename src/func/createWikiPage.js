@@ -20,19 +20,14 @@ export default function CreateWikiPage(props){
         event.preventDefault();
         let pID;
         let API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_create_page.php?wiki_id="+wID+"&page_title=a&user_id="+uID+"&token="+token;
-        console.log(API_URL);
         fetch(`${API_URL}`)
         .then((data) => data.json())
         .then((data) => {
             checkToken(data.Data)
             pID = data.Data.id
-            console.log(pID);
-            
-        })
-        .then(()=>{
+        }).then(()=>{
             let template = '{"theme":"Three","summery":{"title":"Titel","img":"Bild Url","tags":[{"name":"Titel","content":"Innehåll"}]},"description":"Beskrivning","content":[{"type":"title","text":"Titel"},{"type":"text","text":"Text"},{"type":"list","text":["Objekt 1","Objekt 2"]},{"type":"underTitle","text":"Under titel"}],"refrences":[{"title":"temp","where":"google.se"}]}';
             API_URL = "http://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_update_page.php?user_id="+uID+"&token="+token+"&page_id="+pID+"&content="+template;
-            console.log(API_URL);
             fetch(`${API_URL}`)
             .then((data)=>{
                 saveLS("pID", pID, 1, "/");
