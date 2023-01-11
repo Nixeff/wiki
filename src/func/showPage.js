@@ -21,6 +21,7 @@ export default class ShowPage extends React.Component {
             description: "",
             content: [],
             refrences: [],
+            userType: loadLS("userType")
         }
     }
 
@@ -191,7 +192,12 @@ export default class ShowPage extends React.Component {
                                 </div>
                             ))}
                         </div>
-                        <EditWikiPageButton title="Edit" location="/EditPage"/>
+                        {this.state.userType?(
+                            <EditWikiPageButton title="Edit" location="/EditPage"/>
+                        ):(
+                            console.log("")
+                        )}
+                        
                     </div>
                     
                 </div>

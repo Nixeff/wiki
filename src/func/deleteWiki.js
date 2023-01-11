@@ -3,6 +3,7 @@ import { loadLS } from "./localStorage";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import "../css/deleteWiki.css";
+import checkToken from "./checkToken.js";
 
 export default function DeleteWiki(props) {
     const [wID, setwID] = useState(props.wID);
@@ -28,7 +29,11 @@ export default function DeleteWiki(props) {
 
     const deleteWiki = async () => {
         let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/Wiki/wiki_delete.php?wiki_id="+wID+"&user_id="+uID+"&token="+token;
-        fetch(`${API_URL}`);
+        fetch(`${API_URL}`)
+        .then((data) => data.json())
+        .then((data) => {
+            checkToken(data.Data)
+        })
     }
 
     return(

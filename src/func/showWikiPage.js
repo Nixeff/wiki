@@ -19,6 +19,7 @@ export default class ShowWikiPage extends React.Component {
             token: loadLS("token"),
             user: loadLS("uID"),
             ID: loadLS("wID"),
+            userType: loadLS("userType"),
             wikis: [],
             isShowLogin: false
         }
@@ -94,7 +95,6 @@ export default class ShowWikiPage extends React.Component {
                             <div id="page" key={index} >
                                 <WikiTag location="/Page" cookieName="pID" title={title.summery.title} value={wikis.ID}/>
                                 <p id="desc">{title.description}</p>
-                                <DeleteWikiPage pID={wikis.ID}/>
                             </div>
                         )
                     })}
@@ -111,7 +111,6 @@ export default class ShowWikiPage extends React.Component {
                             <div id="page" key={index} >
                                 <WikiTag location="/Page" cookieName="pID" title={title.summery.title} value={wikis.ID}/>
                                 <p id="desc">{title.description}</p>
-                                <DeleteWikiPage pID={wikis.ID}/>
                             </div>
                         )
                     })}
@@ -156,12 +155,24 @@ export default class ShowWikiPage extends React.Component {
                 <br></br>
                 <br></br>
                 {this.state.wikis?(
-                <div>
-                    <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
-                    {this.lineBreak()}
-                </div>
+                    <div>
+                        {this.state.userType?(
+                            <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
+                        ):(
+                            console.log("")
+                        )}
+                        {this.lineBreak()}
+                        
+                    </div>
+                    
                 ):(
-                    <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
+                    <div>
+                        {this.state.userType?(
+                            <CreateWikiPage wID={this.state.ID} uID={this.state.user} token={this.state.token}/>
+                        ):(
+                            console.log("")
+                        )}
+                    </div>
                 )}
 
             </div>

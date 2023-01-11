@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { loadLS } from "./localStorage";
+import { loadLS, saveLS } from "./localStorage";
 import "../css/createWiki.css";
+import checkToken from "./checkToken.js";
 
 export default function CreateWiki ({isAdmin}) {
     const [wName, setwName] = useState("")
@@ -15,7 +16,11 @@ export default function CreateWiki ({isAdmin}) {
     const createWiki = async (event) => {
         event.preventDefault();
         let API_URL = "https://acesoft.ntigskovde.se/Ace-Software/Wiki/create_wiki.php?wiki_name="+wName+"&visibility="+visibility+"&user_id="+uID+"&token="+token;
-        fetch(`${API_URL}`);
+        fetch(`${API_URL}`)
+        .then((data) => data.json())
+        .then((data) => {
+            checkToken(data.Data)
+        })
     }
     
     return(
